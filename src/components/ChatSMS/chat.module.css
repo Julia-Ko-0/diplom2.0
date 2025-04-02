@@ -1,0 +1,32 @@
+.div_{
+    background-color: aquamarine;
+    width: 100%;
+    height: calc(100vh - 120px);
+    border-radius: 20px;
+    border: 1px solid black;    
+    
+
+}
+.heder_chat_div{
+    background-color: beige;
+    width: 100%;
+    border-radius: 20px 20px 0px 0px;
+    height: 90px;
+    display: grid;
+    grid-template-columns: 70px auto 10px;  
+    border-bottom: solid 1px black ;
+   
+
+}
+ 
+.heder_chat_div img{
+ width: 50px;
+ border-radius: 50%;
+ margin: auto auto auto 10px;
+}
+ .heder_name_date{
+    height: 50px;
+
+    margin: auto 0px auto 0px;
+    line-height:5px;
+ }

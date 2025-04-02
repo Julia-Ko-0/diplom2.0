@@ -1,0 +1,17 @@
+.div_novbar{
+    
+    position: fixed;
+    /* top: 0px; */
+    background-color:var(--bg-color-novbar) ;
+    display:flex;
+    width: auto;
+    height: 100px;
+    width: 80%;
+
+    margin-bottom: 20px;
+}
+.div_novbar img{
+    border-radius: 50%;
+    height: 70px;
+    margin: auto 20px auto auto;
+}

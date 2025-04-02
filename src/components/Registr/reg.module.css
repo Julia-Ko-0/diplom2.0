@@ -1,0 +1,38 @@
+.login_div{
+    background-color: #C1E8FF;
+    /* min-height: 10em; */
+    display: table-cell;
+    height: 100vh;
+    width: 100vh;
+    vertical-align: middle
+
+}
+.login_div p {
+    width: 200px;
+    margin: 0px auto 10px auto;
+}
+
+.form_div{
+    margin: 0px auto auto auto; 
+    width: 250px;
+}
+.btn_div{
+    margin: 0px auto auto auto; 
+    width: 150px;
+}
+.form_div input {
+    margin: 5% auto 5% auto;
+    width: 100%;
+    height: 35px;
+}
+.form_div button {
+    margin: 0px auto 0px auto;
+    width: 100%;
+    height: 35px;
+}
+.text_log{
+    display: flex;
+    width: 150px;
+    margin: 1% auto 0px auto;
+}
+

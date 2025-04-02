@@ -1,0 +1,102 @@
+/* <<<<<<< HEAD
+.chast_div{
+    display: grid;
+    gap: 10px; */
+    /* overflow-y:auto;
+    height: 800px; */
+    /* padding: 0px 0px 30px 0px;
+}
+.chast_div::-webkit-scrollbar{
+   width: 0;
+}
+.div_sms{
+    background-color: #C1CFFF;
+    display: grid;
+    padding: 10px 20px 10px 20px;
+    grid-template-columns: 100px auto;
+    height: 100px;
+    border-radius: 8px;
+ 
+}
+.div_sms:hover{
+    background-color: #afbde9;
+   
+ 
+}
+.div_sms img{
+   width: 80px;
+   border-radius: 50%;
+   margin: auto 0px auto 0px;
+}
+.d_chat_{
+    display: grid;
+    grid-template-rows: 30px 70px;
+}
+.d_name_chat_date{
+    display: grid;
+    grid-template-columns: auto 100px;
+    vertical-align:text-top;
+======= */
+.div_chats{
+    display: flex;
+/* margin-left: -5%; */
+    margin: 5px 0px 5px 0px;
+    height: 100px;
+ border-top: 1px solid black;
+    /* background-color: antiquewhite; */
+ 
+  
+
+
+}
+.chast_div{
+    display: block;
+    height: auto;
+    padding: 0px ;
+    border: solid 1px;
+    
+    /* border-width: 1px; */
+    border-color: black;
+    border-radius: 10px;
+    background-color: aquamarine;
+}
+.input_div{
+height: 30px;
+}
+.input_div input{
+ width: 80%;
+ padding-left: 40px;
+ font-size: 17px;
+ /* margin-left: 10%; */
+ border: none;
+ border-radius: 10px 0px 0px 0px;
+ background: url('search-svgrepo-com.svg')  no-repeat 10px center ;
+background-size: 25px;
+  /* background-color: rgba(0, 0, 0,0); */
+ height: 100%;
+}
+/* .input_div input.icon{
+    background: url('search-svgrepo-com.svg')  no-repeat center left;
+
+} */
+.div_chats img{
+  height: 80px;
+  margin:  auto 10px auto 10px;
+  border-radius: 50%;
+}
+.div_chats_name_and_sms{
+    
+    /* height: 20px; */
+    width: 100%;
+    margin:  20px auto auto 20px;
+}
+.div_chats_sms{
+    /* width: 100%; */
+    display: flex;
+    margin-bottom: 10px;
+    /* margin:  auto 10px auto 10px; */
+}
+.chats_sms_date{
+    margin: 0px 20px 0px auto;
+
+}

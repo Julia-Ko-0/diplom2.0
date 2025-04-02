@@ -1,0 +1,37 @@
+.login_div{
+    background-color: #C1E8FF;
+    height: 800px;
+    display: table-cell;
+    width: 2000px;
+    vertical-align: middle
+
+}
+.login_div p{
+    width: 200px;
+    margin: 0px auto 10px auto;
+}
+.form_div{
+    margin: 0px auto auto auto; 
+    width: 200px;
+}
+.form_div input {
+    margin: 5% auto 5% auto;
+    width: 300px;
+    height: 35px;
+}
+.form_div button {
+    margin: 0px auto 0px auto;
+    width: 100px;
+    height: 35px;
+}
+.text_log{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin: 10px auto auto auto; 
+    gap: 50px;
+    width: 200px;
+}
+.text_log button{
+    width: 100px;
+    height: 30px;
+}
