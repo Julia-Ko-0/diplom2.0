@@ -1,45 +1,79 @@
-.div_home{
+.div_{
+    display: grid;
+    grid-template-columns: 10vw 80vw 10vw ;
+    /* grid-template-columns: 1fr minmax() 1fr; */
+    margin: 0px auto 0px auto;
+    width: 98vw;
+    /* justify-content: center; */
 
-    gap: 5%;
+}
+.div_home{
+    display: grid;
+    justify-content: center;
+    grid-column-start: 2;
+    /* gap: 5px; */
     padding-top: 110px;
-  
+    /* padding-right: 10%;
+    padding-left: 10%; */
+    width: 100%;
+    grid-template-columns: 200px minmax(auto, 800px) 200px;
+    gap: 15px;
 }
 .menu{
-    
+    display: grid;
+    grid-column-start:1;
     top:  110px;
-    position: fixed;
-    background-color:  var(--bg-color2);
-    width: 10%;
-    margin: 0px 10px 10px 0px;
+    position:sticky;
+    background-color: var(--bg-color2);
+    width: 180px;
+    /* margin: 0px 10px 10px 0px; */
     height: 230px;
-    border: 1px ; /* Параметры рамки */
+    border: 1px solid  var(--border-color); 
     /* max-width: 800px; */
     border-radius: 10px;
-    padding: 10px 15px 10px 15px;
+    padding: 10px 10px 10px 10px;
     /* min-width: max-content; */
+    grid-column-end: 2;
 }
 .elem_menu{
     display:block;
     border-radius: 10px;
     height: 40px;  
     margin: 5px;
+   font-size:16px;
+    padding-left: 10px;
 }
-
+.active {
+    background-color: var(--element-select); /* или любой выделяющий цвет */
+    color: black;
+    border-radius: 8px;
+    display:block;
+    border-radius: 10px;
+    height: 40px;  
+    margin: 5px;
+   font-size:16px;
+   padding-left: 10px;
+  }
 .posts{
-    margin: 0px 20% 0px 18%;
-    width: auto;
+    /* margin: 0px 20% 0px %; */
+    grid-column-start: 2;
+    width:100%;
+    max-width: 800px;
+    /* min-width: 500px; */
+    margin: 0 auto;
 }
 .favourites{
-   right: 9%;
+   /* right: 9%; */
     top:  110px;
-    position: fixed;
+    position:sticky;
     /* background-color: #C1CFFF; */
     background-color: var(--bg-color2);
-    width: 12%;
+    width: 180px;
     margin: 0px 10px 10px 0px;
     height: 230px;
-    border: 1px ; /* Параметры рамки */
     /* max-width: 800px; */
     border-radius: 10px;
-    padding: 10px 15px 10px 15px;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid var(--border-color);
+    grid-column-start: 3;
 }

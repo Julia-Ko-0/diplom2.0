@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router'
 function CrElChats(sms){
 // <<<<<<< HEAD
     
-
+console.log(sms.sms)
     const navigate = useNavigate();
 
  
@@ -47,8 +47,8 @@ function CrElChats(sms){
             <span  className={styles.chats_sms_date}>{sms.date}</span>
 
         </div>
-    {sms.text.length>70 &&  <span>{sms.text.substring(0,70)}...</span> }
-    {sms.text.length<=70 &&  <span>{sms.text}</span> }
+    {sms.sms.text.length>70 &&  <span>{sms.sms.text.substring(0,70)}...</span> }
+    {sms.sms.text.length<=70 &&  <span>{sms.sms.text}</span> }
      
          </div>
 </li>)

@@ -1,3 +1,32 @@
+
+.chast_div{
+    display: block;
+    height: auto;
+    padding: 0px ;
+    border: solid 1px;
+    width: 100%;
+    /* border-width: 1px; */
+    border-color: var(--border-color);
+    border-radius: 10px;
+    background-color: var(--bg-color2);
+    margin-top: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* <<<<<<< HEAD
 .chast_div{
     display: grid;
@@ -40,45 +69,45 @@
 .div_chats{
     display: flex;
 /* margin-left: -5%; */
-    margin: 5px 0px 5px 0px;
+    /* margin: 5px 0px 5px 0px; */
     height: 100px;
- border-top: 1px solid black;
+ border-top: 1px solid var(--border-color);
     /* background-color: antiquewhite; */
  
   
 
 
 }
-.chast_div{
-    display: block;
-    height: auto;
-    padding: 0px ;
-    border: solid 1px;
-    
-    /* border-width: 1px; */
-    border-color: black;
-    border-radius: 10px;
-    background-color: aquamarine;
-}
+
 .input_div{
 height: 30px;
+width: 100%;
+margin-left: -1px;
+
+
 }
 .input_div input{
- width: 80%;
- padding-left: 40px;
- font-size: 17px;
- /* margin-left: 10%; */
- border: none;
- border-radius: 10px 0px 0px 0px;
- background: url('search-svgrepo-com.svg')  no-repeat 10px center ;
-background-size: 25px;
-  /* background-color: rgba(0, 0, 0,0); */
- height: 100%;
+    width: calc(100% + 2px);
+    padding-left: 40px;
+    font-size: 17px;
+    border: none;
+    border-radius: 10px 10px 0px 0px;
+    background: url('search-svgrepo-com.svg') no-repeat 10px center;
+    background-size: 15px;
+    height: 30px;
+
 }
 /* .input_div input.icon{
     background: url('search-svgrepo-com.svg')  no-repeat center left;
 
 } */
+.input_div input:focus{
+    outline: none;
+    border: 2px solid var(--border-color-input);
+    padding-left: 40px; /* Сохраняем одинаковый отступ */
+    box-sizing: border-box; 
+    height: 100%;
+}
 .div_chats img{
   height: 80px;
   margin:  auto 10px auto 10px;

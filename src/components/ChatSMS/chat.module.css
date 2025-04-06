@@ -3,7 +3,7 @@
     width: 100%;
     height: calc(100vh - 120px);
     border-radius: 20px;
-    border: 1px solid black;    
+    border: 1px solid  var(--border-color);    
     
 
 }
@@ -14,7 +14,7 @@
     height: 90px;
     display: grid;
     grid-template-columns: 70px auto 10px;  
-    border-bottom: solid 1px black ;
+    border-bottom: solid 1px  var(--border-color) ;
    
 
 }

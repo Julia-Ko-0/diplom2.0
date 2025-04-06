@@ -4,10 +4,10 @@
     /* top: 0px; */
     background-color:var(--bg-color-novbar) ;
     display:flex;
-    width: auto;
-    height: 100px;
-    width: 80%;
-
+    width: 100vw;
+    height: 70px;
+    /* width: 80%; */
+    border: 1px solid  var(--border-color);
     margin-bottom: 20px;
 }
 .div_novbar img{
