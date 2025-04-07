@@ -3,12 +3,12 @@
 //     smsType?: number,
 //     sms?:string,
 // }
+import style from "./SMS.module.css";
 
+let user_id_ = 7
 
-
-
-export const SMS  = ({smsType, sms})=>{
-
+export const SMS  = ({sms})=>{
+console.log(sms)
 //   if(smsType ==1){
 //     return(
 //         <div>
@@ -25,25 +25,35 @@ export const SMS  = ({smsType, sms})=>{
 //   }
   return(
   <div>
-    {smsType == 1 && <SMSMe sms={sms} />}
-    {smsType == 2 && <SMSFor sms={sms} />}
+{/* 
+    {sms.user.user_id == user_id_ && <SMSMe sms={sms.text_sms} />}
+    {sms.user.user_id != user_id_ && <SMSFor sms={sms.text_sms} />} */}
+    <SMSApp sms={sms} />
   </div>
 )
 }
-
-
-export const SMSMe = ({sms})=>{
+export const SMSApp = ({sms})=>{
     return(
-        <div style={{backgroundColor:"green"}}>
-            <p>{sms}</p>
+        <div className={`${style.smsWrapper} ${sms.user.user_id == user_id_ ? style.me : style.other}`}>
+            <div  className={style.sms}>
+            <p>{sms.text_sms}</p>
+            </div>
         </div>
     )
 }
 
-export const SMSFor = ({sms})=>{
-    return(
-        <div style={{backgroundColor:"blue"}}>
-            <p>{sms}</p>
-        </div>
-    )
-}
+// export const SMSMe = ({sms})=>{
+//     return(
+//         <div className={style.smsMe}>
+//             <p>{sms}</p>
+//         </div>
+//     )
+// }
+
+// export const SMSFor = ({sms})=>{
+//     return(
+//         <div  className={style.smsFor}>
+//             <p>{sms}</p>
+//         </div>
+//     )
+// }

@@ -1,5 +1,5 @@
 import { post } from '../../data/elem'
-import { NavLink, Outlet } from 'react-router'
+import { NavLink, Outlet, useLocation } from 'react-router'
 import styles from './menu.module.css'
 import { Link } from 'react-router-dom'
 
@@ -10,7 +10,8 @@ function CrElFavorit(){
 }
 
 const Menu= ()=>{
-
+  const location = useLocation();
+  const isChatsActive = location.pathname === '/us/chats' || location.pathname === '/us/chatsms';
 
         return(
          <div className={styles.div_}>
@@ -29,14 +30,14 @@ className={({ isActive }) =>
 <NavLink
 to="chats"
 className={({ isActive }) =>
-  isActive ? `${styles.elem_menu} ${styles.active}` : styles.elem_menu
+  isActive || isChatsActive ? `${styles.elem_menu} ${styles.active}` : styles.elem_menu
 }
 >
 Сообщения
 </NavLink>
 
 <NavLink
-to="group"
+to="group" 
 className={({ isActive }) =>
   isActive ? `${styles.elem_menu} ${styles.active}` : styles.elem_menu
 }

@@ -1,4 +1,9 @@
 
+.all_chast_div{
+display: grid;
+gap: 10px;
+}
+
 .chast_div{
     display: block;
     height: auto;
@@ -13,59 +18,61 @@
 }
 
 
+.forder_div{
+    display: flex;
+    border: solid 1px;
+    border-color: var(--border-color);
+    border-radius: 10px;
+    background-color: var(--bg-color2);
+    height: 40px;
+    align-items: center; 
+    gap: 5px;
+    padding: 0px 5px 0px 5px;
+    width: calc(100% - 10px);
+    overflow-x: auto;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* <<<<<<< HEAD
-.chast_div{
-    display: grid;
-    gap: 10px; */
-    /* overflow-y:auto;
-    height: 800px; */
-    /* padding: 0px 0px 30px 0px;
 }
-.chast_div::-webkit-scrollbar{
-   width: 0;
-}
-.div_sms{
-    background-color: #C1CFFF;
-    display: grid;
-    padding: 10px 20px 10px 20px;
-    grid-template-columns: 100px auto;
-    height: 100px;
+
+
+
+  .forder_div::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+  
+
+.tab {
+    background-color: transparent;
+    /* border: 1px solid #ccc; */
     border-radius: 8px;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    height: 30px;
  
-}
-.div_sms:hover{
-    background-color: #afbde9;
-   
- 
-}
-.div_sms img{
-   width: 80px;
-   border-radius: 50%;
-   margin: auto 0px auto 0px;
-}
-.d_chat_{
-    display: grid;
-    grid-template-rows: 30px 70px;
-}
-.d_name_chat_date{
-    display: grid;
-    grid-template-columns: auto 100px;
-    vertical-align:text-top;
-======= */
+  }
+  
+  .tab:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .active {
+    background-color: transparent;
+    border: 1px solid var(--border-color-forder);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    height: 30px;
+
+    background-color: var(--bg-color-forder); /* Цвет активной вкладки */
+    color:var(--text-color-forder) ;
+    /* font-weight: bold; */
+  }
+
+
 .div_chats{
     display: flex;
 /* margin-left: -5%; */
@@ -80,9 +87,10 @@
 }
 
 .input_div{
-height: 30px;
+    height: 35px;
 width: 100%;
 margin-left: -1px;
+
 
 
 }
@@ -94,7 +102,7 @@ margin-left: -1px;
     border-radius: 10px 10px 0px 0px;
     background: url('search-svgrepo-com.svg') no-repeat 10px center;
     background-size: 15px;
-    height: 30px;
+    height: 35px;
 
 }
 /* .input_div input.icon{

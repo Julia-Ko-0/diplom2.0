@@ -1,28 +1,43 @@
 .div_{
-    background-color: aquamarine;
+    background-color: var(--bg-color2);
     width: 100%;
     height: calc(100vh - 120px);
-    border-radius: 20px;
-    border: 1px solid  var(--border-color);    
-    
+    border-radius: 10px;
+
+    border: 1px solid var(--border-color); 
+    display: grid;
+    gap: 0px;
+    grid-template-rows: 61px calc(100vh - 217px) 35px;
+
 
 }
 .heder_chat_div{
-    background-color: beige;
-    width: 100%;
-    border-radius: 20px 20px 0px 0px;
-    height: 90px;
-    display: grid;
-    grid-template-columns: 70px auto 10px;  
-    border-bottom: solid 1px  var(--border-color) ;
-   
 
+    width:100% ;
+    border-radius: 10px 10px 0px 0px;
+    height: 60px;
+    display: grid;
+    grid-template-columns:50px 70px auto 10px;  
+    background-color: var(--bg-color-heder_chat);
+    border-bottom: 1px solid var(--border-color); 
+  
+}
+.heder_chat_div button{
+
+    border-radius: 100%;
+    width: 40px;
+    /* border:1px solid var(--border-color);  */
+border: none;
+background-color: var(--bg-color-heder_chat);
+    margin: auto 0px auto 10px;
+    height: 40px;
 }
  
 .heder_chat_div img{
  width: 50px;
  border-radius: 50%;
  margin: auto auto auto 10px;
+
 }
  .heder_name_date{
     height: 50px;
@@ -30,3 +45,62 @@
     margin: auto 0px auto 0px;
     line-height:5px;
  }
+ .sms_div{
+
+
+    width: auto;
+    background-color: var(--bg-color-sms_chat);
+    height:calc(100% - 20PX) ;
+    padding: 10px;
+    display: flex;
+    flex-direction: column-reverse; /* Сообщения идут снизу вверх */
+    gap: 8px; /* Расстояние между сообщениями */
+    overflow-y: auto;
+
+    
+ }
+ .input_div {
+
+height: 35px;
+background-color:  var( --bg-color-inpus_chat);
+display: flex;
+border-top: 1px solid var(--border-color);
+border-bottom: 1px solid var(--border-color);
+border-radius: 0px 0px 10px 10px ;
+}
+  
+  .input_div input {
+    background-color:  var( --bg-color-inpus_chat);
+    width: 100% ;
+    font-size: 17px;
+    border: none;
+    border-radius: 0px 0px 0px 10px ;
+    padding-left: 40px; 
+    box-sizing: border-box; 
+   
+    height: calc(100% - 2зч);
+
+  }
+
+  .input_div button {
+ border: none;
+ margin: 1%;
+
+
+  }
+
+
+
+.input_div  input:focus{
+    outline: none;
+    border: none;
+    padding-left: 40px; 
+    box-sizing: border-box; 
+    height: calc(100% -2px);
+    background-color:  var( --bg-color-inpus_chat-focus);
+    
+} 
+
+.input_div:has(input:focus) {
+    background-color: var(--bg-color-inpus_chat-focus);
+  }

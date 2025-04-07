@@ -1,0 +1,21 @@
+
+.smsWrapper {
+    display: flex;
+  }
+.smsWrapper.me {
+    justify-content: flex-end; /* выравнивание по правому краю */
+  }
+  
+  .smsWrapper.other {
+    justify-content: flex-start; /* по левому */
+  }
+  .sms{
+    background-color: aliceblue;
+    display: inline-block;
+    width: auto;
+    min-width: 100px;
+    max-width: 300px;
+    overflow-wrap: break-word;
+    padding: 5px 10px;
+    border-radius: 8px;
+  }

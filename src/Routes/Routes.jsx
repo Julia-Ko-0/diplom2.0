@@ -31,6 +31,7 @@ import { Chat } from "../components/ChatSMS/Chat";
                     {
                         path:'chats',
                         element: <Chats/>,
+                     
             
                     },
                     {
@@ -39,16 +40,13 @@ import { Chat } from "../components/ChatSMS/Chat";
                     },
                     {
                         path:'myakk',
-// <<<<<<< HEAD
-//                         element: <Homes/>
-//                     },
-//                     {
-//                         path:'chatsms',
-//                         element:<Chat/>
-// =======
-//                         element: <MyAkk/>
-// >>>>>>> 38653995a712cdd64f66b79495f9ae0a8960ea49
+                        // element:</>
+                    },
+                    {
+                        path:'chatsms',
+                        element:<Chat/>
                     }
+
                 ]
             }
         ]

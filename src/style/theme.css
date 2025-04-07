@@ -11,6 +11,13 @@ body[data-theme="light"] {
   --element-select: #69BEBA;
   --text-color: #2b2d30;
   --border-color-input:#69BEBA;
+  --border-color-forder:#69BEBA;
+  --bg-color-forder:none;
+  --text-color-forder: #2b2d30;
+  --bg-color-inpus_chat:#ffffff;
+  --bg-color-sms_chat:#ffffff;
+  --bg-color-heder_chat:#ffffff;
+  --bg-color-inpus_chat-focus:#ffffff;
 }
 /* body[data-theme="light"] {
   --bg-color: #fbfcf4;
