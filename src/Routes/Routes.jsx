@@ -9,8 +9,9 @@ import Login from "../components/Login/Login";
 import Registr from "../components/Registr/Registr";
 import Chats from "../components/Chats/Chats";
 // <<<<<<< HEAD
-import Rab from "../components/rab/rab";
+
 import { Chat } from "../components/ChatSMS/Chat";
+import { Settings } from "../components/Settings/Setting";
 // =======
 // import MyAkk from "../components/Myakk/MyAkk";
 // >>>>>>> 38653995a712cdd64f66b79495f9ae0a8960ea49
@@ -21,7 +22,7 @@ import { Chat } from "../components/ChatSMS/Chat";
         element:<App/>,
         children:[
             {
-                path:'/us',
+                path:'/us/',
                 element: <Menu/>,
                 children:[
                     {
@@ -45,26 +46,26 @@ import { Chat } from "../components/ChatSMS/Chat";
                     {
                         path:'chatsms',
                         element:<Chat/>
-                    }
+                    },
+                  
 
                 ]
-            }
+            },
+            {
+                path:'settings',
+                element: <Settings/>
+            },
         ]
     },
     {
         
         path:'/login',
         element:<Login/>
-    }
-    ,
+    },
     {
         
         path:'/',
         element:<Registr/>
     },
-    {
-        
-        path:'/rab',
-        element:<Rab/>
-    }
+  
  ])
