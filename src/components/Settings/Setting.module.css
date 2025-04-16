@@ -1,0 +1,64 @@
+.div_settings{
+        display: grid;
+        grid-template-columns: 10vw 80vw 10vw ;
+        /* grid-template-columns: 1fr minmax() 1fr; */
+        margin: 0px 0px 0px 0px;
+        width: 100%;
+        /* justify-content: center; */
+}
+.div_settings_{
+        display: grid;
+        justify-content: center;
+        grid-column-start: 2;
+        /* gap: 5px; */
+        padding-top: 110px;
+        /* padding-right: 10%;
+        padding-left: 10%; */
+        width: 100%;
+        grid-template-columns: 200px minmax(auto, 800px) 200px;
+        gap: 15px;
+
+}
+.div_settings_select{
+        grid-column-start: 2;
+
+        width: 100%;
+        height: 90vh;
+
+}
+.menu{
+    /* right: 9%; */
+    top:  110px;
+    position:sticky;
+
+    background-color: var(--bg-color2);
+    width: 180px;
+    margin: 0px 10px 10px 0px;
+    height: 230px;
+    /* max-width: 800px; */
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid var(--border-color);
+    grid-column-start: 3;
+}
+
+.elem_menu{
+        display:block;
+        border-radius: 10px;
+        height: 40px;  
+        margin: 5px;
+       font-size:16px;
+        padding-left: 10px;
+    }
+    .active {
+        background-color: var(--element-select); /* или любой выделяющий цвет */
+        color: black;
+        border-radius: 8px;
+        display:block;
+        border-radius: 10px;
+        height: 40px;  
+        margin: 5px;
+       font-size:16px;
+       padding-left: 10px;
+       transition: background-color 0.5s;
+      }

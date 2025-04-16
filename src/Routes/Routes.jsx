@@ -12,9 +12,10 @@ import Chats from "../components/Chats/Chats";
 
 import { Chat } from "../components/ChatSMS/Chat";
 import { Settings } from "../components/Settings/Setting";
-// =======
-// import MyAkk from "../components/Myakk/MyAkk";
-// >>>>>>> 38653995a712cdd64f66b79495f9ae0a8960ea49
+import { Fav } from "../components/Settings/set/Fav/Fav";
+import { Akk } from "../components/Settings/set/Akk/Akk";
+import { Blacklist } from "../components/Settings/set/Blacklist/Blacklist";
+import { Appearance } from "../components/Settings/set/Appearance/Appearance";
 
  export  const router = createBrowserRouter([
     {
@@ -22,7 +23,7 @@ import { Settings } from "../components/Settings/Setting";
         element:<App/>,
         children:[
             {
-                path:'/us/',
+                path:'/us',
                 element: <Menu/>,
                 children:[
                     {
@@ -47,14 +48,34 @@ import { Settings } from "../components/Settings/Setting";
                         path:'chatsms',
                         element:<Chat/>
                     },
-                  
-
+                
                 ]
             },
             {
                 path:'settings',
-                element: <Settings/>
+                element: <Settings/>,
+                children:[
+                    {
+                        path:'fav',
+                        element: <Fav/>
+                    },
+                    {
+                        path:'blacklist',
+                        element: <Blacklist/>
+                    },
+                    {
+                        path:'appearance',
+                        element: <Appearance/>
+                    },
+                    {
+                        path:'akk',
+                        element: <Akk/>
+                    },
+                   
+                ]
             },
+
+         
         ]
     },
     {
