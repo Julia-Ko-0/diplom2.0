@@ -2,6 +2,8 @@ import styles from './home.module.css'
 import { PostM } from '../../models/models'
 import { post } from '../../data/elem'
 import { Outlet } from 'react-router'
+import { useEffect } from 'react'
+import { getUserInfo, getUserPosts, getUsersPosts } from '../../hooks/api'
 
 
 
@@ -50,12 +52,135 @@ function CrElPosts(post){
     )
 }
 const Homes = ()=>{
+  async function sendMessage(senderId, receiverId, messageText, messageFileBase64 = "") {
+    try {
+      const response = await fetch("http://localhost:8080/update-info-user", {
+        method: "POST",
+        credentials: "include", 
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          UserID: 17,
+          Patronymic: "J",
+
+      
+        }
+        )
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Ошибка:", errorData);
+        return;
+      }
+  
+      const result = await response.json();
+      console.log("Успех:", result);
+    } catch (err) {
+      console.error("Сетевая ошибка:", err);
+    }
+  }
+  
+  async function auth() {
+    try {
+      const response = await fetch("http://localhost:8080/login", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // ВАЖНО: позволяет браузеру сохранять/отправлять куки
+        body: JSON.stringify({
+          login: 'user1',
+          password: 'emma_secure'
+        }),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Ошибка:", errorData);
+        return;
+      }
+  
+      const result = await response.json();
+      console.log("Успех:", result);
+    } catch (err) {
+      console.error("Сетевая ошибка:", err);
+    }
+  }
+  async function logout() {
+    try {
+      const response = await fetch("http://localhost:8080/logout", {
+        method: "POST",
+        credentials: "include", // обязательно для отправки куки
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Ошибка:", errorData);
+        return;
+      }
+  
+      const result = await response.json();
+      console.log("Успех:", result);
+    } catch (err) {
+      console.error("Сетевая ошибка:", err);
+    }
+  }
+  async function info() {
+    try {
+      const response = await fetch("http://localhost:8080/user_info", {
+        method: "POST",
+        credentials: "include",
+       // обязательно
+      });
+  
+      const result = await response.json();
+      if (!response.ok) {
+        console.error("Ошибка:", result);
+        return;
+      }
+  
+      console.log("Успех:", result);
+    } catch (err) {
+      console.error("Сетевая ошибка:", err);
+    }
+  }
+  
+  
 
 console.log(post)
-    return(
-     
-            <div className={styles.posts}>
-             
+
+
+return(
+ 
+        <div className={styles.posts}>
+         <div><button onClick={()=>{
+            // sendMessage(17,4,'gjvjubnt')
+            auth()
+         }}>
+          
+          auth</button><button onClick={()=>{
+            sendMessage(17,4,'gjvjubnt')
+            // auth()
+         }}>
+          
+          sendMessage</button>
+          <button onClick={()=>{
+         
+            logout()
+         }}>
+          
+          logout</button>
+          <button onClick={()=>{
+         
+        //  info()
+        getUserInfo()
+        getUserPosts()
+        getUsersPosts('JuliaKo')
+      }}>
+       
+       info</button></div>
                 {/* <CrElPosts/>
                 <CrElPosts/> */}
                 {post.map(posts => <CrElPosts post={posts} />)}

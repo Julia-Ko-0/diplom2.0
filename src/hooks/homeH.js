@@ -10,8 +10,8 @@ export function usePost(){
         setError('')
         const response = await axios.get('https://kitsu.io/api/edge/manga?page[limit]=2&page[offset]=0')
         settest(response.data.data)
-    }catch(e:unknown){
-        const error = e as AxiosError
+    }catch(e){
+        const error = e 
         setError(error.message)
     }
   
