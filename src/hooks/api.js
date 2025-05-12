@@ -85,3 +85,5 @@ export const removeFromBlacklist = (blockedId) =>
 // 🔁 Репосты
 export const removeRepost = (repostId) =>
   fetchWithAuth("/user/repost/remove", { body: JSON.stringify({ repost_id: repostId }) });
+export const getGroupSubscribers = (id_group) =>
+    fetchWithAuth(`/group/${id_group}/subscribers`);

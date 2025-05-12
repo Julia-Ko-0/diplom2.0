@@ -6,7 +6,9 @@ import App from './App';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './Routes/Routes';
 import { ThemeProvider } from './context/ThemeContext';
+import axios from 'axios';
 
+axios.defaults.withCredentials = true;
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') 

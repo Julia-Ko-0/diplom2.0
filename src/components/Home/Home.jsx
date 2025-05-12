@@ -3,7 +3,7 @@ import { PostM } from '../../models/models'
 import { post } from '../../data/elem'
 import { Outlet } from 'react-router'
 import { useEffect } from 'react'
-import { getUserInfo, getUserPosts, getUsersPosts } from '../../hooks/api'
+import { getGroupSubscribers, getUserInfo, getUserPosts, getUsersPosts } from '../../hooks/api'
 
 
 
@@ -176,8 +176,9 @@ return(
          
         //  info()
         getUserInfo()
-        getUserPosts()
-        getUsersPosts('JuliaKo')
+        // getUserPosts()
+        // getUsersPosts('JuliaKo')
+        getGroupSubscribers(1)
       }}>
        
        info</button></div>
