@@ -17,7 +17,12 @@ body[data-theme="light"] {
   --bg-color-inpus_chat:#ffffff;
   --bg-color-sms_chat:#ffffff;
   --bg-color-heder_chat:#ffffff;
+  --svg-color: #8a8888;
   --bg-color-inpus_chat-focus:#ffffff;
+  --svg-color-full:none;
+  --button-color:#ffffff;
+    --button-border-color:#dfdfdf;
+   --bg-color-hover-element:#69BEBA;
 }
 /* body[data-theme="light"] {
   --bg-color: #fbfcf4;

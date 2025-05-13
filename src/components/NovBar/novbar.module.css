@@ -12,6 +12,7 @@
     border: 1px solid  var(--border-color);
     margin-bottom: 20px;
     align-content: center;
+     z-index: 9000;
 }
 .div_novbar_{
     display: grid;
@@ -22,14 +23,13 @@
 width: 100%;
     margin: 0px auto 0px auto;
 }
-.div_novbar_left{
-   
-}
+
 .div_novbar_img {
     /* grid-column-start: 2; */
     display: flex;
     align-items: center; /* выравнивает по вертикали */
     gap: 20px;
+      cursor: pointer;
     /* margin: auto 40px auto auto; */
 }
 .div_novbar_img img {
@@ -41,4 +41,48 @@ width: 100%;
     /* border-radius: 50%; */
     height: 30px;
     /* margin: auto 20px auto auto; */
+}
+
+.div_novbar_menu {
+  position: absolute;
+  top: 125%;        /* Появляется сразу под .div_novbar_img */
+  right: 0;         /* Привязка к правому краю аватарки */
+   background-color:  var(--bg-color2);
+
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+
+  min-width: 200px;
+  z-index: 9; 
+
+    border-radius: 10px;
+}
+.div_novbar_img_wrapper {
+  position: relative;
+  display: inline-block;
+ 
+
+}
+.div_novbar_img_wrapper svg{
+       color:  var(--svg-color);
+       stroke:     var(--svg-color);
+}
+
+.div_novbar_menu svg{ 
+   width: 25px;
+   color:  var(--svg-color);
+      stroke:    var(--svg-color);
+}
+.div_novbar_menu_elem{
+    display: flex;
+    gap: 10px;
+        margin:  5px  10px  5px 10px ;
+        padding: 5px;
+
+    border-radius: 10px;
+}
+.div_novbar_menu_elem:hover{
+
+  background-color:  var( --bg-color-hover-element);
 }

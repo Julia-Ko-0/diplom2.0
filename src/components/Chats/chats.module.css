@@ -30,6 +30,7 @@ gap: 10px;
     padding: 0px 5px 0px 5px;
     width: calc(100% - 10px);
     overflow-x: auto;
+    
 
 }
 
@@ -50,6 +51,10 @@ gap: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
     height: 30px;
+     display: flex;            /* превращаем кнопку в flex-контейнер */
+  justify-content: center;  /* горизонтальное выравнивание */
+  align-items: center;      /* вертикальное выравнивание */
+  text-align: center;
  
   }
   
@@ -58,6 +63,10 @@ gap: 10px;
   }
   
   .active {
+     display: flex;            /* превращаем кнопку в flex-контейнер */
+  justify-content: center;  /* горизонтальное выравнивание */
+  align-items: center;      /* вертикальное выравнивание */
+  text-align: center;
     background-color: transparent;
     border: 1px solid var(--border-color-forder);
     border-radius: 8px;

@@ -17,7 +17,8 @@ const Menu= ()=>{
          <div className={styles.div_}>
              <div className={styles.div_home}>
               
-              <div className={styles.menu}>
+    <div className={styles.menu_btn_add}>
+                <div className={styles.menu}>
               <NavLink
 to="home"
 className={({ isActive }) =>
@@ -53,7 +54,15 @@ className={({ isActive }) =>
 >
 Моя страница
 </NavLink>
+
               </div>
+              <div>
+                   <button><svg width="auto" height="auto" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M21.507 43L21.5 1M1 21.4999H43" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>Создать пост
+</button>
+              </div>
+    </div>
               <div className={styles.posts}>
                   <Outlet/>
               </div>

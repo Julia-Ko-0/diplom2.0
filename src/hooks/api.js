@@ -1,6 +1,6 @@
-// api.js — модуль для работы с бэкендом
 const API_BASE = "http://localhost:8080";
 
+// Базовый метод для запросов
 async function fetchWithAuth(endpoint, options = {}) {
   const url = `${API_BASE}${endpoint}`;
   const defaultOptions = {
@@ -16,29 +16,31 @@ async function fetchWithAuth(endpoint, options = {}) {
   };
 
   const res = await fetch(url, mergedOptions);
+  if (!res.ok) {
+    const error = await res.text();
+    throw new Error(`Ошибка API: ${res.status} - ${error}`);
+  }
   return res.json();
 }
 
-// 🔐 Авторизация
+// Универсальный GET с авторизацией
+async function fetchGetWithAuth(endpoint) {
+  return fetchWithAuth(endpoint, { method: "GET" });
+}
+
+/* 🔐 Авторизация */
 export const loginUser = (data) => fetchWithAuth("/login", { body: JSON.stringify(data) });
 export const logoutUser = () => fetchWithAuth("/logout");
 
-// 👤 Пользователь
+/* 👤 Пользователь */
 export const getUserInfo = () => fetchWithAuth("/user_info");
 export const getUsersInfo = (login) => fetchWithAuth(`/user_info/${login}`);
 export const getUserPosts = (limit = 10, offset = 0) =>
   fetchWithAuth(`/user_info_post?limit=${limit}&offset=${offset}`);
 export const getUsersPosts = (login, limit = 10, offset = 0) =>
-    fetchWithAuth(`/user_info_post/${login}?limit=${limit}&offset=${offset}`);
-// 📁 Папки и чаты
-export const getUserChatFolders = () => fetchWithAuth("/user/chat-folders");
-export const getUserChats = () => fetchWithAuth("/user/chats");
-export const getChatsInFolder = (folderId) => fetchWithAuth(`/user/chats/${folderId}`);
-export const getChatInfo = (chatId) => fetchWithAuth(`/user/chats/info/${chatId}`);
-export const getChatMessages = (chatId, limit = 10, offset = 0) =>
-  fetchWithAuth(`/user/chats/messenge/${chatId}?limit=${limit}&offset=${offset}`);
+  fetchWithAuth(`/user_info_post/${login}?limit=${limit}&offset=${offset}`);
 
-// 📝 История и профиль
+/* 📝 История и профиль */
 export const getNameHistory = () => fetchWithAuth("/user/name-history");
 export const updateUserInfo = (data) => fetchWithAuth("/update-info-user", { body: JSON.stringify(data) });
 export const updateUserEmail = (email) => fetchWithAuth("/update-user-email", { body: JSON.stringify({ email }) });
@@ -46,44 +48,90 @@ export const updateBirthdate = (birthdate) => fetchWithAuth("/update-user-birthd
 export const updateUserLogin = (login) => fetchWithAuth("/update-user-login", { body: JSON.stringify({ login }) });
 export const updateUserPassword = (password) => fetchWithAuth("/update-user-password", { body: JSON.stringify({ password }) });
 
-// 💬 Чаты и сообщения
+/* 💬 Чаты и сообщения */
+export const getUserChatFolders = () => fetchWithAuth("/user/chats");
+export const getUserChats = () => fetchWithAuth("/user/chats");
+export const getChatsInFolder = (folderId) => fetchWithAuth(`/user/chats/${folderId}`);
+export const getChatInfo = (chatId) => fetchWithAuth(`/user/chats/info/${chatId}`);
+export const getChatMessages = (chatId, limit = 10, offset = 0) =>
+  fetchWithAuth(`/user/chats/messages/${chatId}?limit=${limit}&offset=${offset}`);
 export const sendMessageOne = (data) => fetchWithAuth("/send-message-one", { body: JSON.stringify(data) });
 export const sendMessageToChat = (data) => fetchWithAuth("/send-message", { body: JSON.stringify(data) });
 
-// 📦 Папки и управление чатами
+/* 📦 Папки и управление чатами */
 export const addChatFolder = (name) => fetchWithAuth("/add-chat-folder", { body: JSON.stringify({ name }) });
 export const addChatToFolder = (data) => fetchWithAuth("/add-chat-to-folder", { body: JSON.stringify(data) });
 export const updateGroupChat = (data) => fetchWithAuth("/update-group-chat", { body: JSON.stringify(data) });
 export const removeUserFromChat = (chatId, userId) =>
   fetchWithAuth("/remove-user-from-chat", { body: JSON.stringify({ chatId, userId }) });
 
-// 🗑️ Удаления
+/* 🗑️ Удаления */
 export const deleteMessage = (data) => fetchWithAuth("/delete-sms-from-chat", { body: JSON.stringify(data) });
 export const deleteChat = (data) => fetchWithAuth("/delete-chat", { body: JSON.stringify(data) });
 export const deleteFriendRequest = (data) => fetchWithAuth("/delete-friend-request", { body: JSON.stringify(data) });
 export const deletePost = (data) => fetchWithAuth("/delete-post-user", { body: JSON.stringify(data) });
-// 👥 Друзья и подписки
-export const getFriendsList = () => fetchWithAuth("/user/friends/list");
+
+/* 👥 Друзья и подписки */
+export const getFriendsList = () => fetchWithAuth("/friends/list");
 export const removeFriend = (friendId) =>
-  fetchWithAuth("/user/friends/remove", { body: JSON.stringify({ friend_id: friendId }) });
+  fetchWithAuth("/friends/remove", { body: JSON.stringify({ friend_id: friendId }) });
 
-// 📨 Заявки в друзья
-export const getFriendRequests = () => fetchWithAuth("/user/friend-request/incoming");
+/* 📨 Заявки в друзья */
+export const getFriendRequests = () => fetchWithAuth("/friend-request/incoming");
 export const sendFriendRequest = (targetId) =>
-  fetchWithAuth("/user/friend-request/send", { body: JSON.stringify({ target_id: targetId }) });
+  fetchWithAuth("/friend-request/send", { body: JSON.stringify({ target_id: targetId }) });
 export const acceptFriendRequest = (targetId) =>
-  fetchWithAuth("/user/friend-request/accept", { body: JSON.stringify({ target_id: targetId }) });
+  fetchWithAuth("/friend-request/accept", { body: JSON.stringify({ target_id: targetId }) });
 export const rejectFriendRequest = (targetId) =>
-  fetchWithAuth("/user/friend-request/reject", { body: JSON.stringify({ target_id: targetId }) });
+  fetchWithAuth("/friend-request/reject", { body: JSON.stringify({ target_id: targetId }) });
 
-// 🚫 Чёрный список (блокировка)
+/* 🚫 Чёрный список */
 export const addToBlacklist = (blockedId) =>
-  fetchWithAuth("/user/blacklist/add", { body: JSON.stringify({ blocked_id: blockedId }) });
+  fetchWithAuth("/blacklist/add", { body: JSON.stringify({ blocked_id: blockedId }) });
 export const removeFromBlacklist = (blockedId) =>
-  fetchWithAuth("/user/blacklist/remove", { body: JSON.stringify({ blocked_id: blockedId }) });
+  fetchWithAuth("/blacklist/remove", { body: JSON.stringify({ blocked_id: blockedId }) });
 
-// 🔁 Репосты
+/* 🔁 Репосты */
 export const removeRepost = (repostId) =>
-  fetchWithAuth("/user/repost/remove", { body: JSON.stringify({ repost_id: repostId }) });
-export const getGroupSubscribers = (id_group) =>
-    fetchWithAuth(`/group/${id_group}/subscribers`);
+  fetchWithAuth("/reposts/remove", { body: JSON.stringify({ repost_id: repostId }) });
+
+/* 👤 Подписчики и подписки */
+export const getSubscribersList = () => fetchWithAuth("/user/subscribers");
+export const getGroupSubscribers = (id_group) => fetchWithAuth(`/group/${id_group}/subscribers`);
+export const subscribeToUser = (targetId) => fetchWithAuth("/user/subscribe", { body: JSON.stringify({ target_id: targetId }) });
+export const unsubscribeFromUser = (targetId) => fetchWithAuth("/user/unsubscribe", { body: JSON.stringify({ target_id: targetId }) });
+
+/* 📄 Посты */
+export const createPost = (data) => fetchWithAuth("/add-post-user", { body: JSON.stringify(data) });
+export const updatePost = (postId, content) =>
+  fetchWithAuth("/update-post-user", { body: JSON.stringify({ post_id: postId, content }) });
+
+/* 🏷️ Теги */
+export const createTag = (data) => fetchWithAuth("/tags/create", { body: JSON.stringify(data) });
+export const getTags = (groupId) => fetchWithAuth(`/tags/${groupId}`);
+export const updateTagsInGroup = (data) => fetchWithAuth("/group/update-tags", { body: JSON.stringify(data) });
+
+/* 👾 Стикеры */
+export const createStickerPack = (data) => fetchWithAuth("/user/sticker-pack/create", { body: JSON.stringify(data) });
+export const addStickerToPack = (data) => fetchWithAuth("/user/sticker-pack/add-sticker", { body: JSON.stringify(data) });
+export const getUserStickerPacks = () => fetchWithAuth("/user/sticker-pack/list");
+export const sendStickerToUser = (data) => fetchWithAuth("/sticker/send", { body: JSON.stringify(data) });
+
+/* 🛠 Роли и разрешения */
+export const createRoleWithFeatures = (data) => fetchWithAuth("/groups/:group_id/roles", { body: JSON.stringify(data) });
+export const addFeatureToRole = (data) => fetchWithAuth("/roles/:role_id/features", { body: JSON.stringify(data) });
+export const addUserToRoleGroup = (data) => fetchWithAuth("/roles/:role_id/users", { body: JSON.stringify(data) });
+export const getRolesInfoForGroup = (groupId) => fetchWithAuth(`/groups/${groupId}/roles`);
+
+/* 💬 Комментарии */
+export const getComments = (postId) => fetchWithAuth(`/comments?post_id=${postId}`);
+export const toggleLikeComment = (commentId) => fetchWithAuth("/toggle_like_comment", { body: JSON.stringify({ comment_id: commentId }) });
+
+/* ✨ Уведомления и избранное */
+export const addToFavourites = (data) => fetchWithAuth("/add_to_favourites", { body: JSON.stringify(data) });
+export const getUserFavouriteSMS = () => fetchWithAuth("/user/favourite-sms");
+
+/* Управление чатами и папками чатов */
+export const getChatsByFolder = (folderId) => fetchWithAuth("/user/chats-in-folder", { body: JSON.stringify({ folder_id: folderId }) });
+export const removeChatFromFolder = (chatId) => fetchWithAuth("/user/folder/chat/remove", { body: JSON.stringify({ chat_id: chatId }) });
+export const removeChatFolder = (folderId) => fetchWithAuth("/user/folder/remove", { body: JSON.stringify({ folder_id: folderId }) });

@@ -18,29 +18,52 @@
     grid-template-columns: 200px minmax(auto, 800px) 200px;
     gap: 15px;
 }
+.menu_btn_add{
+        display: grid;
+    grid-column-start:1;
+    top:  110px;
+    position:sticky;
+      width: 180px;
+    height: 250px;
+
+
+    grid-column-end: 2;
+}
 .menu{
     display: grid;
-    grid-column-start:1;
+        background-color: var(--bg-color2);
+  
+    border: 1px solid  var(--border-color); 
+
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
+    /* grid-column-start:1;
     top:  110px;
     position:sticky;
     background-color: var(--bg-color2);
     width: 180px;
-    /* margin: 0px 10px 10px 0px; */
+
     height: 230px;
     border: 1px solid  var(--border-color); 
-    /* max-width: 800px; */
+
     border-radius: 10px;
     padding: 10px 10px 10px 10px;
-    /* min-width: max-content; */
-    grid-column-end: 2;
+
+    grid-column-end: 2; */
 }
+
+
 .elem_menu{
-    display:block;
+    /* display:block; */
     border-radius: 10px;
     height: 40px;  
     margin: 5px;
    font-size:16px;
     padding-left: 10px;
+     display: flex;            /* превращаем кнопку в flex-контейнер */
+  align-items: center;      /* вертикальное выравнивание */
+  text-align: center;
 }
 .active {
     background-color: var(--element-select); /* или любой выделяющий цвет */
@@ -53,7 +76,16 @@
    font-size:16px;
    padding-left: 10px;
    transition: background-color 0.5s;
+    display: flex;            /* превращаем кнопку в flex-контейнер */
+  align-items: center;      /* вертикальное выравнивание */
+  text-align: center;
   }
+  a {
+  text-decoration: none; /* убирает подчёркивание */
+  color: inherit;        /* делает цвет таким же, как у родителя (обычный текст) */
+  font: inherit;         /* копирует стиль шрифта от родителя */
+  cursor: default;       /* (необязательно) если не хочешь, чтобы был указатель-рука */
+}
 .posts{
     /* margin: 0px 20% 0px %; */
     grid-column-start: 2;
@@ -77,3 +109,24 @@
     border: 1px solid var(--border-color);
     grid-column-start: 3;
 }
+ .menu_btn_add button{
+ 
+      display: flex;            /* превращаем кнопку в flex-контейнер */
+  justify-content: center;  /* горизонтальное выравнивание */
+  align-items: center;      /* вертикальное выравнивание */
+  text-align: center;
+  width: 100%;
+height: 42px;
+gap: 10px;
+font-size:15px;
+    border-radius: 7px;
+background-color: var(--button-color);
+border: 1px solid var(--button-border-color);
+}
+ .menu_btn_add  svg{
+    /* width: 42px; */
+width: 20px;
+}
+    .add_posts button:hover{
+
+  }

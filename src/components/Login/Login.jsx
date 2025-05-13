@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
    import SHA256 from 'crypto-js/sha256';
 
@@ -7,6 +7,7 @@ import styles from './login.module.css';
 function Login() {
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -24,7 +25,7 @@ function Login() {
         return;
       }
 
-      alert('Авторизация успешна');
+       navigate('/us/home');
       // Перенаправить пользователя, сохранить токен и т.д.
     } catch (err) {
       console.error('Сетевая ошибка:', err);
@@ -32,8 +33,11 @@ function Login() {
   };
 
   return (
-    <div className={styles.login_div}>
-      <p>Вход</p>
+    <div  className={styles.login_div}>
+         <div className={styles.div_login}>
+      <p style={{
+   fontSize:'40px',textAlign:'center'
+  }}>Вход</p>
       <form className={styles.form_div} onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
@@ -53,6 +57,8 @@ function Login() {
         <Link to='/'>Зарегистрироваться</Link>
       </div>
     </div>
+    </div>
+ 
   );
 }
 
