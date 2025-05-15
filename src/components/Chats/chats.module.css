@@ -59,7 +59,7 @@ gap: 10px;
   }
   
   .tab:hover {
-    background-color: #f0f0f0;
+    background-color: var(--button-hover);
   }
   
   .active {

@@ -3,7 +3,8 @@ import { PostM } from '../../models/models'
 import { post } from '../../data/elem'
 import { Outlet } from 'react-router'
 import { useEffect, useState } from 'react'
-import { getGroupSubscribers, getUserInfo, getUserPosts, getUsersPosts } from '../../hooks/api'
+import { getFilteredPosts, getGroupSubscribers, getRecommendedPosts, getUserInfo, getUserPosts, getUsersPosts } from '../../hooks/api'
+import { formatDate, getImageSrc } from '../../hooks/homeH'
 
 
 
@@ -11,25 +12,30 @@ import { getGroupSubscribers, getUserInfo, getUserPosts, getUsersPosts } from '.
 //     post: PostM
 // }
 
-function CrElPosts(post){
+function CrElPosts({post}){
+  console.log(post.fale_post)
     return(
         <div className={styles.elem_post}>
             <div className={styles.elem_post_header}>
                 <img  className={styles.elem_post_header_ava} 
                 src={post.img}></img>
+                   <span className={styles.h_name}>{post.heder}</span>
+                      <span className={styles.h_name}>{post.text}</span>
                 <div className={styles.elem_post_h_name}>
-                    <span className={styles.h_name}>{post.heder}</span>
+                 
                     <div className={styles.elem_post_h_name_datetime}> 
-                        <p>20:00</p>
-                        <p>21/08/2024</p>
+                        <p>{formatDate(post.dateTime_post)}</p>
+                        {/* <p>21/08/2024</p> */}
                     </div>
                    
                 </div>   
                 <img className={styles.elem_post_header_btn} src='../imgs/Home/Group 8.svg'></img>      
             </div>
             <div className={styles.elem_post_body}>
-            <p>{post.text}</p>
-            <img  className={styles.elem_post_body_img} src='https://i.pinimg.com/564x/00/47/f9/0047f95b65904798dde37033fdcfdd1e.jpg'></img>
+            {/* <p>{post.}</p> */}
+           
+            {/* <img  className={styles.elem_post_body_img} src=""></img> */}
+            <img width="325" height="373" alt="" src={post.fale_post}></img>
            
             </div>
             <div className={styles.elem_post_btn}>
@@ -131,9 +137,31 @@ const Homes = ()=>{
   
   
 
-console.log(post)
+// console.log(post)
+//  const a =  getUserPosts()
+// console.log(a.data)
         const [activeTab, setActiveTab] = useState('1');
+         const [posts, setPost] = useState([]);
+useEffect(()=>{
+  activeTab == '2' ?
+getRecommendedPosts(10, 0)
+  .then((data) => {
+    console.log("Посты пользователя:", data);
+    setPost(data)
+  })
+  .catch((error) => {
+    console.error("Ошибка при получении постов:", error.message);
+  }) :
+getFilteredPosts() 
+.then((data) => {
+    console.log("Посты пользователя:", data);
+    setPost(data)
+  })
+  .catch((error) => {
+    console.error("Ошибка при получении постов:", error.message);
+  });
 
+},[activeTab])
 return(
  
         <div className={styles.posts}>
@@ -191,7 +219,7 @@ return(
        info</button></div> */}
                 {/* <CrElPosts/>
                 <CrElPosts/> */}
-                {post.map(posts => <CrElPosts post={posts} />)}
+                {posts.map(posts => <CrElPosts post={posts} />)}
                 
             </div>
     )

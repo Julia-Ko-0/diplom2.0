@@ -23,6 +23,7 @@ body[data-theme="light"] {
   --button-color:#ffffff;
     --button-border-color:#dfdfdf;
    --bg-color-hover-element:#69BEBA;
+--button-hover:#f0f0f0;
 }
 /* body[data-theme="light"] {
   --bg-color: #fbfcf4;

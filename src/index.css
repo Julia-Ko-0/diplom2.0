@@ -25,12 +25,14 @@ body a{
 
    font-family:'Inter_28pt-Regular',sans-serif;
    font-size: large;
+      cursor: pointer;
   
 }
 body button{
 
    font-family:'Inter_28pt-Regular',sans-serif;
    font-size: large;
+    cursor: pointer;
   
 }
 
