@@ -99,9 +99,9 @@
 // }
 
 // export default Registr
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './reg.module.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SHA256 from 'crypto-js/sha256';
 // import defaultAvatar from '/imgs/log/Group 25 (2).svg';
 
@@ -109,7 +109,7 @@ function Registr() {
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState('');
   const [preview, setPreview] = useState(null); // для превью изображения
-
+  const navigate = useNavigate();
   const handleRegister = async () => {
     const hashedPassword = SHA256(password).toString();
     try {
@@ -137,7 +137,31 @@ function Registr() {
       setPreview(localUrl);
     }
   };
+  const handleLogin = async () => {
+    try {
+        const hashedPassword = SHA256(password).toString(); 
+      const response = await fetch("http://localhost:8080/login", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ login: login, Password: hashedPassword }),
+      });
 
+      const data = await response.json();
+      if (!response.ok) {
+        alert(data.error || 'Ошибка авторизации');
+        return;
+      }
+
+       navigate('/us/home');
+      // Перенаправить пользователя, сохранить токен и т.д.
+    } catch (err) {
+      console.error('Сетевая ошибка:', err);
+    }
+  };
+useEffect(()=>{
+  // handleLogin()
+},[])
   return (
     <div className={styles.login_div}>
       <div className={styles.div_login}>

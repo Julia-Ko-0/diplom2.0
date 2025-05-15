@@ -35,12 +35,19 @@
     height: 100px;
     width: 100%;
 }
-
+.elem_post_header_text{
+    display: grid;
+    padding: 0px 0px 10px 0px;
+  height: 100%;
+}
 .h_name{
-    margin-top: 30px;
+    /* margin-top: 30px; */
 }
 .elem_post_h_name{
-    display: block;
+    display: grid;
+    width: 100%;
+    grid-template-columns: auto 40%;
+    /* height: 50px; */
     margin:  auto auto auto 10px;
    
 }
@@ -49,19 +56,26 @@
 } */
 .elem_post_h_name_datetime{
     display: flex;
-    margin-top: -30px;
+    /* margin-top: -30px; */
+    
 }
-/* .elem_post_body{
-    height: 100px;
-} */
+.elem_post_body{
+    height: auto;
+        /* max-width: 20vw; */
+}
 .elem_post_body_img{
     /* width: 100%; */
     object-fit: cover;
-    width: 100%;
+    /* width: 100px; */
+      max-width: 100%;
     border-radius: 5px;
     border: solid 1px black;
-    height: 500px;
+    /* height: 20vw; */
 
+
+}
+.fale_post{
+    width: auto;
 }
 .elem_post_btn{
     width: 100%;

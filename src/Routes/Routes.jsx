@@ -17,6 +17,7 @@ import { Akk } from "../components/Settings/set/Akk/Akk";
 import { Blacklist } from "../components/Settings/set/Blacklist/Blacklist";
 import { Appearance } from "../components/Settings/set/Appearance/Appearance";
 import ProtectedRoute from "../ProtectedRoute";
+import Post from "../components/Post/Post";
 
 //  export  const router = createBrowserRouter([
 //     {
@@ -130,6 +131,10 @@ export const router = createBrowserRouter([
                 path: 'chatsms',
                 element: <Chat />,
               },
+           {
+            path:'post',
+               element: <Post />,
+           }
             ],
           },
           {
@@ -158,6 +163,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: '/login',
     element: <Login />,

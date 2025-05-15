@@ -98,6 +98,8 @@
    /* right: 9%; */
     top:  110px;
     position:sticky;
+
+      /* z-index: ; */
     /* background-color: #C1CFFF; */
     background-color: var(--bg-color2);
     width: 180px;
@@ -154,15 +156,36 @@ width: 20px;
   flex-direction: column;
   gap: 12px;
 }
+.modal_overlay {
+  z-index: 1000;
+}
 
+.div_add_post {
+  z-index: 1001;
+}
 
 .div_header_modal{
     display: flex;
   
 }
 .div_header_modal button{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
     border-radius: 50%;
+    border: 1px solid var(--border-color);
+    margin: 0px 0px 0px auto;
+  
+}
+.div_header_modal svg{
+    width: 20px;
+    color: var(--svg-color);
+    fill: var(--svg-color);
+    stroke: var(--svg-color);
+
+
   
 }

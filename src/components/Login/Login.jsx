@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
    import SHA256 from 'crypto-js/sha256';
@@ -29,9 +29,12 @@ function Login() {
       // Перенаправить пользователя, сохранить токен и т.д.
     } catch (err) {
       console.error('Сетевая ошибка:', err);
+      alert('Сетевая ошибка:', err);
     }
   };
+useEffect(()=>{
 
+},[])
   return (
     <div  className={styles.login_div}>
          <div className={styles.div_login}>
