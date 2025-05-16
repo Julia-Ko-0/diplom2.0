@@ -12,11 +12,21 @@ import {
   getUsersPosts,
 } from "../../hooks/api";
 import { formatDate, getImageSrc } from "../../hooks/homeH";
+import { useParams } from 'react-router-dom';
 
 // interface PostsProps{
 //     post: PostM
 // }
+  // const handleSubmit = async () => {
 
+  //   try {
+  //     await 
+  //     alert("Пост успешно создан!");
+  //   } catch (err) {
+  //     console.error("Ошибка при создании поста:", err);
+  //     // alert("Ошибка при создании поста");
+  //   }
+  // };
 function CrElPosts({ post }) {
     const navigate = useNavigate();
   console.log(post.fale_post);
@@ -26,10 +36,17 @@ function CrElPosts({ post }) {
         <img className={styles.elem_post_header_ava} src={post.author.profile_picture == '' || post.author.profile_picture == ''? "/imgs/log/Group 25 (2).svg" :post.author.profile_picture}></img>
       
         <div className={styles.elem_post_h_name}>
-           <div className={styles.elem_post_header_text}> 
-            <span className={styles.h_name}>{post.header}</span>
-            <span className={styles.h_name}>{post.text}</span>
-            </div>
+       {post.post_type =='user' &&   
+         <div className={styles.elem_post_header_text}> 
+            
+            <span className={styles.h_name}>{post.author.username}</span>
+            {/* <span className={styles.h_name}>{post.text}</span> */}
+            </div>}
+                {post.post_type =='group' &&     <div className={styles.elem_post_header_text}> 
+                <span className={styles.h_name}>{post.group_info.name}</span>
+            <span className={styles.h_name}>{post.author.username}</span>
+        
+            </div>}
           <div className={styles.elem_post_h_name_datetime}>
             <p>{formatDate(post.dateTime_post)}</p>
             {/* <p>21/08/2024</p> */}
@@ -51,7 +68,9 @@ function CrElPosts({ post }) {
    
       </div>
       <div className={styles.elem_post_btn}>
-        <div>
+        <div className={styles.elem_post_btn_el} onClick={()=>{
+            
+        }}>
    <svg
           width="46"
           height="38"
@@ -63,11 +82,11 @@ function CrElPosts({ post }) {
         </svg>
         <p>{post.likes_count}</p>
         </div>
-             <div onClick={()=>{
+             <div className={styles.elem_post_btn_el} onClick={()=>{
               
-       navigate('/us/post');
+       navigate(`/us/home/post/${post.post_id}`,{state:{post}});
              }}>
-           <svg
+           <svg style={{marginTop:'5px'}}
           width="44"
           height="40"
           viewBox="0 0 44 40"
@@ -79,7 +98,7 @@ function CrElPosts({ post }) {
         </svg>
             <p>{post.comments_count}</p>
         </div>
-             <div>
+             <div className={styles.elem_post_btn_el}>
              <svg
           width="38"
           height="40"
@@ -132,7 +151,7 @@ const Homes = () => {
       console.error("Сетевая ошибка:", err);
     }
   }
-
+  const {id_post} = useParams()
   async function auth() {
     try {
       const response = await fetch("http://localhost:8080/login", {
@@ -180,9 +199,7 @@ const Homes = () => {
     }
   }
 
-  // console.log(post)
-  //  const a =  getUserPosts()
-  // console.log(a.data)
+
   const [activeTab, setActiveTab] = useState("1");
   const [posts, setPost] = useState([]);
   const [posts2, setPost2] = useState([]);
@@ -219,7 +236,10 @@ const Homes = () => {
   }, []);
   return (
     <div className={styles.posts}>
-      <div className={styles.add_posts}>
+       {
+                    id_post ==null  && 
+      <div>
+          <div className={styles.add_posts}>
         <input></input>
       </div>
       <div className={styles.forder_div} id="scrollable">
@@ -240,6 +260,10 @@ const Homes = () => {
           Рекомендации
         </button>
       </div>
+      </div>
+
+                 }
+    
 
       {/* <div><button onClick={()=>{
             // sendMessage(17,4,'gjvjubnt')
@@ -270,9 +294,16 @@ const Homes = () => {
        info</button></div> */}
       {/* <CrElPosts/>
                 <CrElPosts/> */}
-      {posts.map((posts) => (
-        <CrElPosts post={posts} />
-      ))}
+                 {
+                    id_post !=null  && <Outlet />
+                 }
+                    {
+                    id_post ==null  && posts.map((posts) => (
+        <CrElPosts post={posts}/>
+      ))
+                 }
+      {}
+
     </div>
   );
 };

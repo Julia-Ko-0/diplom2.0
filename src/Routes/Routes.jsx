@@ -114,6 +114,12 @@ export const router = createBrowserRouter([
               {
                 path: 'home',
                 element: <Homes />,
+                children:[
+                    {
+            path:'post/:id_post',
+               element: <Post />,
+           }
+                ]
               },
               {
                 path: 'chats',
@@ -131,10 +137,7 @@ export const router = createBrowserRouter([
                 path: 'chatsms',
                 element: <Chat />,
               },
-           {
-            path:'post',
-               element: <Post />,
-           }
+         
             ],
           },
           {

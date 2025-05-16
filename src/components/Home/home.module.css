@@ -64,13 +64,13 @@
         /* max-width: 20vw; */
 }
 .elem_post_body_img{
-    /* width: 100%; */
+    width: 100%;
     object-fit: cover;
     /* width: 100px; */
-      max-width: 100%;
+      /* max-width: 100%; */
     border-radius: 5px;
-    border: solid 1px black;
-    /* height: 20vw; */
+    /* border: solid 1px black; */
+    max-height: 50vh;
 
 
 }
@@ -82,6 +82,9 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     margin-top: 5px;
+    justify-content: center;
+    justify-items: center;
+
 }
 .elem_post_btn svg{
  fill: var(--svg-color-full);
@@ -92,6 +95,13 @@
 .elem_post_btn svg{
     margin: 0px auto 0px auto;
     width: 25px;
+}
+.elem_post_btn_el{
+    display: flex;
+    align-content: center;
+    align-items: center;
+     cursor: pointer;
+    width: 60px;
 }
 .forder_div{
     display: flex;
