@@ -1,8 +1,8 @@
-import styles from "./home.module.css";
-import { PostM } from "../../models/models";
-import { post } from "../../data/elem";
-import { Outlet, useNavigate } from "react-router";
-import { useEffect, useState } from "react";
+import styles from "./Search.module.css"
+import { PostM } from "../../../models/models";
+import { post } from "../../../data/elem";
+import { data, Outlet, useNavigate, useOutletContext } from "react-router";
+import { useEffect, useRef, useState } from "react";
 import {
   getFilteredPosts,
   getGroupSubscribers,
@@ -10,8 +10,9 @@ import {
   getUserInfo,
   getUserPosts,
   getUsersPosts,
-} from "../../hooks/api";
-import { formatDate, getImageSrc } from "../../hooks/homeH";
+  searchAll,
+} from "../../../hooks/api";
+import { formatDate, getImageSrc } from "../../../hooks/homeH";
 import { useParams } from 'react-router-dom';
 
 // interface PostsProps{
@@ -28,18 +29,20 @@ import { useParams } from 'react-router-dom';
   //   }
   // };
 function CrElPosts({ post }) {
+  console.log('kdfdl')
+  const name = post.author.username
     const navigate = useNavigate();
-  console.log(post.fale_post);
+  console.log(name);
   return (
     <div className={styles.elem_post}>
       <div className={styles.elem_post_header}>
-        <img className={styles.elem_post_header_ava} src={post.author.profile_picture == '' || post.author.profile_picture == ''? "/imgs/log/Group 25 (2).svg" :post.author.profile_picture}></img>
+        <img className={styles.elem_post_header_ava} src={post.author.profile_picture == '' || post.author.profile_picture == ''? "../imgs/log/Group 25 (2).svg" :post.author.profile_picture}></img>
       
         <div className={styles.elem_post_h_name}>
        {post.post_type =='user' &&   
          <div className={styles.elem_post_header_text}> 
             
-            <span className={styles.h_name}>{post.author.username}</span>
+            <span className={styles.h_name}>{name}</span>
             {/* <span className={styles.h_name}>{post.text}</span> */}
             </div>}
                 {post.post_type =='group' &&     <div className={styles.elem_post_header_text}> 
@@ -119,7 +122,7 @@ function CrElPosts({ post }) {
     </div>
   );
 }
-const Homes = () => {
+const Search = () => {
   async function sendMessage(
     senderId,
     receiverId,
@@ -199,56 +202,162 @@ const Homes = () => {
     }
   }
 
+
   const [activeTab, setActiveTab] = useState("1");
   const [posts, setPost] = useState([]);
   const [posts2, setPost2] = useState([]);
+      const [search_params, setSearxh] = useState();
+      const navigate = useNavigate();
+      const inputRef = useRef(null);
   useEffect(() => {
-    activeTab == "2"
-      ? getRecommendedPosts(10, 0)
-          .then((data) => {
-            console.log("Посты пользователя:", data);
-            setPost(data);
-          })
-          .catch((error) => {
-            console.error("Ошибка при получении постов:", error.message);
-                setPost([])
-          })
-      : getFilteredPosts()
-          .then((data) => {
-            console.log("Посты пользователя:", data);
-            setPost(data);
-          })
-          .catch((error) => {
-            console.error("Ошибка при получении постов:", error.message);
-            setPost([])
-          });
-  }, [activeTab]);
-  useEffect(() => {
-    getUserPosts()
+    searchAll({ search: search_params})
       .then((data) => {
-        console.log("Посты пользователя:", data);
-        setPost2(data.posts);
+        console.log("Поиск:", data);
+        setPost2(data);
       })
       .catch((error) => {
-        console.error("Ошибка при получении постов:", error.message);
+        console.error("Ошибка поиска:", error.message);
       });
-  }, []);
-  return (
-    <div className={styles.posts}>
-       {
-                    id_post == null  && 
-      <div>
-    
+  }, [search_params]);
+  // useEffect(() => {
+  //   getUserPosts()
+  //     .then((data) => {
+  //       console.log("Посты пользователя:", data);
+  //       setPost2(data.posts);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Ошибка при получении постов:", error.message);
+  //     });
+  // }, []);
 
+
+      useEffect(() => {
+  inputRef.current?.focus();
+}, []);
+  return (
+    // <div>sdgikljskgjh</div>
+    <div className={styles.posts}>
+       <div className={styles.add_posts}>
+        <input
+ ref={inputRef}
+        value={search_params}
+      //   onBlur={()=>{
+          
+      //  navigate('/us/home/posts');
+      //   }}
+      onChange={(e)=>{
+        setSearxh(e.target.value)
+      }}
+         onFocus={()=>{
+          
+       navigate('/us/home/search');
+        }}></input>
+      </div>
+         <div className={styles.forder_div} id="scrollable">
+        <button
+          className={activeTab === "1" ? styles.active : styles.tab}
+          onClick={() => {
+            setActiveTab("1");
+          }}
+        >
+          Все
+        </button>{" "}
+        <button
+          className={activeTab === "2" ? styles.active : styles.tab}
+          onClick={() => {
+            setActiveTab("2");
+          }}
+        >
+          Пользователи
+        </button>
+          <button
+          className={activeTab === "3" ? styles.active : styles.tab}
+          onClick={() => {
+            setActiveTab("3");
+          }}
+        >
+          Посты
+        </button>
+          <button
+          className={activeTab === "4" ? styles.active : styles.tab}
+          onClick={() => {
+            setActiveTab("4");
+          }}
+        >
+          Группы
+        </button>
+      </div>
+      <div>
+        {posts2.map((e)=>{
+          const app = e.result_item
+          if(app.type == 'group'){
+            console.log('kjsk')
+  return(
+            <div>
+              <p>{app.id}</p>
+               <p>group</p>
+            </div>
+
+          )
+          }
+              if(app.type === "post_user"){
+console.log('sjdskh')
+{return(<CrElPosts post={app}/>)}
+          }
+                 if(app.type == 'post_group'){
+{return(<CrElPosts post={app}/>)}
+
+
+          }
+                   if(app.type == 'user'){
+  return(
+            <div>
+              <p>{app.id}</p>
+               <p>""user""</p>
+            </div>
+
+          )
+          }
+        })}
+      </div>
+       {/* {
+                    id_post ==null  && 
+      <div>
+       
+      <div className={styles.forder_div} id="scrollable">
+        <button
+          className={activeTab === "1" ? styles.active : styles.tab}
+          onClick={() => {
+            setActiveTab("1");
+          }}
+        >
+          Подписки
+        </button>{" "}
+        <button
+          className={activeTab === "2" ? styles.active : styles.tab}
+          onClick={() => {
+            setActiveTab("2");
+          }}
+        >
+          Рекомендации
+        </button>
+      </div>
       </div>
 
                  }
     
 
-  
-      <Outlet/>
+                 {
+                    id_post !=null  && <Outlet />
+                 }
+                    {
+                    id_post ==null  && posts.map((posts) => (
+        <CrElPosts post={posts}/>
+      ))
+                 } */}
+   
 
     </div>
   );
 };
-export default Homes;
+export default Search;

@@ -1,7 +1,7 @@
-import styles from "./home.module.css";
-import { PostM } from "../../models/models";
-import { post } from "../../data/elem";
-import { Outlet, useNavigate } from "react-router";
+import styles from "./Post_home.module.css"
+import { PostM } from "../../../models/models";
+import { post } from "../../../data/elem";
+import { Outlet, useNavigate, useOutletContext } from "react-router";
 import { useEffect, useState } from "react";
 import {
   getFilteredPosts,
@@ -10,8 +10,9 @@ import {
   getUserInfo,
   getUserPosts,
   getUsersPosts,
-} from "../../hooks/api";
-import { formatDate, getImageSrc } from "../../hooks/homeH";
+  searchAll,
+} from "../../../hooks/api";
+import { formatDate, getImageSrc } from "../../../hooks/homeH";
 import { useParams } from 'react-router-dom';
 
 // interface PostsProps{
@@ -33,16 +34,16 @@ function CrElPosts({ post }) {
   return (
     <div className={styles.elem_post}>
       <div className={styles.elem_post_header}>
-        <img className={styles.elem_post_header_ava} src={post.author.profile_picture == '' || post.author.profile_picture == ''? "/imgs/log/Group 25 (2).svg" :post.author.profile_picture}></img>
+        <img className={styles.elem_post_header_ava} src={post.author.profile_picture == '' || post.author.profile_picture == ''? "../imgs/log/Group 25 (2).svg" :post.author.profile_picture}></img>
       
         <div className={styles.elem_post_h_name}>
-       {post.post_type =='user' &&   
+       {post.type =='user' &&   
          <div className={styles.elem_post_header_text}> 
             
             <span className={styles.h_name}>{post.author.username}</span>
             {/* <span className={styles.h_name}>{post.text}</span> */}
             </div>}
-                {post.post_type =='group' &&     <div className={styles.elem_post_header_text}> 
+                {post.type =='group' &&     <div className={styles.elem_post_header_text}> 
                 <span className={styles.h_name}>{post.group_info.name}</span>
             <span className={styles.h_name}>{post.author.username}</span>
         
@@ -119,7 +120,7 @@ function CrElPosts({ post }) {
     </div>
   );
 }
-const Homes = () => {
+const Post_home = () => {
   async function sendMessage(
     senderId,
     receiverId,
@@ -198,6 +199,10 @@ const Homes = () => {
       console.error("Сетевая ошибка:", err);
     }
   }
+  const navigate = useNavigate();
+
+  const [search_params, setSearxh] = useState();
+
 
   const [activeTab, setActiveTab] = useState("1");
   const [posts, setPost] = useState([]);
@@ -233,22 +238,93 @@ const Homes = () => {
         console.error("Ошибка при получении постов:", error.message);
       });
   }, []);
-  return (
-    <div className={styles.posts}>
-       {
-                    id_post == null  && 
-      <div>
-    
 
+  return (
+    // <div>sdgikljskgjh</div>
+    <div className={styles.posts}>
+            <div className={styles.add_posts}>
+        <input
+        value={search_params}
+      //   onBlur={()=>{
+          
+      //  navigate('/us/home/posts');
+      //   }}
+      onChange={(e)=>{
+        setSearxh(e.target.value)
+      }}
+         onFocus={()=>{
+          
+       navigate('/us/home/search');
+        }}></input>
+      </div>
+       {
+                    id_post ==null  && 
+      <div>
+       
+      <div className={styles.forder_div} id="scrollable">
+        <button
+          className={activeTab === "1" ? styles.active : styles.tab}
+          onClick={() => {
+            setActiveTab("1");
+          }}
+        >
+          Подписки
+        </button>{" "}
+        <button
+          className={activeTab === "2" ? styles.active : styles.tab}
+          onClick={() => {
+            setActiveTab("2");
+          }}
+        >
+          Рекомендации
+        </button>
+      </div>
       </div>
 
                  }
     
 
-  
-      <Outlet/>
+                 {
+                    id_post !=null  && <Outlet />
+                 }
+                    {
+                    id_post ==null  && posts.map((posts) => (
+        <CrElPosts post={posts}/>
+      ))
+                 }
+   
 
     </div>
   );
 };
-export default Homes;
+export default Post_home;
+
+      {/* <div><button onClick={()=>{
+            // sendMessage(17,4,'gjvjubnt')
+            auth()
+         }}>
+          
+          auth</button><button onClick={()=>{
+            sendMessage(17,4,'gjvjubnt')
+            // auth()
+         }}>
+          
+          sendMessage</button>
+          <button onClick={()=>{
+         
+            // logout()
+         }}>
+          
+          logout</button>
+          <button onClick={()=>{
+         
+        //  info()
+        getUserInfo()
+        // getUserPosts()
+        // getUsersPosts('JuliaKo')
+        getGroupSubscribers(1)
+      }}>
+       
+       info</button></div> */}
+      {/* <CrElPosts/>
+                <CrElPosts/> */}

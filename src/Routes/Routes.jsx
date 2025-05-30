@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 // import { Homes } from "../components/Home/Home";
 import { NovBar } from "../components/NovBar/novbar";
@@ -18,6 +18,8 @@ import { Blacklist } from "../components/Settings/set/Blacklist/Blacklist";
 import { Appearance } from "../components/Settings/set/Appearance/Appearance";
 import ProtectedRoute from "../ProtectedRoute";
 import Post from "../components/Post/Post";
+import Post_home from "../components/Home/Post_home/Post_home";
+import Search from "../components/Home/Search/Search";
 
 //  export  const router = createBrowserRouter([
 //     {
@@ -38,8 +40,7 @@ import Post from "../components/Post/Post";
 //                     {
 //                         path:'chats',
 //                         element: <Chats/>,
-                     
-            
+
 //                     },
 //                     {
 //                         path:'group',
@@ -53,7 +54,7 @@ import Post from "../components/Post/Post";
 //                         path:'chatsms',
 //                         element:<Chat/>
 //                     },
-                
+
 //                 ]
 //             },
 //             {
@@ -76,103 +77,110 @@ import Post from "../components/Post/Post";
 //                         path:'akk',
 //                         element: <Akk/>
 //                     },
-                   
+
 //                 ]
 //             },
 
-         
 //         ]
 //     },
 // ]
 //     } ,
-  
+
 //     {
-        
+
 //         path:'/login',
 //         element:<Login/>
 //     },
 //     {
-        
+
 //         path:'/',
 //         element:<Registr/>
 //     },
-  
+
 //  ])
 
 export const router = createBrowserRouter([
+  // {
+  // element: <ProtectedRoute />,
+  // children: [
   {
-    element: <ProtectedRoute />,
+    path: "/us",
+    element: <App />,
     children: [
       {
-        path: '/us',
-        element: <App />,
+        path: "/us",
+        element: <Menu />,
         children: [
           {
-            path: '/us',
-            element: <Menu />,
+            path: "home",
+            element: <Homes />,
             children: [
               {
-                path: 'home',
-                element: <Homes />,
-                children:[
-                    {
-            path:'post/:id_post',
-               element: <Post />,
-           }
-                ]
+                path: "posts",
+                element: <Post_home/>,
               },
               {
-                path: 'chats',
-                element: <Chats />,
+                path: "post/:id_post",
+                element: <Post/>,
               },
               {
-                path: 'group',
-                element: <Group />,
+                path: "search",
+                element: <Search />,
               },
-              {
-                path: 'myakk',
-                // element:</>
-              },
-              {
-                path: 'chatsms',
-                element: <Chat />,
-              },
-         
+          
             ],
           },
           {
-            path: 'settings',
-            element: <Settings />,
-            children: [
-              {
-                path: 'fav',
-                element: <Fav />,
-              },
-              {
-                path: 'blacklist',
-                element: <Blacklist />,
-              },
-              {
-                path: 'appearance',
-                element: <Appearance />,
-              },
-              {
-                path: 'akk',
-                element: <Akk />,
-              },
-            ],
+            path: "chats",
+            element: <Chats />,
+          },
+          {
+            path: "group",
+            element: <Group />,
+          },
+          {
+            path: "myakk",
+            // element:</>
+          },
+          {
+            path: "chatsms",
+            element: <Chat />,
+          },
+        ],
+      },
+      {
+        path: "settings",
+        element: <Settings />,
+        children: [
+          {
+            path: "fav",
+            element: <Fav />,
+          },
+          {
+            path: "blacklist",
+            element: <Blacklist />,
+          },
+          {
+            path: "appearance",
+            element: <Appearance />,
+          },
+          {
+            path: "akk",
+            element: <Akk />,
           },
         ],
       },
     ],
   },
+  // ],
+  // },
 
   {
-    path: '/login',
+    path: "/login",
     element: <Login />,
   },
   {
-    path: '/',
+    path: "/",
     element: <Registr />,
   },
 ]);

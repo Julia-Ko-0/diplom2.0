@@ -10,14 +10,14 @@ function CrElFavorit() {
 }
 
 
-function ModalPost() {
+function ModalPost({setModal}) {
   const [formData, setFormData] = useState({
     header: "",
     text_post: "",
     fale_post: "", // base64 image
   });
 
-  const [imagePreview, setImagePreview] = useState(null);
+  const [imagePreview, setImagePreview] = useState(true);
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
@@ -65,7 +65,7 @@ function ModalPost() {
   };
 
   return (
-    <div className={styles.modal_overlay}>
+    <div className={styles.modal_overlay} >
       <div
         className={styles.div_add_post}
         onDragOver={(e) => e.preventDefault()}
@@ -75,8 +75,9 @@ function ModalPost() {
           <p>Создать пост</p>
           {/* <button onClick={handleSubmit}> */}
           <button onClick={()=>{
+            setModal(false)
             console.log(formData)
-            handleSubmit()
+           
           }}>
             <svg
               width="43"
@@ -96,7 +97,8 @@ function ModalPost() {
           </button>
         </div>
 
-        <input
+         <input
+         className={styles.input_header}
           placeholder="Заголовок поста"
           value={formData.header}
           onChange={(e) =>
@@ -104,12 +106,14 @@ function ModalPost() {
           }
         />
         <input
+         className={styles.input_header}
           placeholder="Текст поста"
           value={formData.text_post}
           onChange={(e) =>
             setFormData((prev) => ({ ...prev, text_post: e.target.value }))
           }
         />
+
 
         <label className={styles.upload_button}>
           Загрузить изображение
@@ -119,24 +123,32 @@ function ModalPost() {
         {imagePreview && (
           <img src={imagePreview} alt="Preview" className={styles.image_preview} />
         )}
+         <div className={styles.div_button}>
+           <button  onClick={()=>handleSubmit()} >Выложить пост</button>
+         </div>
       </div>
+     
     </div>
   );
 }
 const Menu = () => {
   const location = useLocation();
+  const ishomeActive =
+    location.pathname === "us/home/posts" || 
+    location.pathname == "/us/home/post/" ||
+     location.pathname === "/us/home/search";
   const isChatsActive =
     location.pathname === "/us/chats" || location.pathname === "/us/chatsms";
-
+  const [modal, setModal] = useState(false);
   return (
     <div className={styles.div_}>
       <div className={styles.div_home}>
         <div className={styles.menu_btn_add}>
           <div className={styles.menu}>
             <NavLink
-              to="home"
+              to="home/posts"
               className={({ isActive }) =>
-                isActive
+                isActive || ishomeActive
                   ? `${styles.elem_menu} ${styles.active}`
                   : styles.elem_menu
               }
@@ -177,15 +189,11 @@ const Menu = () => {
               Моя страница
             </NavLink>
           </div>
-          <div>
+          <div className={styles.btn_modal}>
             <button
+         
               onClick={() => {
-                //                     createPost({
-                //   "text_post": "Это текст",
-                //   "header": "Это заголовок",
-                //   "fale_post": "data:image/png;base64,"
-                // }
-                // )
+                setModal(true)
               }}
             >
               <svg
@@ -214,7 +222,9 @@ const Menu = () => {
           <span className={styles.elem_menu}>Избранное</span>
         </div>
       </div>
-      {/* <ModalPost/> */}
+      {
+        modal && <ModalPost setModal={setModal}/>
+      }
       {/* <div className={styles.modal_overlay}>
         <div className={styles.div_add_post}>
           <div className={styles.div_header_modal}>

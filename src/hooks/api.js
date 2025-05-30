@@ -174,8 +174,8 @@ export const searchUsers = (query) =>
 export const searchGroups = (query) =>
   fetchWithAuth("/search/group", { body: JSON.stringify({ query }) });
 
-export const searchAll = (query) =>
-  fetchWithAuth("/search/all", { body: JSON.stringify({ query }) });
+export const searchAll = (data) =>
+  fetchWithAuth("/search/all", {body: JSON.stringify(data) });
 export const deleteUserPost = (postId) =>
   fetchWithAuth("/user/post/delete", { body: JSON.stringify({ post_id: postId }) });
 export const updateUserPost = (postId, content) =>

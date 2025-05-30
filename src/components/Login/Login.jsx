@@ -25,7 +25,7 @@ function Login() {
         return;
       }
 
-       navigate('/us/home');
+       navigate('/us/home/posts');
       // Перенаправить пользователя, сохранить токен и т.д.
     } catch (err) {
       console.error('Сетевая ошибка:', err);
