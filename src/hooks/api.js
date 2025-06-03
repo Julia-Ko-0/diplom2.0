@@ -49,7 +49,7 @@ export const updateUserLogin = (login) => fetchWithAuth("/update-user-login", { 
 export const updateUserPassword = (password) => fetchWithAuth("/update-user-password", { body: JSON.stringify({ password }) });
 
 /* 💬 Чаты и сообщения */
-export const getUserChatFolders = () => fetchWithAuth("/user/chats");
+// export const getUserChatisFolders = () => fetchWithAuth("/user/chats");
 export const getUserChats = () => fetchWithAuth("/user/chats");
 export const getChatsInFolder = (folderId) => fetchWithAuth(`/user/chats/${folderId}`);
 export const getChatInfo = (chatId) => fetchWithAuth(`/user/chats/info/${chatId}`);
@@ -217,3 +217,5 @@ fetchWithAuth('/features/add', {
   fetchWithAuth(`/recommended-posts?limit=${limit}&offset=${offset}`);
   export const getFilteredPosts = ( limit = 50, offset = 0) =>
   fetchWithAuth(`/filtered-posts?limit=${limit}&offset=${offset}`);
+  // 📂 Получение папок чатов пользователя
+export const getUserChatFolders = () => fetchWithAuth("/get-user-chat-folders");

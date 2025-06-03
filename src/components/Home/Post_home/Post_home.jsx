@@ -30,20 +30,25 @@ import { useParams } from 'react-router-dom';
   // };
 function CrElPosts({ post }) {
     const navigate = useNavigate();
-  console.log(post.fale_post);
+  console.log(post);
   return (
     <div className={styles.elem_post}>
       <div className={styles.elem_post_header}>
-        <img className={styles.elem_post_header_ava} src={post.author.profile_picture == '' || post.author.profile_picture == ''? "../imgs/log/Group 25 (2).svg" :post.author.profile_picture}></img>
+        {/* <img className={styles.elem_post_header_ava} src={post.author.profile_picture == '' || post.author.profile_picture == ''? "../imgs/log/Group 25 (2).svg" :post.author.profile_picture}></img> */}
       
+      <img
+          className={styles.elem_post_header_ava}
+          src=        "../imgs/log/Group 25 (2).svg"
+
+        ></img>
         <div className={styles.elem_post_h_name}>
-       {post.type =='user' &&   
+       {post.post_type =='user' &&   
          <div className={styles.elem_post_header_text}> 
             
             <span className={styles.h_name}>{post.author.username}</span>
             {/* <span className={styles.h_name}>{post.text}</span> */}
             </div>}
-                {post.type =='group' &&     <div className={styles.elem_post_header_text}> 
+                {post.post_type =='group' &&     <div className={styles.elem_post_header_text}> 
                 <span className={styles.h_name}>{post.group_info.name}</span>
             <span className={styles.h_name}>{post.author.username}</span>
         
@@ -53,10 +58,16 @@ function CrElPosts({ post }) {
             {/* <p>21/08/2024</p> */}
           </div>
         </div>
-        <img
+        {/* <img
           className={styles.elem_post_header_btn}
           src="../imgs/Home/Group 8.svg"
-        ></img>
+        ></img> */}
+        <svg width="8" height="28" viewBox="0 0 8 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="1" y="-1" width="6" height="6" rx="3" transform="matrix(1 0 0 -1 0 6)" fill="#A8B6E6" stroke="black" stroke-width="2"/>
+<path d="M1 24C1 25.6569 2.34315 27 4 27C5.65685 27 7 25.6569 7 24C7 22.3431 5.65685 21 4 21C2.34315 21 1 22.3431 1 24Z" fill="#A8B6E6" stroke="black" stroke-width="2"/>
+<rect x="1" y="-1" width="6" height="6" rx="3" transform="matrix(1 0 0 -1 0 16)" fill="#A8B6E6" stroke="black" stroke-width="2"/>
+</svg>
+
       </div>
       <div className={styles.elem_post_body}>
         {/* <p>{post.}</p> */}
@@ -261,7 +272,7 @@ const Post_home = () => {
                     id_post ==null  && 
       <div>
        
-      <div className={styles.forder_div} id="scrollable">
+      {/* <div className={styles.forder_div} id="scrollable">
         <button
           className={activeTab === "1" ? styles.active : styles.tab}
           onClick={() => {
@@ -278,7 +289,7 @@ const Post_home = () => {
         >
           Рекомендации
         </button>
-      </div>
+      </div> */}
       </div>
 
                  }

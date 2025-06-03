@@ -17,7 +17,7 @@ function ModalPost({setModal}) {
     fale_post: "", // base64 image
   });
 
-  const [imagePreview, setImagePreview] = useState(true);
+  const [imagePreview, setImagePreview] = useState(false);
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
@@ -124,7 +124,7 @@ function ModalPost({setModal}) {
           <img src={imagePreview} alt="Preview" className={styles.image_preview} />
         )}
          <div className={styles.div_button}>
-           <button  onClick={()=>handleSubmit()} >Выложить пост</button>
+           <button  onClick={()=>handleSubmit()} >Опубликовать</button>
          </div>
       </div>
      
@@ -218,9 +218,9 @@ const Menu = () => {
         <div className={styles.posts}>
           <Outlet />
         </div>
-        <div className={styles.favourites}>
+        {/* <div className={styles.favourites}>
           <span className={styles.elem_menu}>Избранное</span>
-        </div>
+        </div> */}
       </div>
       {
         modal && <ModalPost setModal={setModal}/>

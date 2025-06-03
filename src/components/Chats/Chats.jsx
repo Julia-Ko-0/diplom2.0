@@ -1,39 +1,44 @@
 import { SMS } from '../../models/models'
 import styles from './chats.module.css'
-import { forder, sms ,sms2} from '../../data/elem'
+// import { forder, sms ,sms2} from '../../data/elem'
 import { useNavigate } from 'react-router'
 import { useEffect, useState } from 'react'
+import { getUserChatFolders, getUserChats } from '../../hooks/api'
 
 // interface SMSProps {
 //     sms: SMS
 // }
-let img_p = 'https://i.pinimg.com/736x/6d/88/6e/6d886e24ec70f3f3dab9df74a3485982.jpg'
+let img_p = "/imgs/log/Group 25 (2).svg"
 
 
 
 function CrElChats({sms}){
 // <<<<<<< HEAD
     
-console.log(sms)
+// console.log(sms)
     const navigate = useNavigate();
-
+  // console.log(sms)
+const id = sms.id_chat
+const countChatPepl = sms.countChatPepl
    return( 
    <li className={styles.div_chats}
    onClick={()=>{
-        navigate('/us/chatsms');
+        navigate('/us/chatsms',{state:{sms}});
    }}>
    {
-    sms.img == null ||sms.img == '' ?  <img src={img_p} ></img>: <img src={sms.img} ></img>
+    sms.pfoto == null ||sms.pfoto == '' ?  <img src={img_p} ></img>: <img src={sms.pfoto} ></img>
    }
     <div  className={styles.div_chats_name_and_sms}>
        
         <div  className={styles.div_chats_sms}>
-            <span >{sms.name}</span>
-            <span  className={styles.chats_sms_date}>{sms.date}</span>
+            <span >{sms.name_chat}</span>
+            <span  className={styles.chats_sms_date}>{sms.dateTime_chat}</span>
 
         </div>
-    {sms.text.length>70 &&  <span>{sms.text.substring(0,70)}...</span> }
-    {sms.text.length<=70 &&  <span>{sms.text}</span> }
+    { sms.last_message !== null && sms.last_message.text_sms.length>70 &&  <span>{sms.last_message.text_sms.substring(0,70)}...</span> 
+    }
+      { sms.last_message !== null && sms.last_message.text_sms !== null && sms.last_message.text_sms.length<=70 &&  <span>{sms.last_message.text_sms}</span> }
+    {/* <span>{sms.last_message.text_sms}</span> */}
      
          </div>
 </li>)
@@ -48,7 +53,7 @@ function CrElForder({name, id,activeTab,setActiveTab,setSMS}){
         className={activeTab === id ? styles.active : styles.tab}
         onClick={() => {
           setActiveTab(id)
-          setSMS(sms2)
+          // setSMS()
         }}
       >
         {name}
@@ -59,7 +64,8 @@ function CrElForder({name, id,activeTab,setActiveTab,setSMS}){
 
     function Chats() {
         const [activeTab, setActiveTab] = useState('all');
-        const [isSms, setSMS] = useState(sms);
+        const [isSms, setSMS] = useState([]);
+          const [isFolder, setFolder] = useState([]);
         const navigate = useNavigate();
       
         useEffect(() => {
@@ -79,24 +85,54 @@ function CrElForder({name, id,activeTab,setActiveTab,setSMS}){
             scrollable.removeEventListener("wheel", handleWheel);
           };
         }, []);
-      
+            useEffect(()=>{
+         getUserChatFolders()
+                  .then((data) => {
+                    console.log("папки чатов:", data);
+                    setFolder(data);
+
+                  })
+                  .catch((error) => {
+                    console.error("Ошибка при получении :", error.message);
+                        setFolder([])
+                  })
+                  getUserChats()    .then((data) => {
+                    console.log("xfns:", data);
+                    setSMS(data);
+
+                  })
+                  .catch((error) => {
+                    console.error("Ошибка при получении :", error.message);
+                        setSMS([])
+                  })
+      },[])
         return (
           <div className={styles.all_chast_div}>
             <div className={styles.forder_div} id="scrollable">
               <button
+              // style={{borderRight:"1px solid black"}}
+                className={styles.tab}
+                onClick={() => {
+                  // setActiveTab('add');
+                  // setSMS(sms);
+                }}
+              >
+                Добавить
+              </button>
+              <button
                 className={activeTab === 'all' ? styles.active : styles.tab}
                 onClick={() => {
                   setActiveTab('all');
-                  setSMS(sms);
+                  // setSMS(sms);
                 }}
               >
                 Все
               </button>
-              {forder.map((fr) => (
+              {isFolder.map((fr) => (
                 <CrElForder
-                  key={fr.id}
-                  name={fr.name ?? ''}
-                  id={fr.id}
+                  key={fr.id_chatFolders}
+                  name={fr.name_chatFolders ?? ''}
+                  id={fr.id_chatFolders}
                   activeTab={activeTab}
                   setActiveTab={setActiveTab}
                   setSMS={setSMS}
@@ -110,7 +146,8 @@ function CrElForder({name, id,activeTab,setActiveTab,setSMS}){
               </div>
       
               {isSms.map((smss) => (
-                <CrElChats key={smss.id_sms} sms={smss} />
+                <CrElChats key={smss.id_chat} sms={smss} />
+                // console.log(smss)
               ))}
             </ul>
           </div>

@@ -5,10 +5,11 @@
 // }
 import style from "./SMS.module.css";
 
-let user_id_ = 7
+// let user_id_ = 7
 
-export const SMS  = ({sms})=>{
-console.log(sms)
+export const SMS  = ({sms,id_})=>{
+
+console.log(id_)
 //   if(smsType ==1){
 //     return(
 //         <div>
@@ -28,17 +29,18 @@ console.log(sms)
 {/* 
     {sms.user.user_id == user_id_ && <SMSMe sms={sms.text_sms} />}
     {sms.user.user_id != user_id_ && <SMSFor sms={sms.text_sms} />} */}
-    <SMSApp sms={sms} />
+    <SMSApp sms={sms} id_={id_}/>
   </div>
 )
 }
-export const SMSApp = ({sms})=>{
+export const SMSApp = ({sms,id_})=>{
     return(
-        <div className={`${style.smsWrapper} ${sms.user.user_id == user_id_ ? style.me : style.other}`}>
+        <div className={`${style.smsWrapper} ${sms.user.user_id ==  id_ ? style.me : style.other}`}>
             <div  className={style.sms}>
             <p>{sms.text_sms}</p>
             </div>
         </div>
+        // <div></div>
     )
 }
 

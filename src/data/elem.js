@@ -31,7 +31,7 @@ export const messages = [
     user: {
       user_id: 7,
       username: "alex",
-      profile_picture: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA..."
+      // profile_picture: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA..."
     }
   },
   {
@@ -99,7 +99,7 @@ export const messages = [
     user: {
       user_id: 7,
       username: "alex",
-      profile_picture: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA..."
+      // profile_picture: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA..."
     }
   }
 ];
@@ -227,7 +227,7 @@ export const sms = [
     date:"2000-10-10",
 },
 {id: 1,
-    img:'https://i.pinimg.com/564x/36/e8/98/36e898e3c962164b04091ff4e752db6f.jpg',
+    // img:'https://i.pinimg.com/564x/36/e8/98/36e898e3c962164b04091ff4e752db6f.jpg',
     name: "name",
     text:"string",
     date:"2000-10-10",
@@ -238,15 +238,15 @@ export const sms = [
 export const sms2 = [
   
 {id: 1,
-   img:'https://i.pinimg.com/564x/36/e8/98/36e898e3c962164b04091ff4e752db6f.jpg',
-   name: "name",
-   text:"string",
+  //  img:'https://i.pinimg.com/564x/36/e8/98/36e898e3c962164b04091ff4e752db6f.jpg',
+   name: "emma_wilson20",
+   text:"Сообщение",
    date:"2000-10-11",
 },
 {id: 1,
-   img:'https://i.pinimg.com/564x/36/e8/98/36e898e3c962164b04091ff4e752db6f.jpg',
-   name: "name",
-   text:"string",
+  //  img:'https://i.pinimg.com/564x/36/e8/98/36e898e3c962164b04091ff4e752db6f.jpg',
+   name: "emma_wilson20",
+   text:"Привет",
    date:"2000-10-10",
 },
 // {id: 1,
