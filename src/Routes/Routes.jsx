@@ -16,7 +16,7 @@ import { Fav } from "../components/Settings/set/Fav/Fav";
 import { Akk } from "../components/Settings/set/Akk/Akk";
 import { Blacklist } from "../components/Settings/set/Blacklist/Blacklist";
 import { Appearance } from "../components/Settings/set/Appearance/Appearance";
-import ProtectedRoute from "../ProtectedRoute";
+import ProtectedRoute, { ProtectedRouteLogin } from "../ProtectedRoute";
 import Post from "../components/Post/Post";
 import Post_home from "../components/Home/Post_home/Post_home";
 import Search from "../components/Home/Search/Search";
@@ -100,9 +100,9 @@ import Search from "../components/Home/Search/Search";
 //  ])
 
 export const router = createBrowserRouter([
-  // {
-  // element: <ProtectedRoute />,
-  // children: [
+  {
+  element: <ProtectedRoute />,
+  children: [
   {
     path: "/us",
     element: <App />,
@@ -172,10 +172,12 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  // ],
-  // },
-
-  {
+  ],
+  },
+{
+  element:<ProtectedRouteLogin/>,
+  children:[
+ {
     path: "/login",
     element: <Login />,
   },
@@ -183,4 +185,7 @@ export const router = createBrowserRouter([
     path: "/",
     element: <Registr />,
   },
+  ]
+},
+ 
 ]);

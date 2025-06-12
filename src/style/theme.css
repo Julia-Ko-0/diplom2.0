@@ -24,6 +24,8 @@ body[data-theme="light"] {
     --button-border-color:#dfdfdf;
    --bg-color-hover-element:#69BEBA;
 --button-hover:#f0f0f0;
+--date-color:#cedff0;
+--bg-color-modal:aliceblue;
 }
 /* body[data-theme="light"] {
   --bg-color: #fbfcf4;

@@ -167,7 +167,7 @@ const Menu = () => {
               Сообщения
             </NavLink>
 
-            <NavLink
+            {/* <NavLink
               to="group"
               className={({ isActive }) =>
                 isActive
@@ -187,7 +187,7 @@ const Menu = () => {
               }
             >
               Моя страница
-            </NavLink>
+            </NavLink> */}
           </div>
           <div className={styles.btn_modal}>
             <button

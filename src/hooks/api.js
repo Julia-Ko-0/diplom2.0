@@ -53,13 +53,17 @@ export const updateUserPassword = (password) => fetchWithAuth("/update-user-pass
 export const getUserChats = () => fetchWithAuth("/user/chats");
 export const getChatsInFolder = (folderId) => fetchWithAuth(`/user/chats/${folderId}`);
 export const getChatInfo = (chatId) => fetchWithAuth(`/user/chats/info/${chatId}`);
-export const getChatMessages = (chatId, limit = 10, offset = 0) =>
+export const getChatInfoDetails = (chatId) => fetchWithAuth(`/user/chats/info_details/${chatId}`);
+export const getChatMessages = (chatId, limit , offset ) =>
   fetchWithAuth(`/user/chats/messages/${chatId}?limit=${limit}&offset=${offset}`);
 export const sendMessageOne = (data) => fetchWithAuth("/send-message-one", { body: JSON.stringify(data) });
 export const sendMessageToChat = (data) => fetchWithAuth("/send-message", { body: JSON.stringify(data) });
+export const getChatsInFolderBoolen = (folderId, limit = 10, offset = 0) => 
+  fetchWithAuth(`/user/chats/boolen/${folderId}?&limit=${limit}&offset=${offset}`);
+export const updateChat = (chat_id,name_chat,pfoto) => fetchWithAuth("/chat/update", { body: JSON.stringify({ chat_id: chat_id, name_chat: name_chat, pfoto: pfoto }) });
 
 /* 📦 Папки и управление чатами */
-export const addChatFolder = (name) => fetchWithAuth("/add-chat-folder", { body: JSON.stringify({ name }) });
+export const addChatFolder = (name) => fetchWithAuth("/add-chat-folder", { body: JSON.stringify({ folder_name:name }) });
 export const addChatToFolder = (data) => fetchWithAuth("/add-chat-to-folder", { body: JSON.stringify(data) });
 export const updateGroupChat = (data) => fetchWithAuth("/update-group-chat", { body: JSON.stringify(data) });
 export const removeUserFromChat = (chatId, userId) =>
@@ -130,8 +134,8 @@ export const getUserFavouriteSMS = () => fetchWithAuth("/user/favourite-sms");
 
 /* Управление чатами и папками чатов */
 export const getChatsByFolder = (folderId) => fetchWithAuth("/user/chats-in-folder", { body: JSON.stringify({ folder_id: folderId }) });
-export const removeChatFromFolder = (chatId) => fetchWithAuth("/user/folder/chat/remove", { body: JSON.stringify({ chat_id: chatId }) });
-export const removeChatFolder = (folderId) => fetchWithAuth("/user/folder/remove", { body: JSON.stringify({ folder_id: folderId }) });
+export const removeChatFromFolder = (data) => fetchWithAuth("/user/folder/chat/remove", { body: JSON.stringify( data ) });
+export const removeChatFolder = (folderId) => fetchWithAuth("/user/folder/remove", { body: JSON.stringify({ chat_folder_id: folderId }) });
 export const addRepost = (data) => fetchWithAuth("/add-repost", { body: JSON.stringify(data) });
 export const getUserReposts = () => fetchWithAuth("/reposts");
 export const getUsersReposts = (login) => fetchWithAuth(`/reposts/${login}`);
