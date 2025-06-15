@@ -147,6 +147,7 @@ margin-left: -1px;
 }
 .div_chats img{
   height: 80px;
+  width: 80px;
   margin:  auto 10px auto 10px;
   border-radius: 50%;
 }

@@ -3,10 +3,10 @@ import styles from "./InfoChat.module.css";
 import { getChatInfo, getChatInfoDetails, updateChat } from "../../../hooks/api";
 
 let img_p = "/imgs/log/Group 25 (2).svg";
-export function InfoChat({ setModal, infoChat,setModal_add_user} ) {
+export function InfoChat({ setModal, infoChat,setModal_add_user,setInfoChat} ) {
     // console.log(infoChat)
       const menuRef_chat = useRef(null);
-  const [imageData, setImageData] = useState(null);
+  // const [imageData, setImageData] = useState(null);
       const [preview, setPreview] = useState(null);   
   const [isChatInfo, setChatInfo] = useState({
   "chat_info": {
@@ -34,7 +34,7 @@ export function InfoChat({ setModal, infoChat,setModal_add_user} ) {
     const reader = new FileReader();
     reader.onloadend = () => {
       setPreview(reader.result); // base64
-      setImageData(reader.result); // то, что пойдёт на сервер
+      // setImageData(reader.result); // то, что пойдёт на сервер
     };
     reader.readAsDataURL(file);
   };
@@ -59,23 +59,37 @@ useEffect(()=>{
 useEffect(()=>{
 
       getChatInfoDetails(infoChat.id_chat)
-        .then((data) => setChatInfo(data))
+        .then((data) => {setChatInfo(data)
+          setPreview(data.chat_info.pfoto)
+        
+        })
       .catch((error) => {
         console.error("Ошибка при получении:", error.message);
         
 
       });
 },[infoChat])
-
+const updateChatName = (newName) => {
+  setChatInfo(prev => ({
+    ...prev,
+    chat_info: {
+      ...prev.chat_info,
+      name_chat: newName
+    }
+  }));
+ 
+};
   const handleSubmit = async () => {
   
     try {
-      await  updateChat(8,"переименованный чат",imageData );
-      alert("Пост успешно создан!");
+      await  updateChat(isChatInfo.chat_info.id_chat,isChatInfo.chat_info.name_chat,preview );
+      // alert("Пост успешно создан!");
+   setInfoChat(prev =>({...prev, name_chat:isChatInfo.chat_info.name_chat,pfoto:preview}))
+      setModal(false);
 
     } catch (err) {
       console.error("Ошибка при создании поста:", err);
-      alert("Ошибка при создании поста");
+      // alert("Ошибка при создании поста");
     }
   };
 
@@ -90,7 +104,7 @@ console.log(isChatInfo)
         <p> О чате</p>
         <button onClick={()=>handleSubmit()}>Сохранить</button>
        </div>
-         <img src={isChatInfo.chat_info.pfoto}></img>
+    
         <div className={styles.div_name_pfoto}>
           
             {/* {
@@ -120,7 +134,7 @@ console.log(isChatInfo)
       ) : (
         <img src={isChatInfo.chat_info.pfoto} alt="chat-pic" />
       )} */}
-            <input value={isChatInfo.chat_info.name_chat}></input>
+            <input value={isChatInfo.chat_info.name_chat} onChange={(e)=>updateChatName(e.target.value)}></input>
         </div>
 
         <div>

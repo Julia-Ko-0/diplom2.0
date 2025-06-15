@@ -35,7 +35,9 @@ body button{
     cursor: pointer;
   
 }
-
+body img{
+    object-fit: cover;
+}
 
 @font-face {
   font-family: 'Inter_28pt-Regular';

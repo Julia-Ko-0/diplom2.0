@@ -64,3 +64,7 @@ height: 20%;
 width: 80%;
 /* max-width: 100px; */
 }
+.elem_post_body_img{
+  border-radius: 100%;
+  /* width: ; */
+}

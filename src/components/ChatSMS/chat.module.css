@@ -35,8 +35,10 @@ background-color: var(--bg-color-heder_chat);
  
 .heder_chat_div img{
  width: 50px;
- border-radius: 50%;
+ height: 50px;
+ border-radius: 100%;
  margin: auto auto auto 10px;
+
 
 }
  .heder_name_date{

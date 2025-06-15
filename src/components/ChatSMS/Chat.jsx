@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./chat.module.css";
 import { SMSApp } from "./SMS/SMS";
 import { useLocation } from "react-router-dom";
-import { getChatMessages, getUserInfo, sendMessageOne, sendMessageToChat } from "../../hooks/api";
+import { getChatMessages, getFriendsList, getUserInfo, sendMessageOne, sendMessageToChat } from "../../hooks/api";
 import { InfoChat } from "./InfoChat/InfoChat";
+import { AddUserChat } from "./Add_UserChat/Add_userChat";
 
 let img_p = "/imgs/log/Group 25 (2).svg";
 
@@ -15,10 +16,13 @@ export const Chat = () => {
   const [isUserInfo, setUser] = useState({});
   const [isOffset, setOffset] = useState(0);
   const id = state.sms.id_chat;
+  
 
+// const nameCh = state.sms.name
 
   const countChatPepl = state.sms.countChatPepl;
-
+const [isUnfoChat,setInfoChat] = useState(state.sms)
+// console.log(isUnfoChat)
   const smsRef = useRef(null);
   const [modal, setModal] = useState(false);
        const menuRef_add_user = useRef(null);
@@ -153,6 +157,7 @@ useEffect(()=>{
     document.removeEventListener("mousedown", handleClickOutside);
   };
 },[])
+
   return (
     <div className={styles.div_}>
       <div className={styles.heder_chat_div} onClick={() => {
@@ -163,9 +168,9 @@ useEffect(()=>{
    
         }}>
         <button>naz</button>
-        <img src={img_p} alt="Chat" />
+        <img src={isUnfoChat.pfoto || img_p} alt="Chat" />
         <div className={styles.heder_name_date}>
-          <p style={{ fontSize: "15px" }}>{state.sms.name_chat}</p>
+          <p style={{ fontSize: "15px" }}>{isUnfoChat.name_chat}</p>
         </div>
         <div></div>
       </div>
@@ -199,18 +204,9 @@ useEffect(()=>{
       </div>
 
 
-      {modal && <InfoChat setModal={setModal} infoChat={state.sms} setModal_add_user={setModal_add_user}/>}
+      {modal && <InfoChat setModal={setModal} infoChat={state.sms} setModal_add_user={setModal_add_user} setInfoChat={setInfoChat}/>}
          {
-        modal_add_user && <div className={styles.modal_overlay} >
-              <div
-        className={styles.div_add_post}
-        ref={menuRef_add_user}
-      ><p>Добавление пользователя</p>
-      <div>
-
-      </div>
-                </div>
-        </div>
+        modal_add_user && <AddUserChat menuRef_add_user={menuRef_add_user}/>
       }
     </div>
   );

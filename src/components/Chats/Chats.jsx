@@ -482,7 +482,7 @@ function Chats() {
           <CrElChats key={smss.id_chat} sms={smss} />
         ))}
       </ul>
-      {modal && <ModalPost setModal={setModal} />}
+    {modal && <ModalPost setModal={setModal} />}
     </div>
   );
 }
