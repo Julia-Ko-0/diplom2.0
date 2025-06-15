@@ -13,7 +13,7 @@
 
 .sms {
     display: flex;
-  background-color: aliceblue;
+  background-color: var(--bg-color-sms);
   /* display: inline-block; */
   gap: 10px;
   width: auto;

@@ -21,6 +21,7 @@ import Post from "../components/Post/Post";
 import Post_home from "../components/Home/Post_home/Post_home";
 import Search from "../components/Home/Search/Search";
 import { Friends } from "../components/Friends/Friends";
+import { User } from "../components/User/User";
 
 //  export  const router = createBrowserRouter([
 //     {
@@ -148,6 +149,10 @@ export const router = createBrowserRouter([
             element: <Chat />,
           },
           {
+            path:'user',
+            element:<User/>
+          },
+             {
             path:'friends',
             element:<Friends/>
           },

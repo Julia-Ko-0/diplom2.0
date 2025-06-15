@@ -34,7 +34,7 @@ export const logoutUser = () => fetchWithAuth("/logout");
 
 /* 👤 Пользователь */
 export const getUserInfo = () => fetchWithAuth("/user_info");
-export const getUsersInfo = (login) => fetchWithAuth(`/user_info/${login}`);
+export const getUsersInfo = (login) => fetchWithAuth(`/users_info/${login}`);
 export const getUserPosts = (limit = 10, offset = 0) =>
   fetchWithAuth(`/user_info_post?limit=${limit}&offset=${offset}`);
 export const getUsersPosts = (login, limit = 10, offset = 0) =>
@@ -170,13 +170,13 @@ export const addUserToGroupBlacklist = (groupId, userId) =>
 export const removeUserFromGroupBlacklist = (groupId, userId) =>
   fetchWithAuth(`/group/${groupId}/blacklist/remove`, { body: JSON.stringify({ user_id: userId }) });
 export const searchPosts = (query) =>
-  fetchWithAuth("/search/posts", { body: JSON.stringify({ query }) });
+  fetchWithAuth("/search/posts", { body: JSON.stringify(query) });
 
 export const searchUsers = (query) =>
-  fetchWithAuth("/search/users", { body: JSON.stringify({ query }) });
+  fetchWithAuth("/search/users", { body: JSON.stringify(query) });
 
 export const searchGroups = (query) =>
-  fetchWithAuth("/search/group", { body: JSON.stringify({ query }) });
+  fetchWithAuth("/search/group", { body: JSON.stringify(query) });
 
 export const searchAll = (data) =>
   fetchWithAuth("/search/all", {body: JSON.stringify(data) });
@@ -223,3 +223,5 @@ fetchWithAuth('/features/add', {
   fetchWithAuth(`/filtered-posts?limit=${limit}&offset=${offset}`);
   // 📂 Получение папок чатов пользователя
 export const getUserChatFolders = () => fetchWithAuth("/get-user-chat-folders");
+
+export const areFriends = (id) => fetchWithAuth(`/friends/check/${id}`);

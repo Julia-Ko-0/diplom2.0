@@ -1,14 +1,39 @@
-.div_frends img{
-width: 10vw;
-max-width: 100px;
+
+.div_frends{
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+        /* padding: 10px; */
+    border: solid 1px var(--border-color);
+    
+    background-color: var( --bg-color2);
+}
+
+.div_frends_elem img{
+width: 9vw;
+max-width: 80px;
 padding-left: 20px;
 }
-.div_frends{
+.div_frends_elem{
     width: 100%;
-    padding: 10px;
-    /* background-color: aqua; */
+    /* margin: 10px; */
+    height: 11vw;
+    max-height: 110px;
+    align-content: center;
     border-bottom:solid 1px var(--border-color) ;
     display: grid;
     gap: 30px;
-    grid-template-columns: 100px auto;
+    
+    grid-template-columns: 100px auto 170px;
+    
+}
+.div_frends_elem button{
+    margin: auto 0px auto 0px;
+    height: 30px;
+    font-size: 15px;
+    width: 90%;
+}
+
+.div_frends_elem:last-child {
+  border-bottom: none;
 }
