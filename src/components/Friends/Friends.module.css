@@ -1,0 +1,14 @@
+.div_frends img{
+width: 10vw;
+max-width: 100px;
+padding-left: 20px;
+}
+.div_frends{
+    width: 100%;
+    padding: 10px;
+    /* background-color: aqua; */
+    border-bottom:solid 1px var(--border-color) ;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 100px auto;
+}

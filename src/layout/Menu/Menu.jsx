@@ -166,6 +166,16 @@ const Menu = () => {
             >
               Сообщения
             </NavLink>
+              <NavLink
+              to="friends"
+              className={({ isActive }) =>
+                isActive 
+                  ? `${styles.elem_menu} ${styles.active}`
+                  : styles.elem_menu
+              }
+            >
+              Друзья
+            </NavLink>
 
             {/* <NavLink
               to="group"

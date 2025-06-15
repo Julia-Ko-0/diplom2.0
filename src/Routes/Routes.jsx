@@ -20,6 +20,7 @@ import ProtectedRoute, { ProtectedRouteLogin } from "../ProtectedRoute";
 import Post from "../components/Post/Post";
 import Post_home from "../components/Home/Post_home/Post_home";
 import Search from "../components/Home/Search/Search";
+import { Friends } from "../components/Friends/Friends";
 
 //  export  const router = createBrowserRouter([
 //     {
@@ -145,6 +146,10 @@ export const router = createBrowserRouter([
           {
             path: "chatsms",
             element: <Chat />,
+          },
+          {
+            path:'friends',
+            element:<Friends/>
           },
         ],
       },

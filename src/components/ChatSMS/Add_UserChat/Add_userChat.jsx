@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getFriendsList } from '../../../hooks/api';
 import styles from './Add_userChat.module.css'
 
-
+let img_p = "/imgs/log/Group 25 (2).svg";
 
 export const AddUserChat = ({menuRef_add_user,isInfo})=>{
     const [isFriends,setFriends] = useState([])
@@ -29,6 +29,7 @@ getFriendsList()
 {isFriends.map((e)=>{
     return(
         <div className={styles.div_frends}>
+            <img src={e.avatar || img_p }></img>
             <p >{e.login}</p>
            
                 {
