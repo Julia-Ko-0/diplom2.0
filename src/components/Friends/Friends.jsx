@@ -21,7 +21,7 @@ export const Friends = ()=>{
     return(
         <div className={styles.div_frends}>
          
-{isFriends.map((e)=>{
+{isFriends != null && isFriends.length >0  && isFriends.map((e)=>{
     return(
         <div className={styles.div_frends_elem} onClick={()=>{
                 navigate("/us/user", { state:  e  });

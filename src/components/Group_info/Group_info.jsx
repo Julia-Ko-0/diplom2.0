@@ -1,9 +1,9 @@
-import styles from "./User.module.css";
+import styles from "./Group_info.module.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { areFriends, getUserInfo, getUsersInfo } from "../../hooks/api";
 
-export const User = () => {
+export const Group_info = () => {
   const { state } = useLocation();
   const [isUserInfo, setUserIndo] = useState({});
   const [isBoolean, setBoolean] = useState({});

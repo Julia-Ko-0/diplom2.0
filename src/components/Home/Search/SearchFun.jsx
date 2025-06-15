@@ -1,9 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./Search.module.css"
 import { formatDate } from "../../../hooks/homeH";
+
+let img_p = "/imgs/log/Group 25 (2).svg";
+
+
+
 export function CrElPosts({ post }) {
-  console.log(post)
-  const name = post.author.username
+  // console.log(post)
+  // const name = post.author.username
     const navigate = useNavigate();
     return (
     <div className={styles.elem_post}>
@@ -19,12 +24,12 @@ export function CrElPosts({ post }) {
        {post.type =='post_user' &&   
          <div className={styles.elem_post_header_text}> 
             
-            <span className={styles.h_name}>{post.author.username}</span>
+            <span className={styles.h_name}>{post.author.username??''}</span>
             {/* <span className={styles.h_name}>{post.text}</span> */}
             </div>}
                 {post.type =='post_group' &&     <div className={styles.elem_post_header_text}> 
                 <span className={styles.h_name}>{post.group.group_name}</span>
-            <span className={styles.h_name}>{post.author.username}</span>
+            <span className={styles.h_name}>{post.author.username??''}</span>
         
             </div>}
           <div className={styles.elem_post_h_name_datetime}>
@@ -201,4 +206,78 @@ export function CrElPosts_({ post }) {
       </div>
     </div>
   );
+}
+export const User = ({app})=>{
+        const navigate = useNavigate();
+  console.log(app)
+      return(
+        <div className={styles.div_frends_elem} onClick={()=>{
+                navigate("/us/user", { state:  {login:app.username, id:app.id}  });
+        }}>
+            {/* <img src={app.profile_picture || img_p }></img> */}
+               <img
+                className={styles.img_avatar}
+                src={app.profile_picture || img_p}
+                alt="avatar"
+                style={app.profile_picture == null ? {
+                  width: "85px",
+        
+                } : {
+                  width: "85px",
+                  height: "85px",
+                  objectFit: "cover",
+                  borderRadius: "50%",
+                }}
+              />
+            <p >{app.username}</p>
+           
+        
+            </div>
+        
+    )
+    // return(
+    //     <div className={styles.div_frends}>
+         
+
+
+
+
+
+    //     </div>
+    // )
+  // return( <div >
+  //   <img src={app.profile_picture !== '' ? app.profile_picture:''}></img>
+  //           <p>{app.id}</p>
+  //           <p>"user"</p>
+  //         </div>)
+}
+export const Group = ({app})=>{
+        const navigate = useNavigate();
+  console.log(app)
+      return(
+        <div className={styles.div_frends_elem} onClick={()=>{
+                navigate("/us/group_info", { state:  app  });
+        }}>
+            {/* <img src={app.profile_picture || img_p }></img> */}
+               <img
+                className={styles.img_avatar}
+                src={app.profile_picture || img_p}
+                alt="avatar"
+                style={app.profile_picture == null ? {
+                  width: "85px",
+        
+                } : {
+                  width: "85px",
+                  height: "85px",
+                  objectFit: "cover",
+                  borderRadius: "50%",
+                }}
+              />
+            <p >{app.name}</p>
+           
+        
+            </div>
+        
+    )
+
 }

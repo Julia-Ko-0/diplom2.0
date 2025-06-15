@@ -17,7 +17,8 @@ import {
 } from "../../../hooks/api";
 import { formatDate, getImageSrc } from "../../../hooks/homeH";
 import { useParams } from 'react-router-dom';
-import { CrElPosts } from "./SearchFun";
+import { CrElPosts, Group, User } from "./SearchFun";
+
 
 // interface PostsProps{
 //     post: PostM
@@ -191,6 +192,7 @@ useEffect(() => {
           className={activeTab === "1" ? styles.active : styles.tab}
           onClick={() => {
             setActiveTab("1");
+              inputRef.current?.focus();
           }}
         >
           Все
@@ -199,6 +201,7 @@ useEffect(() => {
           className={activeTab === "2" ? styles.active : styles.tab}
           onClick={() => {
             setActiveTab("2");
+              inputRef.current?.focus();
           }}
         >
           Пользователи
@@ -207,6 +210,7 @@ useEffect(() => {
           className={activeTab === "3" ? styles.active : styles.tab}
           onClick={() => {
             setActiveTab("3");
+              inputRef.current?.focus();
           }}
         >
           Посты
@@ -215,6 +219,7 @@ useEffect(() => {
           className={activeTab === "4" ? styles.active : styles.tab}
           onClick={() => {
             setActiveTab("4");
+              inputRef.current?.focus();
           }}
         >
           Группы
@@ -231,28 +236,21 @@ useEffect(() => {
       }
 
       if (app.type === 'group') {
-        return (
-          <div key={`group-${app.id}`}>
-            <p>{app.id}</p>
-            <p>group</p>
-          </div>
-        );
+return(  <div className={styles.elem_post}>    <Group app={app}/> </div>)
       }
 
       if (app.type === 'post_user') {
-        return <CrElPosts key={`post_user-${app.post_id}`} post={app} />;
+        return <CrElPosts post={app} />;
       }
 
       if (app.type === 'post_group') {
-        return <CrElPosts key={`post_group-${app.post_id}`} post={app} />;
+        return <CrElPosts  post={app} />;
       }
 
       if (app.type === 'user') {
         return (
-          <div key={`user-${app.id}`}>
-            <p>{app.id}</p>
-            <p>"user"</p>
-          </div>
+              <div className={styles.elem_post}>    <User app={app}/></div>
+     
         );
       }
 
@@ -262,16 +260,11 @@ useEffect(() => {
 
      posts2.map((e) => {
       const app = e;
-console.log(app)
-    
 
-        return (
-          <div >
-            <p>{app.id}</p>
-            <p>{app.username}</p>
-          </div>
+      return (
+              <div className={styles.elem_post}>    <User app={app}/></div>
+     
         );
-   
     }):activeTab == '3'?
      posts2.map((e) => {
       const app = e;
