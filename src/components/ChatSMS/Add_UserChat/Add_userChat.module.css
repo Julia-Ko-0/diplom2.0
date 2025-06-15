@@ -31,3 +31,7 @@
 .div_add_post {
   z-index: 1001;
 }
+.div_frends{
+    display: grid;
+    grid-template-columns: 80% 20%;
+}

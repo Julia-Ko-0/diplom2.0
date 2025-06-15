@@ -38,7 +38,11 @@ body button{
 body img{
     object-fit: cover;
 }
+.boldText {
+  font-weight:600;
+  font-size: 19px; 
 
+}
 @font-face {
   font-family: 'Inter_28pt-Regular';
   /* src: url('../public/fonts/NotoSansMono-VariableFont.ttf')  format('truetype'); */

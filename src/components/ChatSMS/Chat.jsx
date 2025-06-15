@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./chat.module.css";
 import { SMSApp } from "./SMS/SMS";
 import { useLocation } from "react-router-dom";
-import { getChatMessages, getFriendsList, getUserInfo, sendMessageOne, sendMessageToChat } from "../../hooks/api";
+import { getChatInfo, getChatMessages, getFriendsList, getUserInfo, sendMessageOne, sendMessageToChat } from "../../hooks/api";
 import { InfoChat } from "./InfoChat/InfoChat";
 import { AddUserChat } from "./Add_UserChat/Add_userChat";
 
@@ -60,6 +60,16 @@ const [isUnfoChat,setInfoChat] = useState(state.sms)
         console.error("Ошибка при получении:", error.message);
         setUser({});
       });
+      getChatInfo(id)
+                .then((data) => {
+                        console.log("info:", data);
+                        setInfo(data);
+    
+                      })
+                      .catch((error) => {
+                        console.error("Ошибка при получении :", error.message);
+                            setInfo([])
+                      })
   }, []);
 
   const handleSubmit = async () => {
@@ -206,7 +216,7 @@ useEffect(()=>{
 
       {modal && <InfoChat setModal={setModal} infoChat={state.sms} setModal_add_user={setModal_add_user} setInfoChat={setInfoChat}/>}
          {
-        modal_add_user && <AddUserChat menuRef_add_user={menuRef_add_user}/>
+        modal_add_user && <AddUserChat menuRef_add_user={menuRef_add_user} isInfo={isInfo}/>
       }
     </div>
   );
