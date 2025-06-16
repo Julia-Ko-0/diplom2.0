@@ -3,3 +3,122 @@
     height: 100px;
     padding: 20px;
 }
+/* Общий контейнер */
+.container {
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Аватар */
+.img_avatar {
+  display: block;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto 16px auto;
+  background-color: #f0f0f0;
+}
+
+/* Имя и дата рождения */
+.username {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.birthdate {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Информация о друзьях и подписчиках */
+.stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+  padding: 12px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+  color: #444;
+}
+
+/* Блок статуса и кнопок */
+.status {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.status p {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.actions button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #3b82f6;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.actions button:hover {
+  background-color: #2563eb;
+}
+
+.actions button.secondary {
+  background-color: #e5e7eb;
+  color: #111827;
+}
+
+.actions button.secondary:hover {
+  background-color: #d1d5db;
+}
+.elem_post {
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color2);
+  border-radius: 8px;
+}
+
+.elem_post_header {
+  display: flex;
+  align-items: center;
+}
+
+.elem_post_header_ava {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  /* margin-right: 10px; */
+}
+
+.elem_post_body_img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  margin-top: 10px;
+  border-radius: 5px;
+}

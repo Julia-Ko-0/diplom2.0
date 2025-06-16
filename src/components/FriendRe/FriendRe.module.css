@@ -1,0 +1,52 @@
+.request_list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.request_item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  gap: 16px;
+  cursor: default;
+}
+
+.avatar {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.actions button {
+  padding: 5px 10px;
+  background-color: #eaeaea;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 13px;
+}
+
+.actions button:hover {
+  background-color: #d2d2d2;
+}

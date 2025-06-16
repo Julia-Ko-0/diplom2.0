@@ -38,7 +38,7 @@ export const getUsersInfo = (login) => fetchWithAuth(`/users_info/${login}`);
 export const getUserPosts = (limit = 10, offset = 0) =>
   fetchWithAuth(`/user_info_post?limit=${limit}&offset=${offset}`);
 export const getUsersPosts = (login, limit = 10, offset = 0) =>
-  fetchWithAuth(`/user_info_post/${login}?limit=${limit}&offset=${offset}`);
+  fetchWithAuth(`/user_info_post_/${login}?limit=${limit}&offset=${offset}`);
 
 /* 📝 История и профиль */
 export const getNameHistory = () => fetchWithAuth("/user/name-history");
@@ -225,3 +225,8 @@ fetchWithAuth('/features/add', {
 export const getUserChatFolders = () => fetchWithAuth("/get-user-chat-folders");
 
 export const areFriends = (id) => fetchWithAuth(`/friends/check/${id}`);
+export const areFriends_R = (id) => fetchWithAuth(`/friends/checkR/${id}`);
+export const areFriends_Sub = (id) => fetchWithAuth(`/subscription/check/${id}`);
+// группы
+export const getGroupUser = (id) => fetchWithAuth(`/groupsUs/${id}`);
+export const getGroupMe = () => fetchWithAuth(`/groupsUs/me`);

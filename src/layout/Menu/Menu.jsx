@@ -9,8 +9,7 @@ function CrElFavorit() {
   return <div></div>;
 }
 
-
-function ModalPost({setModal}) {
+function ModalPost({ setModal }) {
   const [formData, setFormData] = useState({
     header: "",
     text_post: "",
@@ -65,7 +64,7 @@ function ModalPost({setModal}) {
   };
 
   return (
-    <div className={styles.modal_overlay} >
+    <div className={styles.modal_overlay}>
       <div
         className={styles.div_add_post}
         onDragOver={(e) => e.preventDefault()}
@@ -74,11 +73,12 @@ function ModalPost({setModal}) {
         <div className={styles.div_header_modal}>
           <p>Создать пост</p>
           {/* <button onClick={handleSubmit}> */}
-          <button onClick={()=>{
-            setModal(false)
-            console.log(formData)
-           
-          }}>
+          <button
+            onClick={() => {
+              setModal(false);
+              console.log(formData);
+            }}
+          >
             <svg
               width="43"
               height="37"
@@ -97,8 +97,8 @@ function ModalPost({setModal}) {
           </button>
         </div>
 
-         <input
-         className={styles.input_header}
+        <input
+          className={styles.input_header}
           placeholder="Заголовок поста"
           value={formData.header}
           onChange={(e) =>
@@ -106,7 +106,7 @@ function ModalPost({setModal}) {
           }
         />
         <input
-         className={styles.input_header}
+          className={styles.input_header}
           placeholder="Текст поста"
           value={formData.text_post}
           onChange={(e) =>
@@ -114,29 +114,36 @@ function ModalPost({setModal}) {
           }
         />
 
-
         <label className={styles.upload_button}>
           Загрузить изображение
-          <input type="file" accept="image/*" onChange={handleFileChange} hidden />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            hidden
+          />
         </label>
 
         {imagePreview && (
-          <img src={imagePreview} alt="Preview" className={styles.image_preview} />
+          <img
+            src={imagePreview}
+            alt="Preview"
+            className={styles.image_preview}
+          />
         )}
-         <div className={styles.div_button}>
-           <button  onClick={()=>handleSubmit()} >Опубликовать</button>
-         </div>
+        <div className={styles.div_button}>
+          <button onClick={() => handleSubmit()}>Опубликовать</button>
+        </div>
       </div>
-     
     </div>
   );
 }
 const Menu = () => {
   const location = useLocation();
   const ishomeActive =
-    location.pathname === "us/home/posts" || 
+    location.pathname === "us/home/posts" ||
     location.pathname == "/us/home/post/" ||
-     location.pathname === "/us/home/search";
+    location.pathname === "/us/home/search";
   const isChatsActive =
     location.pathname === "/us/chats" || location.pathname === "/us/chatsms";
   const [modal, setModal] = useState(false);
@@ -166,10 +173,10 @@ const Menu = () => {
             >
               Сообщения
             </NavLink>
-              <NavLink
+            <NavLink
               to="friends"
               className={({ isActive }) =>
-                isActive 
+                isActive
                   ? `${styles.elem_menu} ${styles.active}`
                   : styles.elem_menu
               }
@@ -177,7 +184,7 @@ const Menu = () => {
               Друзья
             </NavLink>
 
-            {/* <NavLink
+            <NavLink
               to="group"
               className={({ isActive }) =>
                 isActive
@@ -188,7 +195,7 @@ const Menu = () => {
               Группы
             </NavLink>
 
-            <NavLink
+            {/* <NavLink
               to="myakk"
               className={({ isActive }) =>
                 isActive
@@ -201,9 +208,8 @@ const Menu = () => {
           </div>
           <div className={styles.btn_modal}>
             <button
-         
               onClick={() => {
-                setModal(true)
+                setModal(true);
               }}
             >
               <svg
@@ -232,9 +238,7 @@ const Menu = () => {
           <span className={styles.elem_menu}>Избранное</span>
         </div> */}
       </div>
-      {
-        modal && <ModalPost setModal={setModal}/>
-      }
+      {modal && <ModalPost setModal={setModal} />}
       {/* <div className={styles.modal_overlay}>
         <div className={styles.div_add_post}>
           <div className={styles.div_header_modal}>

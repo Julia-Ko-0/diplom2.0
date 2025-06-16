@@ -212,7 +212,9 @@ export const User = ({app})=>{
   console.log(app)
       return(
         <div className={styles.div_frends_elem} onClick={()=>{
-                navigate("/us/user", { state:  {login:app.username, id:app.id}  });
+          console.log(app)
+                navigate("/us/user", { state:  {login:app.username, id:app.id??app.user_id
+}  });
         }}>
             {/* <img src={app.profile_picture || img_p }></img> */}
                <img
