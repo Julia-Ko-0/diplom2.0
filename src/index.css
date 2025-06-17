@@ -38,6 +38,19 @@ body button{
 body img{
     object-fit: cover;
 }
+body button{
+      justify-content: center;
+    align-content: center;
+    align-items: center;
+      border-radius: 7px;
+background-color: var(--button-color);
+border: 1px solid var(--button-border-color);
+}
+body button:hover{
+
+  background-color: var(--button-hover);
+
+}
 .boldText {
   font-weight:600;
   font-size: 19px; 

@@ -16,6 +16,7 @@ body[data-theme="light"] {
   --text-color-forder: #2b2d30;
   --bg-color-inpus_chat:#ffffff;
   --bg-color-sms_chat:#ffffff;
+    --bg-color-sms_last_chat:#b6b4b4;
   --bg-color-heder_chat:#ffffff;
   --svg-color: #8a8888;
   --bg-color-inpus_chat-focus:#ffffff;

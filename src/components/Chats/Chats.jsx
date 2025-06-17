@@ -285,12 +285,12 @@ function CrElChats({ sms }) {
           <span className={styles.chats_sms_date}>{sms.dateTime_chat}</span>
         </div>
         {sms.last_message !== null && sms.last_message.text_sms.length > 70 && (
-          <span>{sms.last_message.text_sms.substring(0, 70)}...</span>
+          <span style={{color:"var(--bg-color-sms_last_chat)"}}>{sms.last_message.text_sms.substring(0, 70)}...</span>
         )}
         {sms.last_message !== null &&
           sms.last_message.text_sms !== null &&
           sms.last_message.text_sms.length <= 70 && (
-            <span>{sms.last_message.text_sms}</span>
+            <span style={{color:"var(--bg-color-sms_last_chat)"}}>{sms.last_message.text_sms}</span>
           )}
         {/* <span>{sms.last_message.text_sms}</span> */}
       </div>

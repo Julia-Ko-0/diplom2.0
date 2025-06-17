@@ -14,6 +14,7 @@ import {
 } from "../../../hooks/api";
 import { formatDate, getImageSrc } from "../../../hooks/homeH";
 import { useParams } from 'react-router-dom';
+let img_p = "/imgs/log/Group 25 (2).svg";
 
 // interface PostsProps{
 //     post: PostM
@@ -38,7 +39,9 @@ function CrElPosts({ post }) {
       
       <img
           className={styles.elem_post_header_ava}
-          src=        "../imgs/log/Group 25 (2).svg"
+          src= {post?.owner?.profile_picture || post?.author?.profile_picture
+ ||
+img_p}
 
         ></img>
         <div className={styles.elem_post_h_name}>
