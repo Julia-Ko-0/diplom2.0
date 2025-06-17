@@ -8,6 +8,7 @@ import {
   addChatToFolder,
   getChatsInFolder,
   getChatsInFolderBoolen,
+  getFriendsList,
   getUserChatFolders,
   getUserChats,
   removeChatFolder,
@@ -269,6 +270,7 @@ function CrElChats({ sms }) {
     <li
       className={styles.div_chats}
       onClick={() => {
+        console.log(sms)
         navigate("/us/chatsms", { state: { sms } });
       }}
     >
@@ -384,7 +386,11 @@ function Chats() {
   const [isSms, setSMS] = useState([]);
   const [isFolder, setFolder] = useState([]);
     const [isLoading, setLoading] = useState(true);
-
+  const [searchTerm, setSearchTerm] = useState("");
+    const [friends, setFriends] = useState([]);
+  const [filteredFriends, setFilteredFriends] = useState([]);
+   const [isSearching, setIsSearching] = useState(false); 
+     const navigate = useNavigate();
   useEffect(() => {
     // Прокрутка колесиком
     const scrollable = document.getElementById("scrollable");
@@ -438,6 +444,30 @@ function Chats() {
         });
     }
   }, [activeTab,isLoading]);
+useEffect(()=>{
+      getFriendsList()
+      .then((data) => {
+        setFriends(data.friends);
+        setFilteredFriends(data.friends); // Изначально показываем всех друзей
+      })
+      .catch((error) => {
+        console.error("Ошибка при получении списка друзей:", error.message);
+      });
+},[])
+
+    const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setSearchTerm(query);
+console.log(friends)
+    // Фильтрация списка друзей по введенному значению
+    const filtered = friends.filter((friend) =>
+      friend.login.toLowerCase().includes(query.toLowerCase())
+
+    );
+    setFilteredFriends(filtered);
+    setIsSearching(query.length > 0); // Включаем поиск, если что-то введено
+  };
+
   return (
     <div className={styles.all_chast_div}>
       
@@ -475,14 +505,33 @@ function Chats() {
 
       <ul className={styles.chast_div}>
         <div className={styles.input_div}>
-          <input type="text" />
+          <input value={ searchTerm}    onChange={handleSearchChange} type="text" />
         </div>
 
-        {isSms.map((smss) => (
+        {!isSearching && isSms.map((smss) => (
           <CrElChats key={smss.id_chat} sms={smss} />
         ))}
+
       </ul>
+      {isSearching && filteredFriends.map((friend)=>(  <li
+                key={friend.id}
+                className={styles.div_chats}
+                 onClick={() => {
+        navigate("/us/chatsms_new", { state: { friend } });
+ 
+        
+      }}
+              >
+                <img
+                  src={friend.photo || "/imgs/log/Group 25 (2).svg"}
+                  alt="user-photo"
+                />
+                <div className={styles.div_chats_name_and_sms}>
+                  <span>{friend.login}</span>
+                </div>
+              </li>))}
     {modal && <ModalPost setModal={setModal} />}
+    
     </div>
   );
 }

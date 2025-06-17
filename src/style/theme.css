@@ -26,7 +26,8 @@ body[data-theme="light"] {
 --button-hover:#f0f0f0;
 --date-color:#cedff0;
 --bg-color-modal:aliceblue;
---bg-color-sms:aliceblue
+--bg-color-sms:aliceblue;
+--text-color-description:rgb(177, 177, 177);
 }
 /* body[data-theme="light"] {
   --bg-color: #fbfcf4;

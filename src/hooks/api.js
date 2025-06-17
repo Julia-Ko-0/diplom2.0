@@ -154,7 +154,9 @@ export const addFeatureToRole = (roleId, data) =>
 export const addUserToRoleGroup = (roleId, data) => 
   fetchWithAuth(`/roles/${roleId}/users`, { body: JSON.stringify(data) });
 export const getChatsByFolderId = (folderId) => fetchGetWithAuth(`/user/chats-by-folder?folder_id=${folderId}`);
-export const getGroupInfo = (groupId) => fetchGetWithAuth(`/group/info?group_id=${groupId}`);
+export const getGroupInfo = (data) => fetchGetWithAuth(`/group/info`, { body: JSON.stringify({group_id: data}) });
+
+
 export const addGroup = (data) =>
   fetchWithAuth("/user/group/add", { body: JSON.stringify(data) });
 
@@ -230,3 +232,11 @@ export const areFriends_Sub = (id) => fetchWithAuth(`/subscription/check/${id}`)
 // группы
 export const getGroupUser = (id) => fetchWithAuth(`/groupsUs/${id}`);
 export const getGroupMe = () => fetchWithAuth(`/groupsUs/me`);
+// api.js
+
+export const getUserRolesInGroup = (groupId) =>
+  fetchWithAuth(`/group/user/roles`, { body: JSON.stringify({ group_id: groupId }) });
+export const checkChat = (groupId) =>
+  fetchWithAuth(`/chat/check/${groupId}`);
+
+export const createPostGroup = (data) => fetchWithAuth("/group/post", { body: JSON.stringify(data) });

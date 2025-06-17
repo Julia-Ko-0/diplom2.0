@@ -12,10 +12,8 @@ const Group = () => {
   useEffect(() => {
     getGroupMe()
       .then((data) => {
-
-          console.log(data);
-setGroups(data)
-     
+        console.log(data);
+        setGroups(data);
       })
       .catch((error) => {
         console.error("Ошибка при получении групп:", error.message);
@@ -24,26 +22,32 @@ setGroups(data)
   }, []);
 
   return (
-    <div className={styles.div_groups}>
+<div>
+        <div className={styles.div_groups}>
       {groups.length > 0 ? (
         groups.map((group) => (
           <div
             className={styles.div_groups_elem}
             key={group.id_group}
-            onClick={() => navigate("/us/group", { state: group })}
+            
+            onClick={() =>  navigate("/us/group_info", { state:   group })}
           >
             <img
-              src={group.profile_picture || fallbackImg}
+              src={group.profile_picture ? group.profile_picture : fallbackImg}
               alt={group.name}
             />
-            <p>{group.name}</p>
-            <p className={styles.description}>{group.description}</p>
+            <div>
+              <p>{group.name}</p>
+              <p className={styles.description}>{group.description || "Нет описания"}</p>
+            </div>
           </div>
         ))
       ) : (
         <p style={{ padding: "20px" }}>Нет доступных групп</p>
       )}
     </div>
+
+</div>
   );
 };
 

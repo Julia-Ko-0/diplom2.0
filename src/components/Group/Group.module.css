@@ -4,40 +4,32 @@
   border-radius: 8px;
   border: solid 1px var(--border-color);
   background-color: var(--bg-color2);
-  padding-bottom: 10px;
 }
 
 .div_groups_elem {
   width: 100%;
-  max-height: 120px;
+  height: 11vw;
+  max-height: 110px;
+  border-bottom: solid 1px var(--border-color);
   display: grid;
   grid-template-columns: 100px auto;
-  align-items: center;
-  gap: 20px;
+  gap: 30px;
   padding: 10px;
-  border-bottom: solid 1px var(--border-color);
+  align-items: center;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.div_groups_elem:hover {
-  background-color: var(--bg-color-hover-element);
 }
 
 .div_groups_elem img {
   width: 9vw;
   max-width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 50%;
+  padding-left: 20px;
 }
 
-.div_groups_elem p {
-  margin: 0;
-  font-size: 1rem;
+.div_groups_elem:last-child {
+  border-bottom: none;
 }
 
 .description {
-  font-size: 0.9rem;
-  color: var(--text-color);
+  color: var(--text-color-description);
+  font-size: 14px;
 }

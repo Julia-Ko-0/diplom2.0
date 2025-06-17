@@ -3,3 +3,255 @@
     height: 100px;
     padding: 20px;
 }
+.groupContainer {
+  padding: 24px;
+  max-width: 880px;
+  margin: 0 auto;
+
+  background-color: var(--bg-color2);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.avatar img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: var(--bg-color);
+  border: 2px solid var(--border-color);
+}
+
+.info {
+  flex: 1;
+}
+
+.info h2 {
+  font-size: 28px;
+  margin: 0 0 8px;
+  color: var(--text-color);
+}
+
+.description {
+  margin: 8px 0 12px;
+  color: var(--text-color-description);
+  font-style: italic;
+}
+
+.info p {
+  margin: 4px 0;
+  color: var(--text-color);
+}
+
+.tagsBlock {
+  margin-top: 24px;
+}
+
+.tagsBlock h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: var(--text-color);
+}
+
+.tagList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tagItem {
+  margin-bottom: 10px;
+  padding: 10px 14px;
+  background-color: var(--bg-color-sms);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.tagName {
+  font-weight: 600;
+  color: var(--element-select);
+  margin-bottom: 4px;
+}
+
+.tagDescription {
+  color: var(--text-color-description);
+  font-size: 14px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: var(--text-color-description);
+}
+.postsBlock {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.postCard {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background-color: var(--bg-color2);
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatarMini {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+.authorName {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.postDate {
+  font-size: 12px;
+  color: var(--text-color-description);
+}
+
+.postTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0 6px;
+  color: var(--text-color);
+}
+
+.postText {
+  white-space: pre-wrap;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.postImage {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 10px 0;
+  border: 1px solid var(--border-color);
+}
+
+.postMeta {
+  font-size: 13px;
+  color: var(--text-color-description);
+  display: flex;
+  gap: 15px;
+  margin-top: 8px;
+}
+.modal_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; 
+}
+
+.div_add_post {
+  width: 50vw;
+  max-height: 60vh;
+  background-color: aliceblue;
+  padding: 20px;
+  border-radius: 12px;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.modal_overlay {
+  z-index: 1000;
+}
+
+.div_add_post {
+  z-index: 1001;
+}
+
+.div_header_modal{
+    display: flex;
+  
+}
+.div_header_modal button{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    margin: 0px 0px 0px auto;
+  
+}
+.div_header_modal svg{
+    width: 20px;
+    color: var(--svg-color);
+    fill: var(--svg-color);
+    stroke: var(--svg-color); 
+}
+.image_preview{
+  width: auto;
+  max-height: auto;
+  max-width: 50vw;
+  max-height: 40vh;
+  object-fit:contain;
+}
+.input_header {
+    margin-left: -5px;
+    width: calc(100% - 35px);
+    padding-left: 20px;
+    font-size: 17px;
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    background-size: 15px;
+    height: 35px;
+    background-color: var(--bg-color2);
+}
+.btn_modal button{
+  display: flex;            /* превращаем кнопку в flex-контейнер */
+  justify-content: center;  /* горизонтальное выравнивание */
+  align-items: center;      /* вертикальное выравнивание */
+  text-align: center;
+  width: 100%;
+  height: 42px;
+  gap: 10px;
+  font-size:15px;
+  border-radius: 7px;
+  background-color: var(--button-color);
+  border: 1px solid var(--button-border-color);
+}
+.btn_modal{
+
+}

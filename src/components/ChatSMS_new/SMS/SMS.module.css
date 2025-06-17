@@ -1,0 +1,72 @@
+.smsWrapper {
+  display: flex;
+  position: relative; /* Для корректного позиционирования абсолютных элементов */
+}
+
+.smsWrapper.me {
+  justify-content: flex-end; /* Выравнивание сообщений по правому краю */
+}
+
+.smsWrapper.other {
+  justify-content: flex-start; /* Выравнивание сообщений по левому краю */
+}
+
+.sms {
+    display: flex;
+  background-color: var(--bg-color-sms);
+  /* display: inline-block; */
+  gap: 10px;
+  width: auto;
+  min-width: 100px;
+  max-width: 300px;
+  overflow-wrap: break-word;
+  padding: 5px 10px;
+  border-radius: 8px;
+  position: relative; /* Позиционирование относительно родительского элемента */
+}
+
+.div_novbar_menu {
+  position: absolute;
+  background-color: var(--bg-color2);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 200px; /* Максимальная ширина меню */
+  z-index: 10; /* Чтобы меню было поверх других элементов */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Тень для улучшения видимости */
+  transition: transform 0.2s ease-in-out; /* Плавная анимация */
+}
+
+.div_novbar_menu_elem {
+  display: flex;
+  gap: 10px;
+  margin: 5px 10px;
+  padding: 5px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.div_novbar_menu:hover {
+  background-color: var(--bg-color-hover-element);
+}
+
+.sms_ {
+  border: 1px solid var(--bg-color-hover-element);
+
+}
+
+/* Позиционирование меню в зависимости от положения сообщения */
+.smsWrapper.me .div_novbar_menu {
+  bottom: 100%; /* Меню показывается выше сообщения, если это сообщение "me" */
+  right: 0; /* Для "me" - справа */
+  transform: translateY(-10px); /* Немного смещаем вниз для плавности */
+}
+
+.smsWrapper.other .div_novbar_menu {
+  top: 100%; /* Меню показывается ниже сообщения, если это сообщение "other" */
+  left: 0; /* Для "other" - слева */
+  transform: translateY(10px); /* Немного смещаем вверх для плавности */
+}
+.date_sms p {
+font-size: 5px;
+}

@@ -24,6 +24,7 @@ import { Friends } from "../components/Friends/Friends";
 import { User } from "../components/User/User";
 import { Group_info } from "../components/Group_info/Group_info";
 import { FriendRe } from "../components/FriendRe/FriendRe";
+import { Chat_new } from "../components/ChatSMS_new/Chat_new";
 
 //  export  const router = createBrowserRouter([
 //     {
@@ -149,6 +150,10 @@ export const router = createBrowserRouter([
           {
             path: "chatsms",
             element: <Chat />,
+          },
+            {
+            path: "chatsms_new",
+            element: <Chat_new/>,
           },
           {
             path:'user',
