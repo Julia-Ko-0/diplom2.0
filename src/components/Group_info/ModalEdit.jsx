@@ -41,16 +41,6 @@ export const ModalEdit = ({ setModal, id_gr,role,feauteres_us,groupInfo,setLoadi
     }
   };
 
-  const handleSubmit = async () => {
-    try {
-      console.log('Пост успешно создан!');
-      setFormData({ header: '', text_post: '', fale_post: '' });
-      setImagePreview(null);
-    } catch (err) {
-      console.error('Ошибка при создании поста:', err);
-      alert('Ошибка при создании поста');
-    }
-  };
 
   // Функция для отрисовки содержимого вкладки
   const renderContent = () => {

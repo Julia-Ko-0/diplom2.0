@@ -7,7 +7,7 @@ let img_p = "/imgs/log/Group 25 (2).svg";
 
 
 export function CrElPosts({ post }) {
-  // console.log(post)
+  console.log(post)
   // const name = post.author.username
     const navigate = useNavigate();
     return (
@@ -16,8 +16,17 @@ export function CrElPosts({ post }) {
         {/* <img className={styles.elem_post_header_ava} src={post.author.profile_picture == '' || post.author.profile_picture == ''? "../imgs/log/Group 25 (2).svg" :post.author.profile_picture}></img> */}
       
       <img
+       style={post?.author?.profile_picture == null ? {
+                  width: "85px",
+        
+                } : {
+                  width: "65px",
+                  height: "65px",
+                  objectFit: "cover",
+                  borderRadius: "50%",
+                }}
           className={styles.elem_post_header_ava}
-          src=        "../imgs/log/Group 25 (2).svg"
+          src=  {post?.author?.profile_picture ||       "../imgs/log/Group 25 (2).svg"}
 
         ></img>
         <div className={styles.elem_post_h_name}>
@@ -54,7 +63,8 @@ export function CrElPosts({ post }) {
                 <span className={styles.h_name}>{post.header}</span>
             <span className={styles.h_name}>{post.text}</span>
           </div>
-        <img  className={styles.elem_post_body_img} src={post.file_post
+        <img  className={styles.elem_post_body_img} 
+         src={post.file_post
 }></img>
         {
           post.fale_post != 'data:image/png;base64,' ? <img className={styles.elem_post_body_img}  alt="" src={post.fale_post}></img> :''        }
@@ -114,13 +124,24 @@ export function CrElPosts({ post }) {
 }
 export function CrElPosts_({ post }) {
   // console.log('kdfdl')
-
     const navigate = useNavigate();
 
   return (
     <div className={styles.elem_post}>
       <div className={styles.elem_post_header}>
-        <img className={styles.elem_post_header_ava} src={post.author.profile_picture == '' || post.author.profile_picture == ''? "../imgs/log/Group 25 (2).svg" :post.author.profile_picture}></img>
+        <img className={styles.elem_post_header_ava}
+    style={post?.author?.profile_picture == null ? {
+                  width: "85px",
+        
+                } : {
+                  width: "65px",
+                  height: "65px",
+                  objectFit: "cover",
+                  borderRadius: "50%",
+                }}
+         src={post?.author?.profile_picture == '' || 
+         post?.author?.profile_picture == ''? "../imgs/log/Group 25 (2).svg" 
+         :post?.author?.profile_picture}></img>
       
         <div className={styles.elem_post_h_name}>
        {post.post_type =='user' &&   
@@ -219,39 +240,27 @@ export const User = ({app})=>{
             {/* <img src={app.profile_picture || img_p }></img> */}
                <img
                 className={styles.img_avatar}
-                src={app.profile_picture || img_p}
+                src={app?.profile_picture || img_p}
                 alt="avatar"
-                style={app.profile_picture == null ? {
+                style={app?.profile_picture == null ? {
                   width: "85px",
         
                 } : {
-                  width: "85px",
-                  height: "85px",
+                  width: "65px",
+                  height: "65px",
                   objectFit: "cover",
                   borderRadius: "50%",
                 }}
               />
-            <p >{app.username}</p>
+            <p >{app?.username}</p>
            
         
             </div>
         
     )
-    // return(
-    //     <div className={styles.div_frends}>
-         
+ 
 
 
-
-
-
-    //     </div>
-    // )
-  // return( <div >
-  //   <img src={app.profile_picture !== '' ? app.profile_picture:''}></img>
-  //           <p>{app.id}</p>
-  //           <p>"user"</p>
-  //         </div>)
 }
 export const Group = ({app})=>{
         const navigate = useNavigate();
@@ -260,17 +269,17 @@ export const Group = ({app})=>{
         <div className={styles.div_frends_elem} onClick={()=>{
                 navigate("/us/group_info", { state:  app  });
         }}>
-            {/* <img src={app.profile_picture || img_p }></img> */}
+        
                <img
                 className={styles.img_avatar}
-                src={app.profile_picture || img_p}
+                src={app?.photo || img_p}
                 alt="avatar"
-                style={app.profile_picture == null ? {
+                style={app.photo == null ? {
                   width: "85px",
         
                 } : {
-                  width: "85px",
-                  height: "85px",
+                  width: "65px",
+                  height: "65px",
                   objectFit: "cover",
                   borderRadius: "50%",
                 }}

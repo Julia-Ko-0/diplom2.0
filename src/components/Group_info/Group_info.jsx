@@ -83,7 +83,7 @@ function ModalPost({ setModal, id_gr }) {
           <button
             onClick={() => {
               setModal(false);
-              console.log(formData);
+            
             }}
           >
             <svg
@@ -157,10 +157,10 @@ export const Group_info = () => {
   const [role_, setRole_] = useState({});
   const [isLoading, setLoading] = useState(true);
   const [feauteres_us, setfeauteres_us] = useState([]);
-
+console.log(state)
   useEffect(() => {
     // console.log(state.id_group ?? state.id);
-    const id = state.id_group ?? state.id;
+    const id = state?.id_group ?? state?.id ?? state?.group_id;
     // getGroupInfo(id)
     //   .then((data) => setGroupInfo(data))
     //   .catch((error) => {
@@ -173,13 +173,13 @@ export const Group_info = () => {
         console.error("Ошибка при получении:", error.message);
         setGroupInfo(null);
       });
-    getGroupPosts(state?.id_group ?? state.id)
+    getGroupPosts(id)
       .then((data) => setPosts(data.posts))
       .catch((error) => {
         console.error("Ошибка при получении :", error.message);
         setPosts([]);
       });
-    getUserRolesInGroup(state?.id_group ?? state.id)
+    getUserRolesInGroup(id)
       .then((data) => setRole(data))
       .catch((error) => {
         console.error("Ошибка при получении :", error.message);
@@ -200,8 +200,7 @@ export const Group_info = () => {
     role?.roles?.map((roleItem) => {
       roleItem?.role_features?.forEach((feature) => {
         // Проверяем на уникальность по ID
-             console.log(feature)
-                  console.log("dlfkdkfjdi")
+      
          allFeatures.push(feature);
     
         if (!allFeatures.some((f) => f.feature_id === feature.feature_id)) {
@@ -223,17 +222,16 @@ export const Group_info = () => {
   // }
 
   const handleAdd = () => {
-    const id = state.id_group ?? state.id;
+    const id = state?.id_group ?? state?.id ?? state?.group_id;
     addGrouptous(id).catch((err) => console.log("ошибка ", err));
     setLoading(!isLoading);
   };
   const handleDel = () => {
-    const id = state.id_group ?? state.id;
+    const id = state?.id_group ?? state?.id ?? state?.group_id;
     UnsubscribeFromGroupHandler(id).catch((err) => console.log("ошибка ", err));
     setLoading(!isLoading);
   };
-  console.log(feauteres_us)
-  console.log(groupInfo)
+
   return (
     <div>
       <div className={styles.groupContainer}>
@@ -350,7 +348,7 @@ export const Group_info = () => {
         )}
       </div>
       {modal && (
-        <ModalPost setModal={setModal} id_gr={state.id_group ?? state.id} />
+        <ModalPost setModal={setModal} id_gr={state?.id_group ?? state?.id ?? state?.group_id} />
       )}
       {modalEdit && (
         <ModalEdit

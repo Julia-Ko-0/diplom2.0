@@ -9,13 +9,13 @@
     background-color: var( --bg-color2);
 }
 
-.div_frends_elem img{
-width: 9vw;
-max-width: 80px;
+.div_frends_elem {
+
 padding-left: 20px;
+padding-right: 20px;
 }
 .div_frends_elem{
-    width: 100%;
+    /* width: 100%; */
     /* margin: 10px; */
     height: 11vw;
     max-height: 110px;

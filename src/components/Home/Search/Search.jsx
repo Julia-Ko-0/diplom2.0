@@ -18,6 +18,7 @@ import {
 import { formatDate, getImageSrc } from "../../../hooks/homeH";
 import { useParams } from 'react-router-dom';
 import { CrElPosts, Group, User } from "./SearchFun";
+let img_p = "/imgs/log/Group 25 (2).svg";
 
 
 // interface PostsProps{
@@ -229,6 +230,7 @@ useEffect(() => {
   { posts2 && posts2.length > 0 ? (
    activeTab == '1'?  posts2.map((e) => {
       const app = e;
+console.log(e)
 
       if (!app || !app.type) {
         console.warn("Invalid search result item", e);
@@ -274,15 +276,37 @@ console.log(e)
     }):activeTab == '4'?
      posts2.map((e) => {
       const app = e;
-// console.log(e)
+console.log(e)
     
 
-        return (
-          <div>
-            <p>{app.group_name}</p>
-            {/* <p>{app.username}</p> */}
+    return(
+          <div className={styles.elem_post}>   
+          <div className={styles.div_frends_elem} onClick={()=>{
+                navigate("/us/group_info", { state:  app  });
+        }}>
+         
+               <img
+                className={styles.img_avatar}
+                src={e?.group_photo_base64 || img_p}
+                alt="avatar"
+                style={e?.group_photo_base64 == null ? {
+                  width: "85px",
+        
+                } : {
+                  width: "85px",
+                  height: "85px",
+                  objectFit: "cover",
+                  borderRadius: "50%",
+                }}
+              />
+            <p >{e?.group_name}</p>
+           
+        
+            </div>
           </div>
-        );
+        
+        
+    )
    
     }):<p></p>
   ) : (

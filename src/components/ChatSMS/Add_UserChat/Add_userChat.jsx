@@ -15,6 +15,15 @@ getFriendsList()
         setFriends({});
       });
 },[])
+  const handleSubmit = async (friendId) => {
+//     try {
+//       await 
+//     // setLoad(p=>!p)
+//     } catch (err) {
+//       console.error('Ошибка при удалении друга:', err);
+//       alert('Ошибка при удалении друга');
+//     }
+  };
 
 
     return( <div className={styles.modal_overlay} >
@@ -34,7 +43,7 @@ getFriendsList()
            
                 {
                     isInfo.some((infoUser) => infoUser.user_id === e.id) ? <p style={{fontSize:"15px",marginTop:"auto",color:"var(--date-color)"}}> уже есть в чате </p> : <div>
-                        <button>Добавить</button>
+                        <button onClick={()=>handleSubmit(e?.id)}>Добавить</button>
                     </div>
                     // e.id == 
                     ///вот тут isInfo
