@@ -33,3 +33,68 @@
   color: var(--text-color-description);
   font-size: 14px;
 }
+.search_input_wrapper {
+  padding: 10px;
+  text-align: center;
+}
+/* 
+.search_input {
+  width: 100%;
+
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+} */
+.all_chast_div{
+display: grid;
+
+}
+
+.input_div{
+     display: block;
+    height: auto;
+    padding: 0px ;
+    border: solid 1px;
+    /* width: 100%; */
+    /* border-width: 1px; */
+    /* border-color: var(--border-color); */
+    border-color: var(--border-color) ;
+    border-radius: 10px;
+    background-color: var(--bg-color2);
+    margin-top: 0px;
+    margin-bottom: 5px;
+
+}
+.input_div input{
+    height: 35px;
+width: 100%;
+
+    padding-left: 40px;
+    font-size: 17px;
+    border: none;
+    border-radius: 10px ;
+
+    background-size: 15px;
+    height: 35px;
+       background: url('search-svgrepo-com.svg') no-repeat 10px center;
+  background-image: none;
+        /* border-color: ; */
+}
+.input_div::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    width: 16px; /* маленькая иконка */
+    height: 16px;
+
+    background-size: contain;
+    pointer-events: none;
+}
+
+.input_div input:focus{
+    outline: none;
+    border: none;
+
+}

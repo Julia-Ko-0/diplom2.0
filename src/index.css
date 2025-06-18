@@ -56,6 +56,7 @@ body button:hover{
   font-size: 19px; 
 
 }
+
 @font-face {
   font-family: 'Inter_28pt-Regular';
   /* src: url('../public/fonts/NotoSansMono-VariableFont.ttf')  format('truetype'); */
@@ -64,4 +65,64 @@ body button:hover{
   src: url('../public/fonts/inte/static/Inter_28pt-Regular.ttf')  format('truetype');
     font-weight: normal;
   font-style: normal;
+}
+/* Стиль для чекбоксов */
+input[type="checkbox"] {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    background-color: var(--checkbox-bg-color);
+    border: 1px solid var(--checkbox-border-color);
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-right: 10px;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--checkbox-checked-bg-color);
+    border-color: var(--checkbox-checked-border-color);
+}
+
+/* input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-radius: 2px;
+} */
+
+input[type="checkbox"]:hover {
+    background-color: var(--checkbox-hover-bg-color);
+    transform: scale(1.1);
+}
+
+input[type="checkbox"]:active {
+    background-color: var(--checkbox-active-bg-color);
+}
+
+
+label {
+    /* font-size: 15px; */
+    margin-left: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+input[type="checkbox"]:checked + label {
+    color: var(--element-select);
+}
+
+label:hover {
+    color: var(--element-select);
+}
+/* Стиль для инпутов с чекбоксами и лейблами */
+label {
+    /* font-size: 14px; */
+    margin-left: 10px;
+    cursor: pointer;
 }

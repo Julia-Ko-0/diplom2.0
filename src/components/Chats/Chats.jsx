@@ -282,7 +282,7 @@ function CrElChats({ sms }) {
       <div className={styles.div_chats_name_and_sms}>
         <div className={styles.div_chats_sms}>
           <span>{sms.name_chat}</span>
-          <span className={styles.chats_sms_date}>{sms.dateTime_chat}</span>
+          <span className={styles.chats_sms_date} style={{color:"var(--bg-color-sms_last_chat)"}}>{sms.dateTime_chat}</span>
         </div>
         {sms.last_message !== null && sms.last_message.text_sms.length > 70 && (
           <span style={{color:"var(--bg-color-sms_last_chat)"}}>{sms.last_message.text_sms.substring(0, 70)}...</span>

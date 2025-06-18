@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./chat.module.css";
 import { SMSApp } from "./SMS/SMS";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getChatInfo, getChatMessages, getFriendsList, getUserInfo, sendMessageOne, sendMessageToChat } from "../../hooks/api";
 import { InfoChat } from "./InfoChat/InfoChat";
 import { AddUserChat } from "./Add_UserChat/Add_userChat";
@@ -17,6 +17,7 @@ export const Chat = () => {
   const [isOffset, setOffset] = useState(0);
   const id = state.sms.id_chat;
   
+  const navigate = useNavigate();
 
 // const nameCh = state.sms.name
 
@@ -177,7 +178,15 @@ useEffect(()=>{
         }
    
         }}>
-        <button>naz</button>
+        <button className={styles.btn_n}
+            onClick={() => {
+              navigate("/us/chats");
+            }}
+            ><svg width="30" height="39" viewBox="0 0 46 39" xmlns="http://www.w3.org/2000/svg">
+<path d="M23.0475 35.9076C23.6508 36.4752 23.6797 37.4243 23.1122 38.0277C22.5447 38.631 21.5956 38.6599 20.9921 38.0924L0.795813 19.099L20.9954 0.886311L21.1145 0.788587C21.7276 0.339311 22.5936 0.418896 23.1137 0.99546C23.6337 1.57226 23.6231 2.44168 23.1128 3.00523L23.0045 3.11369L5.22455 19.1443L23.0475 35.9076Z" />
+<path d="M44.5 17.5C45.3284 17.5 46 18.1716 46 19C46 19.8284 45.3284 20.5 44.5 20.5H3V17.5H44.5Z" />
+</svg>
+</button>
         <img src={isUnfoChat.pfoto || img_p} alt="Chat" />
         <div className={styles.heder_name_date}>
           <p style={{ fontSize: "15px" }}>{isUnfoChat.name_chat}</p>

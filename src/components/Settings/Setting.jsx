@@ -15,7 +15,7 @@ export const Settings = () => {
         <div>
           <button
             onClick={() => {
-              navigate("/us/home");
+              navigate("/us/home/posts");
             }}
           >
             Назад

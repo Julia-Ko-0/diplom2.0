@@ -1,0 +1,98 @@
+
+
+.div_header_edit {
+    display: flex;
+    gap: 20px;
+    padding-left: 30px;
+    align-items: center;
+}
+
+.div_header_edit button {
+    height: 30px;
+    margin: 0px 30px 0px auto;
+}
+
+.div_roles {
+    display: grid;
+    grid-template-columns: 20% auto 10%;
+    align-items: center;
+    border-bottom: var(--border-color) 1px solid;
+    gap: 20px;
+    font-size: 15px;
+    padding: 0px 30px 0px 30px;
+}
+
+.btn_add {
+    margin-left: 30px;
+    display: flex;
+    font-size: 12px;
+    gap: 8px;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.div_roles:last-child {
+    border-bottom: none;
+}
+
+.div_roles:hover {
+    background-color: var(--bg-color-hover-element2);
+    border-radius: 8px;
+}
+
+.div_roles_ {
+    display: grid;
+}
+
+.div_user_role {
+    display: grid;
+    grid-template-columns: 40px auto;
+    border-bottom: var(--border-color) 1px solid;
+    gap: 20px;
+    font-size: 15px;
+    padding: 0px 30px 0px 30px;
+}
+
+.div_user_role:last-child {
+    border: none;
+}
+
+.div_scroll {
+    max-height: 250px;
+    overflow-x: auto;
+    overflow-y: none;
+    width: auto;
+}
+
+.div_scroll2 {
+    margin: 30px 0px 30px 0px;
+    max-height: 35vh;
+    overflow-x: auto;
+}
+
+
+
+
+/* Стиль для инпутов */
+.input {
+
+    background-color: var(--bg-color2);
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    /* font-size: 14px; */
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input:focus {
+    border-color: var(--element-select);
+    outline: none;
+ 
+}
+
+.inputWrapper {
+    margin-bottom: 20px;
+}
+

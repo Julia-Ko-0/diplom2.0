@@ -21,14 +21,22 @@ body[data-theme="light"] {
   --svg-color: #8a8888;
   --bg-color-inpus_chat-focus:#ffffff;
   --svg-color-full:none;
+   --svg-color-full2:#2c2c2c;
   --button-color:#ffffff;
     --button-border-color:#dfdfdf;
    --bg-color-hover-element:#69BEBA;
+   --bg-color-hover-element2:rgb(182, 218, 216);
 --button-hover:#f0f0f0;
 --date-color:#cedff0;
 --bg-color-modal:aliceblue;
 --bg-color-sms:aliceblue;
 --text-color-description:rgb(177, 177, 177);
+  --checkbox-bg-color: #e0e0e0; /* Фоновый цвет чекбокса по умолчанию */
+  --checkbox-border-color: #b0b0b0; /* Цвет границы чекбокса */
+  --checkbox-checked-bg-color: #69BEBA; /* Цвет фона чекбокса, когда он выбран */
+  --checkbox-checked-border-color: #89cc8b; /* Цвет границы чекбокса, когда он выбран */
+  --checkbox-hover-bg-color: #c8c8c8; /* Цвет фона чекбокса при наведении */
+
 }
 /* body[data-theme="light"] {
   --bg-color: #fbfcf4;

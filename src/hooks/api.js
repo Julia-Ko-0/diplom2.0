@@ -122,7 +122,7 @@ export const getUserStickerPacks = () => fetchWithAuth("/user/sticker-pack/list"
 export const sendStickerToUser = (data) => fetchWithAuth("/sticker/send", { body: JSON.stringify(data) });
 
 /* 🛠 Роли и разрешения */
-export const getRolesInfoForGroup = (groupId) => fetchWithAuth(`/groups/${groupId}/roles`);
+export const getRolesInfoForGroup = (groupId) => fetchWithAuth(`/groups/${groupId}/roles-list`);
 
 /* 💬 Комментарии */
 export const getComments = (postId) => fetchWithAuth(`/comments?post_id=${postId}`);
@@ -214,11 +214,15 @@ fetchWithAuth('/chats/sms/delete', { sms_id: smsId });
 
 
 export const addFeature = (adminId, name, description) =>
-fetchWithAuth('/features/add', {
+fetchWithAuth('/features/add', { body: JSON.stringify({
     admin_id: adminId,
     name_feature_role: name,
     description_feature: description,
-  });
+  }
+) });
+
+
+
   export const getRecommendedPosts = ( limit = 50, offset = 0) =>
   fetchWithAuth(`/recommended-posts?limit=${limit}&offset=${offset}`);
   export const getFilteredPosts = ( limit = 50, offset = 0) =>
@@ -240,3 +244,24 @@ export const checkChat = (groupId) =>
   fetchWithAuth(`/chat/check/${groupId}`);
 
 export const createPostGroup = (data) => fetchWithAuth("/group/post", { body: JSON.stringify(data) });
+
+export const addGrouptous = ( groupId) =>
+  fetchWithAuth('/group/addUser', {
+
+body: JSON.stringify({group_id: groupId,})
+  });
+export const getGroupInfo2 = (groupId) =>
+  fetchWithAuth(`/groupinfo/${groupId}`);
+export const getGroupUsHandler = (groupId) =>
+  fetchWithAuth(`/groupinfohan/${groupId}`);
+export const UnsubscribeFromGroupHandler = (groupId) =>
+  fetchWithAuth(`/group/${groupId}/unsubscribe`);
+
+
+export const getFeaturesInfo = () =>
+  fetchWithAuth(`/get-features-info`);
+
+export const removeFeature = ( groupId,feature_id) =>
+  fetchWithAuth('/remove-feature', {
+body: JSON.stringify({role_group_id:  groupId, feature_id:feature_id})
+  })

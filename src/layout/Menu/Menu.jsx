@@ -176,7 +176,7 @@ const Menu = () => {
             <NavLink
               to="friends"
               className={({ isActive }) =>
-                isActive
+                isActive ||  location.pathname === '/us/user'
                   ? `${styles.elem_menu} ${styles.active}`
                   : styles.elem_menu
               }
@@ -187,7 +187,7 @@ const Menu = () => {
             <NavLink
               to="group"
               className={({ isActive }) =>
-                isActive
+                isActive ||  location.pathname === '/us/group_info'
                   ? `${styles.elem_menu} ${styles.active}`
                   : styles.elem_menu
               }

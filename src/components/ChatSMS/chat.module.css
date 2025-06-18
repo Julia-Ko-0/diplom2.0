@@ -1,13 +1,13 @@
 .div_{
     background-color: var(--bg-color2);
     width: 100%;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 170px);
     border-radius: 10px;
 
     border: 1px solid var(--border-color); 
     display: grid;
     gap: 0px;
-    grid-template-rows: 61px calc(100vh - 217px) 35px;
+    grid-template-rows: 61px calc(100vh - 267px) 35px;
 
 
 }
@@ -52,7 +52,7 @@ background-color: var(--bg-color-heder_chat);
 
     width: auto;
     background-color: var(--bg-color-sms_chat);
-    height:calc(100% - 20PX) ;
+    height:calc(100% - 20px) ;
     padding: 10px;
     display: flex;
     flex-direction: column-reverse; /* Сообщения идут снизу вверх */
@@ -137,4 +137,9 @@ border-radius: 0px 0px 10px 10px ;
 
 .div_add_post {
   z-index: 1001;
+}
+.btn_n svg{
+ fill: var(   --svg-color-full2);
+ /* stroke: var(--svg-color); */
+ stroke-width: 2px;
 }
