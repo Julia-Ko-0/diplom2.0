@@ -25,7 +25,7 @@ export const Friends = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = isFriends.filter(friend =>
+    const filtered = isFriends?.filter(friend =>
       friend.login.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredFriends(filtered);
@@ -43,7 +43,7 @@ export const Friends = () => {
       </div>
           <div className={styles.div_frends}>
       
-      {filteredFriends.length > 0 &&
+      {filteredFriends?.length > 0 &&
         filteredFriends.map((e) => (
           <div
             className={styles.div_frends_elem}
@@ -58,7 +58,7 @@ export const Friends = () => {
           </div>
         ))}
 
-      {filteredFriends.length === 0 && (
+      {filteredFriends?.length === 0 && (
         <p style={{ padding: "20px" }}>Нет совпадений</p>
       )}
     </div>

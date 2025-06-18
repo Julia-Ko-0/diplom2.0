@@ -105,7 +105,7 @@ function CrElChatsAdd({ sms, setSMS, isSms }) {
 
     // Обновляем массив чатов с новым состоянием
     setSMS((prevSMS) =>
-      prevSMS.map(
+      prevSMS?.map(
         (chat) =>
           chat.id_chat === id
             ? { ...chat, is_in_folder: updatedStatus } // Обновляем нужный чат
@@ -460,7 +460,7 @@ useEffect(()=>{
     setSearchTerm(query);
 console.log(friends)
     // Фильтрация списка друзей по введенному значению
-    const filtered = friends.filter((friend) =>
+    const filtered = friends?.filter((friend) =>
       friend.login.toLowerCase().includes(query.toLowerCase())
 
     );
@@ -489,7 +489,7 @@ console.log(friends)
         >
           Все
         </button>
-        {isFolder.map((fr) => (
+        {isFolder?.map((fr) => (
           <CrElForder
             key={fr.id_chatFolders}
             name={fr.name_chatFolders ?? ""}
@@ -508,12 +508,12 @@ console.log(friends)
           <input value={ searchTerm}    onChange={handleSearchChange} type="text" />
         </div>
 
-        {!isSearching && isSms.map((smss) => (
+        {!isSearching && isSms?.map((smss) => (
           <CrElChats key={smss.id_chat} sms={smss} />
         ))}
 
       </ul>
-      {isSearching && filteredFriends.map((friend)=>(  <li
+      {isSearching && filteredFriends?.map((friend)=>(  <li
                 key={friend.id}
                 className={styles.div_chats}
                  onClick={() => {

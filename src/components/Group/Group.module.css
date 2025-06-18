@@ -19,11 +19,6 @@
   cursor: pointer;
 }
 
-.div_groups_elem img {
-  width: 9vw;
-  max-width: 80px;
-  padding-left: 20px;
-}
 
 .div_groups_elem:last-child {
   border-bottom: none;
@@ -97,4 +92,13 @@ width: 100%;
     outline: none;
     border: none;
 
+}
+
+.groupPhoto {
+  width: 90px;              /* Размер изображения (можно настроить) */
+  height: 90px;             /* Размер изображения (можно настроить) */
+  object-fit: cover;         /* Обрезает изображение по размеру контейнера */
+  border-radius: 50%;        /* Сделать изображение круглым */
+  border: 3px solid #fff;    /* Белая рамка вокруг изображения */
+  object-position: center;   /* Центрирует изображение внутри контейнера */
 }

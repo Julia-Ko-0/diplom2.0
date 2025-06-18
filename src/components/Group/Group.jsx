@@ -23,7 +23,7 @@ const Group = () => {
         setFilteredGroups([]);
       });
   }, []);
-
+console.log(groups)
   useEffect(() => {
     const filtered = groups.filter(group =>
       group.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -53,10 +53,11 @@ const Group = () => {
               key={group.id_group}
               onClick={() => navigate("/us/group_info", { state: group })}
             >
-              <img
-                src={group.profile_picture ? group.profile_picture : fallbackImg}
-                alt={group.name}
-              />
+             <img
+  className={styles.groupPhoto}
+  src={group.group_photo_base64 ? group.group_photo_base64 : fallbackImg}
+  alt={group.name}
+/>
               <div>
                 <p>{group.name}</p>
                 <p className={styles.description}>

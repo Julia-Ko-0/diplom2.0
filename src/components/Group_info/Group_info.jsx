@@ -1,10 +1,19 @@
 import styles from "./Group_info.module.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { addGrouptous, createPostGroup, getGroupInfo, getGroupInfo2, getGroupPosts, getGroupUsHandler, getUserRolesInGroup, UnsubscribeFromGroupHandler } from "../../hooks/api";
+import {
+  addGrouptous,
+  createPostGroup,
+  getGroupInfo,
+  getGroupInfo2,
+  getGroupPosts,
+  getGroupUsHandler,
+  getUserRolesInGroup,
+  UnsubscribeFromGroupHandler,
+} from "../../hooks/api";
 import { ModalEdit } from "./ModalEdit";
 
-function ModalPost({ setModal ,id_gr}) {
+function ModalPost({ setModal, id_gr }) {
   const [formData, setFormData] = useState({
     header: "",
     text_post: "",
@@ -41,15 +50,14 @@ function ModalPost({ setModal ,id_gr}) {
   };
 
   const handleSubmit = async () => {
- 
-
-    try {
+ if(formData.header !='' ||  formData.text_post != ''  || formData.fale_post!= ''){
+     try {
       // Отправка поста на сервер
       await createPostGroup({
         group_id: id_gr,
-        header:  formData.header,
-    text_post: formData.text_post,
-    fale_post: formData.fale_post,
+        header: formData.header,
+        text_post: formData.text_post,
+        fale_post: formData.fale_post,
       });
       console.log("Пост успешно создан!");
       setFormData({ header: "", text_post: "", fale_post: "" });
@@ -58,6 +66,9 @@ function ModalPost({ setModal ,id_gr}) {
       console.error("Ошибка при создании поста:", err);
       alert("Ошибка при создании поста");
     }
+ }else{
+  alert("Нужно что-то написать или прекрепить файл")
+ }
   };
 
   return (
@@ -136,128 +147,162 @@ function ModalPost({ setModal ,id_gr}) {
 }
 
 export const Group_info = () => {
-    const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(false);
   const [modalEdit, setmodalEdit] = useState(false);
 
-    
   const { state } = useLocation();
   const [groupInfo, setGroupInfo] = useState(null);
   const [posts, setPosts] = useState([]);
-   const [role, setRole] = useState({});
-      const [role_, setRole_] = useState({});
-        const [isLoading, setLoading] = useState(true);
+  const [role, setRole] = useState({});
+  const [role_, setRole_] = useState({});
+  const [isLoading, setLoading] = useState(true);
+  const [feauteres_us, setfeauteres_us] = useState([]);
+
   useEffect(() => {
-console.log(state.id_group??state.id)
-const id = state.id_group??state.id
+    // console.log(state.id_group ?? state.id);
+    const id = state.id_group ?? state.id;
     // getGroupInfo(id)
     //   .then((data) => setGroupInfo(data))
     //   .catch((error) => {
     //     console.error("Ошибка при получении:", error.message);
     //     setGroupInfo(null);
     //   });
-        getGroupInfo2(id)
+    getGroupInfo2(id)
       .then((data) => setGroupInfo(data))
       .catch((error) => {
         console.error("Ошибка при получении:", error.message);
         setGroupInfo(null);
       });
-          getGroupPosts(state?.id_group??state.id)
+    getGroupPosts(state?.id_group ?? state.id)
       .then((data) => setPosts(data.posts))
       .catch((error) => {
         console.error("Ошибка при получении :", error.message);
         setPosts([]);
       });
-      getUserRolesInGroup(state?.id_group??state.id)
+    getUserRolesInGroup(state?.id_group ?? state.id)
       .then((data) => setRole(data))
       .catch((error) => {
         console.error("Ошибка при получении :", error.message);
         setRole([]);
       });
-      getGroupUsHandler(id)
-            .then((data) => setRole_(data))
+    getGroupUsHandler(id)
+      .then((data) => setRole_(data))
       .catch((error) => {
         console.error("Ошибка при получении :", error.message);
         setRole([]);
       });
-  }, [modal,isLoading]);
-// console.log(state)
-console.log(groupInfo)
-console.log(role)
-console.log(role_)
+  }, [modal, isLoading]);
+  // console.log(state)
+
+  useEffect(() => {
+    const allFeatures = [];
+
+    role?.roles?.map((roleItem) => {
+      roleItem?.role_features?.forEach((feature) => {
+        // Проверяем на уникальность по ID
+             console.log(feature)
+                  console.log("dlfkdkfjdi")
+         allFeatures.push(feature);
+    
+        if (!allFeatures.some((f) => f.feature_id === feature.feature_id)) {
+          allFeatures.push(feature);
+        }
+      });
+    });
+
+
+    setfeauteres_us(allFeatures);
+  }, [role]);
+
+  // console.log(groupInfo);
+  // console.log(role);
+  // console.log(role_);
+  // console.log();
   // if (!groupInfo) {
   //   return <p className={styles.loading}>Загрузка информации о группе...</p>;
   // }
 
-  const handleAdd= () => {
-
-    const id = state.id_group??state.id
-    addGrouptous(id).catch((err) => console.log("ошибка ",err));
-    setLoading(!isLoading)
+  const handleAdd = () => {
+    const id = state.id_group ?? state.id;
+    addGrouptous(id).catch((err) => console.log("ошибка ", err));
+    setLoading(!isLoading);
   };
-    const handleDel= () => {
-
-    const id = state.id_group??state.id
-    UnsubscribeFromGroupHandler(id).catch((err) => console.log("ошибка ",err));
-       setLoading(!isLoading)
+  const handleDel = () => {
+    const id = state.id_group ?? state.id;
+    UnsubscribeFromGroupHandler(id).catch((err) => console.log("ошибка ", err));
+    setLoading(!isLoading);
   };
-  
+  console.log(feauteres_us)
+  console.log(groupInfo)
   return (
-<div>
+    <div>
       <div className={styles.groupContainer}>
-   
-      <div className={styles.header}>
-        <div className={styles.avatar}>
-          <img
-            src={groupInfo?.owner?.profile_picture || "/imgs/log/Group 25 (2).svg"}
-            alt={groupInfo?.owner?.username}
-          />
+        <div className={styles.header}>
+          <div className={styles.avatar}>
+            <img
+              src={
+     groupInfo?.photo ||
+                "/imgs/log/Group 25 (2).svg"
+              }
+              alt={groupInfo?.owner?.username}
+            />
+          </div>
+          <div className={styles.info}>
+            <h2>{groupInfo?.name}</h2>
+            <p className={styles.description}>
+              {groupInfo?.description || "Описание отсутствует"}
+            </p>
+            {/* <p><strong>Тип:</strong> {groupInfo?.access ? "Приватная" : "Публичная"}</p> */}
+            <p>
+              <strong>Участников:</strong> {groupInfo?.members_count}
+            </p>
+            <p>
+              <strong>Постов:</strong> {groupInfo?.posts_count}
+            </p>
+            <p>
+              <strong>Владелец:</strong> {groupInfo?.owner.username}
+            </p>
+          </div>
+          <div>
+          {(role.is_owner || feauteres_us.some(e => [1, 2, 3, 9].includes(e.feature_id))) && (
+  <button onClick={() => setmodalEdit(true)}>Редактировать</button>
+)}
+          </div>
         </div>
-        <div className={styles.info}>
-          <h2>{groupInfo?.name}</h2>
-          <p className={styles.description}>
-            {groupInfo?.description || "Описание отсутствует"}
-          </p>
-          {/* <p><strong>Тип:</strong> {groupInfo?.access ? "Приватная" : "Публичная"}</p> */}
-          <p><strong>Участников:</strong> {groupInfo?.members_count}</p>
-          <p><strong>Постов:</strong> {groupInfo?.posts_count}</p>
-          <p><strong>Владелец:</strong> {groupInfo?.owner.username}</p>
-        </div>
-        <div>
-          {role.is_owner && <button onClick={()=>setmodalEdit(true)}>Редактировать</button>}
-        </div>
-     
-      </div>
-      {!role.is_owner  && !role_.is_member   &&
-      <div className={styles.btd_div}>
-          <button onClick={()=>handleAdd()}>Подписаться</button>
-      </div>
-}
-      {!role.is_owner  && role_.is_member   &&
-      <div className={styles.btd_div}>
-          <button onClick={()=>handleDel()}>Отприсаться</button>
-      </div>
-}
-      <div className={styles.tagsBlock}>
-        <h3>Теги:</h3>
-        {groupInfo?.tags?.length != 0 ? (
-          <ul className={styles.tagList}>
-            {groupInfo?.tags?.map((tag) => (
-              <li  className={styles.tagItem}>
-                <span className={styles.tagName}>#{tag.name_tag} </span>
-                <span className={styles.tagDescription}>{ tag.description_tag}</span>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Теги не указаны</p>
+        {!role.is_owner && !role_.is_member && (
+          <div className={styles.btd_div}>
+            <button onClick={() => handleAdd()}>Подписаться</button>
+          </div>
         )}
-      
+        {!role.is_owner && role_.is_member && (
+          <div className={styles.btd_div}>
+            <button onClick={() => handleDel()}>Отприсаться</button>
+          </div>
+        )}
+        <div className={styles.tagsBlock}>
+          <h3>Теги:</h3>
+          {groupInfo?.tags?.length != 0 ? (
+            <ul className={styles.tagList}>
+              {groupInfo?.tags?.map((tag) => (
+                <li className={styles.tagItem}>
+                  <span className={styles.tagName}>#{tag.name_tag} </span>
+                  <span className={styles.tagDescription}>
+                    {tag.description_tag}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Теги не указаны</p>
+          )}
+        </div>
+
+        {(role.is_owner || feauteres_us.some(e => [4].includes(e.feature_id))) && (
+          <button onClick={() => setModal(true)}>Добавить пост</button>
+        )}
       </div>
-      
-  {role.is_owner && <button onClick={()=>setModal(true)}>Добавить пост</button>}
-    </div>
- 
-        <div className={styles.postsBlock}>
+
+      <div className={styles.postsBlock}>
         {posts?.length > 0 ? (
           posts?.map((post) => (
             <div key={post.id_post_gr} className={styles.postCard}>
@@ -270,7 +315,9 @@ console.log(role_)
                       className={styles.avatarMini}
                     />
                   )}
-                  <span className={styles.authorName}>{post.author.username}</span>
+                  <span className={styles.authorName}>
+                    {post.author.username}
+                  </span>
                 </div>
                 <span className={styles.postDate}>
                   {new Date(post.dateTime_post_gr).toLocaleString()}
@@ -291,7 +338,9 @@ console.log(role_)
               <div className={styles.postMeta}>
                 {/* <span> {post.views_post} просмотров</span> */}
                 <span>
-                  {post.comments_permission ? "Комментарии разрешены" : "Без комментариев"}
+                  {post.comments_permission
+                    ? "Комментарии разрешены"
+                    : "Без комментариев"}
                 </span>
               </div>
             </div>
@@ -300,8 +349,19 @@ console.log(role_)
           <p>Пока в группе нет постов</p>
         )}
       </div>
-        {modal && <ModalPost setModal={setModal} id_gr={state.id_group??state.id}/>}
-          {modalEdit && <ModalEdit setModal={setmodalEdit} id_gr={state.id_group??state.id} role={role}/>}
-</div>
+      {modal && (
+        <ModalPost setModal={setModal} id_gr={state.id_group ?? state.id} />
+      )}
+      {modalEdit && (
+        <ModalEdit
+          setModal={setmodalEdit}
+          id_gr={state.id_group ?? state.id}
+          role={role}
+          feauteres_us={feauteres_us}
+          groupInfo = {groupInfo}
+         setLoading_={setLoading}
+        />
+      )}
+    </div>
   );
 };

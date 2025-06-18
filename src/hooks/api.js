@@ -112,7 +112,7 @@ export const updatePost = (postId, content) =>
 
 /* 🏷️ Теги */
 export const createTag = (data) => fetchWithAuth("/tags/create", { body: JSON.stringify(data) });
-export const getTags = (groupId) => fetchWithAuth(`/tags/${groupId}`);
+export const getTags = () => fetchWithAuth(`/tags`);
 export const updateTagsInGroup = (data) => fetchWithAuth("/group/update-tags", { body: JSON.stringify(data) });
 
 /* 👾 Стикеры */
@@ -261,7 +261,20 @@ export const UnsubscribeFromGroupHandler = (groupId) =>
 export const getFeaturesInfo = () =>
   fetchWithAuth(`/get-features-info`);
 
-export const removeFeature = ( groupId,feature_id) =>
+export const removeFeature = ( role_id,feature_id) =>
   fetchWithAuth('/remove-feature', {
-body: JSON.stringify({role_group_id:  groupId, feature_id:feature_id})
+body: JSON.stringify({roleGroupID:  role_id, featureID :feature_id})
   })
+export const RemoveRoleGroup = ( groupId) =>
+  fetchWithAuth('/role-group/delete', {
+body: JSON.stringify({role_group_id:  groupId})
+  })
+export const RemoveUserFromRole = ( groupId,user_is_to_remove) =>
+  fetchWithAuth('/roles/remove-user', {
+body: JSON.stringify({role_group_id:  groupId, user_id_to_remove:user_is_to_remove})
+  })
+  export const UpdateGroupInfo = (data) =>
+  fetchWithAuth('/group/update', {
+body: JSON.stringify(data)
+  })
+

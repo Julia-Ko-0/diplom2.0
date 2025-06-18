@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Group_info.module.css';
 import { ModalEditAll } from './Modal/ModalEditAll';
 import { ModalEditRoleAdmin } from './Modal/ModalEditRoleAdmin';
 import { ModalEditRole } from './Modal/ModalEditRole';
 
-export const ModalEdit = ({ setModal, id_gr,role}) => {
+export const ModalEdit = ({ setModal, id_gr,role,feauteres_us,groupInfo,setLoading_}) => {
+
   const [formData, setFormData] = useState({
     header: '',
     text_post: '',
@@ -55,18 +56,18 @@ export const ModalEdit = ({ setModal, id_gr,role}) => {
   const renderContent = () => {
     switch (activeTab) {
       case 'all':
-      return( <ModalEditAll role={role}/>)
+      return( <ModalEditAll role={role} feauteres_us={feauteres_us} groupInfo={groupInfo} setLoading_={setLoading_}/>)
 
       case 'role':
-        return( <ModalEditRoleAdmin role={role}/>)
+        return( <ModalEditRoleAdmin role={role} feauteres_us={feauteres_us}/>)
 
       case 'editRole':
-       return( <ModalEditRole role={role}/>)
+       return( <ModalEditRole role={role} feauteres_us={feauteres_us}/>)
       default:
         return <p>Выберите вкладку</p>;
     }
   };
-
+console.log(feauteres_us)
   return (
     <div className={styles.modal_overlay}>
       <div
@@ -96,13 +97,13 @@ export const ModalEdit = ({ setModal, id_gr,role}) => {
         </div>
 
         <div className={styles.forder_div} id="scrollable">
-          <button
+  { (role.is_owner || feauteres_us.some(e => [9].includes(e.feature_id)))    &&   <button
             className={activeTab === 'all' ? styles.active : styles.tab}
             onClick={() => setActiveTab('all')}
           >
             Главное
           </button>
-
+}
 
           <button
             className={activeTab === 'editRole' ? styles.active : styles.tab}
