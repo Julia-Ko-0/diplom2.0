@@ -225,7 +225,7 @@ useEffect(()=>{
 
       {modal && <InfoChat setModal={setModal} infoChat={state.sms} setModal_add_user={setModal_add_user} setInfoChat={setInfoChat}/>}
          {
-        modal_add_user && <AddUserChat menuRef_add_user={menuRef_add_user} isInfo={isInfo}/>
+        modal_add_user && <AddUserChat menuRef_add_user={menuRef_add_user} isInfo={isInfo} id_c={id}/>
       }
     </div>
   );

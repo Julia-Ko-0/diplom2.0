@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { getFriendsList } from '../../../hooks/api';
+import { AddUsC, getFriendsList } from '../../../hooks/api';
 import styles from './Add_userChat.module.css'
 
 let img_p = "/imgs/log/Group 25 (2).svg";
 
-export const AddUserChat = ({menuRef_add_user,isInfo})=>{
+export const AddUserChat = ({menuRef_add_user,isInfo,id_c})=>{
     const [isFriends,setFriends] = useState([])
 
     useEffect(()=>{
@@ -15,14 +15,14 @@ getFriendsList()
         setFriends({});
       });
 },[])
-  const handleSubmit = async (friendId) => {
-//     try {
-//       await 
-//     // setLoad(p=>!p)
-//     } catch (err) {
-//       console.error('Ошибка при удалении друга:', err);
-//       alert('Ошибка при удалении друга');
-//     }
+  const handleSubmit = async (riendId) => {
+    try {
+      await AddUsC(id_c,riendId)
+    // setLoad(p=>!p)
+    } catch (err) {
+      console.error('Ошибкa:', err);
+      alert('Ошибка ');
+    }
   };
 
 
@@ -43,7 +43,10 @@ getFriendsList()
            
                 {
                     isInfo.some((infoUser) => infoUser.user_id === e.id) ? <p style={{fontSize:"15px",marginTop:"auto",color:"var(--date-color)"}}> уже есть в чате </p> : <div>
-                        <button onClick={()=>handleSubmit(e?.id)}>Добавить</button>
+                        <button onClick={()=>{
+                            handleSubmit(e?.id)
+                           
+                        }}>Добавить</button>
                     </div>
                     // e.id == 
                     ///вот тут isInfo

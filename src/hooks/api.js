@@ -286,3 +286,10 @@ body: JSON.stringify({
 })
   })
 
+  export const AddUsC = (cg_id,us_id) =>
+  fetchWithAuth('/addUsChat', {
+body: JSON.stringify({
+  chat_id: cg_id,
+  user_id: us_id,
+
+  })})
