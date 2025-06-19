@@ -34,7 +34,7 @@ console.log(groups)
   return (
         <div className={styles.all_chast_div}>
       
- 
+    
 
         <div className={styles.input_div}>
           <input value={ searchTerm}         placeholder="Поиск групп"     onChange={(e) => setSearchTerm(e.target.value)} type="text" />

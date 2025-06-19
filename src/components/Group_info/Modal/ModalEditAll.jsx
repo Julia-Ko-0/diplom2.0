@@ -76,6 +76,7 @@ console.log({
     }
   };
 
+const fallbackImg = "/imgs/log/Group 25 (2).svg";
   const toggleTagSelection = (tagId) => {
     setSelectedTags((prev) =>
       prev.includes(tagId) ? prev.filter((id) => id !== tagId) : [...prev, tagId]
@@ -92,16 +93,16 @@ console.log({
               Сохранить
             </button>
           </div>
- <img src={groupInfo?.group_photo_base64}></img>
+ {/* <img src={groupInfo?.group_photo_base64 }></img> */}
           {/* Если картинка есть, показываем её, если нет — заглушка */}
           <div className={styles.imageWrapper}>
            
             <label htmlFor="avatar-upload" className={styles.avatar_label}>
               <img
                 className={styles.img_avatar}
-                src={preview } // Отображаем выбранную картинку
+                src={preview || fallbackImg} // Отображаем выбранную картинку
                 alt="Group Avatar"
-                style={preview ? { objectFit: "cover", borderRadius: "50%" } : {}}
+                style={preview ? { objectFit: "cover", borderRadius: "50%"  } : {}}
               />
             </label>
             <input

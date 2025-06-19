@@ -2,7 +2,7 @@ import { post } from "../../data/elem";
 import { NavLink, Outlet, useLocation } from "react-router";
 import styles from "./menu.module.css";
 import { Link } from "react-router-dom";
-import { createPost } from "../../hooks/api";
+import { addGroup, createPost } from "../../hooks/api";
 import { useState } from "react";
 
 function CrElFavorit() {
@@ -46,14 +46,14 @@ function ModalPost({ setModal }) {
   };
 
   const handleSubmit = async () => {
-    if (!formData.header || !formData.text_post) {
+    if (!formData.header && !formData.text_post && !formData.fale_post) {
       alert("Заполните заголовок и текст поста");
       return;
     }
 
     try {
       await createPost(formData);
-      alert("Пост успешно создан!");
+      setModal(false)
       // Очистить форму при необходимости:
       setFormData({ header: "", text_post: "", fale_post: "" });
       setImagePreview(null);
@@ -138,6 +138,142 @@ function ModalPost({ setModal }) {
     </div>
   );
 }
+function ModalGroup({ setModal }) {
+  const [formData, setFormData] = useState({
+    header: "",
+    text_post: "",
+    fale_post: "", // base64 image
+  });
+
+  const [imagePreview, setImagePreview] = useState(false);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64 = reader.result;
+        setImagePreview(base64);
+        setFormData((prev) => ({ ...prev, fale_post: base64 }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64 = reader.result;
+        setImagePreview(base64);
+        setFormData((prev) => ({ ...prev, fale_post: base64 }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!formData.header ) {
+      alert("Заполните название");
+      return;
+    }
+
+    try {
+      await addGroup({
+         name: formData.header,            // string
+  type_gr_id: 1,                      // number (int)
+  description: formData.text_post, // string | null
+  photo_base64: null
+        
+      });
+     
+      // Очистить форму при необходимости:
+      setFormData({ header: "", text_post: "", fale_post: "" });
+      setImagePreview(null);
+      setModal(false)
+    } catch (err) {
+      console.error("Ошибка при создании поста:", err);
+      alert("Ошибка при создании поста");
+    }
+  };
+
+  return (
+    <div className={styles.modal_overlay}>
+      <div
+        className={styles.div_add_post}
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={handleDrop}
+      >
+        <div className={styles.div_header_modal}>
+          <p>Создать группу</p>
+          {/* <button onClick={handleSubmit}> */}
+          <button
+            onClick={() => {
+              setModal(false);
+              console.log(formData);
+            }}
+          >
+            <svg
+              width="43"
+              height="37"
+              viewBox="0 0 43 37"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 1C4.62339 4.53502 14.3547 12.8719 24.0099 21M24.0099 21C30.7425 26.6678 37.4381 32.2341 42 36L24.0099 21ZM42 1L1 36"
+                stroke="black"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <input
+          className={styles.input_header}
+          placeholder="Название"
+          value={formData.header}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, header: e.target.value }))
+          }
+        />
+        <input
+          className={styles.input_header}
+          placeholder="Описание"
+          value={formData.text_post}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, text_post: e.target.value }))
+          }
+        />
+
+        {/* <label className={styles.upload_button}>
+          Загрузить изображение
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            hidden
+          />
+        </label> */}
+
+        {/* {imagePreview && (
+          <img
+            src={imagePreview}
+            alt="Preview"
+            className={styles.image_preview}
+          />
+        )} */}
+        <div className={styles.div_button}>
+          <button onClick={() => handleSubmit()}>Опубликовать</button>
+        </div>
+      </div>
+    </div>
+  );
+}
 const Menu = () => {
   const location = useLocation();
   const ishomeActive =
@@ -147,6 +283,7 @@ const Menu = () => {
   const isChatsActive =
     location.pathname === "/us/chats" || location.pathname === "/us/chatsms";
   const [modal, setModal] = useState(false);
+    const [modalG, setModalG] = useState(false);
   return (
     <div className={styles.div_}>
       <div className={styles.div_home}>
@@ -230,6 +367,30 @@ const Menu = () => {
               Создать пост
             </button>
           </div>
+             <div className={styles.btn_modal}>
+            <button
+              onClick={() => {
+                setModalG(true);
+              }}
+            >
+              <svg
+                width="auto"
+                height="auto"
+                viewBox="0 0 44 44"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21.507 43L21.5 1M1 21.4999H43"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Создать группу
+            </button>
+          </div>
         </div>
         <div className={styles.posts}>
           <Outlet />
@@ -239,6 +400,7 @@ const Menu = () => {
         </div> */}
       </div>
       {modal && <ModalPost setModal={setModal} />}
+      {modalG && <ModalGroup setModal={setModalG} />}
       {/* <div className={styles.modal_overlay}>
         <div className={styles.div_add_post}>
           <div className={styles.div_header_modal}>
