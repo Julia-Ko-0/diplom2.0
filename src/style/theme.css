@@ -1,7 +1,39 @@
 body[data-theme="dark"] {
-  --bg-color: white;
-  --text-color: black;
+  --bg-color: #1e1e1e;
+  --bg-color2: #2a2a2a;
+  --bg-color-novbar: #33363f;
+  --border-color: #3a3a3a;
+  --element-select: #5c9eff;
+  --text-color: #f1f1f1;
+  --border-color-input: #5c9eff;
+  --border-color-forder: #5c9eff;
+  --bg-color-forder: none;
+  --text-color-forder: #e0e0e0;
+  --bg-color-inpus_chat: #2a2a2a;
+  --bg-color-sms_chat: #2a2a2a;
+  --bg-color-sms_last_chat: #3b3b3b;
+  --bg-color-heder_chat: #1e1e1e;
+  --svg-color: #aaaaaa;
+  --bg-color-inpus_chat-focus: #383838;
+  --svg-color-full: none;
+  --svg-color-full2: #ffffff;
+  --button-color: #2a2a2a;
+  --button-border-color: #444;
+  --bg-color-hover-element: #5c9eff;
+  --bg-color-hover-element2: #476fa5;
+  --button-hover: #333;
+  --date-color: #808080;
+  --bg-color-modal: #2e2e2e;
+  --bg-color-sms: #2a2a2a;
+  --text-color-description: #bbbbbb;
+
+  --checkbox-bg-color: #3a3a3a;
+  --checkbox-border-color: #5c5c5c;
+  --checkbox-checked-bg-color: #5c9eff;
+  --checkbox-checked-border-color: #4a8ad4;
+  --checkbox-hover-bg-color: #4a4a4a;
 }
+
 
 body[data-theme="light"] {
   --bg-color: #fbfcf4;
@@ -38,23 +70,38 @@ body[data-theme="light"] {
   --checkbox-hover-bg-color: #c8c8c8; /* Цвет фона чекбокса при наведении */
 
 }
-/* body[data-theme="light"] {
-  --bg-color: #fbfcf4;
-  --bg-color2: #ffffff;
-  --bg-color-novbar: #ffffff;
-  --border-color: #dfdfdf;
-  --text-color: #2b2d30;
-} */
-/* body[data-theme="light"] {
-  --bg-color: #fcfffa;
-  --bg-color2: #CEFFFD;
-  --bg-color-novbar: #CEFFFD;
-  --text-color: #2b2d30;
-} */
-
 body[data-theme="color"] {
   --bg-color: #C1E8FF;
-  --bg-color2: #C1CFFF;
-  --bg-color-novbar:#A8B6E5;
+  --bg-color2: #D4C1FF;
+  --bg-color-novbar: #A8B6E5;
+  --border-color: #b6cfff;
+  --element-select: #9f6eed;
   --text-color: #2b2d30;
+  --border-color-input: #a78bfa;
+  --border-color-forder: #a78bfa;
+  --bg-color-forder: none;
+  --text-color-forder: #2b2d30;
+  --bg-color-inpus_chat: #ffffff;
+  --bg-color-sms_chat: #ffffff;
+  --bg-color-sms_last_chat: #d4c1ff;
+  --bg-color-heder_chat: #f3f0ff;
+  --svg-color: #7e6edb;
+  --bg-color-inpus_chat-focus: #f8f4ff;
+  --svg-color-full: none;
+  --svg-color-full2: #4b0082;
+  --button-color: #ffffff;
+  --button-border-color: #b6cfff;
+  --bg-color-hover-element: #a78bfa;
+  --bg-color-hover-element2: #c1b6ff;
+  --button-hover: #e2ddff;
+  --date-color: #8fa9ff;
+  --bg-color-modal: #e7f1ff;
+  --bg-color-sms: #f0f5ff;
+  --text-color-description: #5c5c5c;
+
+  --checkbox-bg-color: #d2d2ff;
+  --checkbox-border-color: #a8a8ff;
+  --checkbox-checked-bg-color: #a78bfa;
+  --checkbox-checked-border-color: #a78bfa;
+  --checkbox-hover-bg-color: #c1b6ff;
 }

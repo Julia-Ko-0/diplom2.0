@@ -129,7 +129,7 @@ export const NovBar = () => {
               <div
                 className={styles.div_novbar_menu_elem}
                 onClick={() => {
-                  navigate("/us/settings/akk");
+                  navigate("/us/settings/appearance");
                   setMenuOpen(false);
                 }}
               >

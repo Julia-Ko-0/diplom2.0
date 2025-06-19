@@ -278,3 +278,11 @@ body: JSON.stringify({role_group_id:  groupId, user_id_to_remove:user_is_to_remo
 body: JSON.stringify(data)
   })
 
+  export const ToggleLikePost = (post_id,type_gr) =>
+  fetchWithAuth('/posts/like/toggle', {
+body: JSON.stringify({
+  post_id:post_id,
+  type_post:type_gr
+})
+  })
+
