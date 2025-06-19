@@ -125,7 +125,9 @@ export const sendStickerToUser = (data) => fetchWithAuth("/sticker/send", { body
 export const getRolesInfoForGroup = (groupId) => fetchWithAuth(`/groups/${groupId}/roles-list`);
 
 /* 💬 Комментарии */
-export const getComments = (postId) => fetchWithAuth(`/comments?post_id=${postId}`);
+export const getComments = (postId, t_p = "user") => {
+  return fetchWithAuth(`/comments?post_id=${postId}&type=${t_p}`);
+};
 export const toggleLikeComment = (commentId) => fetchWithAuth("/toggle_like_comment", { body: JSON.stringify({ comment_id: commentId }) });
 
 /* ✨ Уведомления и избранное */
@@ -163,8 +165,8 @@ export const addGroup = (data) =>
 export const getGroupPosts = (groupId) =>
   fetchWithAuth(`/group/${groupId}/posts`);
 
-export const addCommentToGroupPost = (groupId, data) =>
-  fetchWithAuth(`/group/${groupId}/add-post-comment`, { body: JSON.stringify(data) });
+// export const addCommentToGroupPost = (groupId, data) =>
+//   fetchWithAuth(`/group/${groupId}/add-post-comment`, { body: JSON.stringify(data) });
 
 export const addUserToGroupBlacklist = (groupId, userId) =>
   fetchWithAuth(`/group/${groupId}/blacklist/add`, { body: JSON.stringify({ user_id: userId }) });
@@ -293,3 +295,23 @@ body: JSON.stringify({
   user_id: us_id,
 
   })})
+
+  export const addCommentToGroupPost = (post_id,  text) =>
+  fetchWithAuth('/group/comment/add ', {
+    method: 'POST',
+    body: JSON.stringify({
+      post_id:post_id,
+      comment_text: text,
+ 
+    }),
+  });
+
+export const addCommentToUserPost = (post_id,  text) =>
+  fetchWithAuth('/user/comment/add', {
+    method: 'POST',
+    body: JSON.stringify({
+      post_id:post_id,
+      text: text,
+  
+    }),
+  });

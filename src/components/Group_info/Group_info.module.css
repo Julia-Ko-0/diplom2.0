@@ -358,3 +358,41 @@ background-color: var(--bg-color2);
     fill: var(--svg-color);
     stroke: var(--svg-color); 
 }
+.elem_post_btn_el {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 60px;
+}
+.elem_post_btn svg{
+ fill: var(--svg-color-full);
+ stroke: var(--svg-color);
+ stroke-width: 2px;
+}
+.elem_post_btn{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 5px;
+    justify-content: center;
+    justify-items: center;
+
+}
+.elem_post_btn svg{
+ fill: var(--svg-color-full);
+ stroke: var(--svg-color);
+ stroke-width: 2px;
+}
+
+.elem_post_btn svg{
+    margin: 0px auto 0px auto;
+    width: 25px;
+}
+.elem_post_btn_el{
+    display: flex;
+    align-content: center;
+    align-items: center;
+     cursor: pointer;
+    width: 60px;
+}

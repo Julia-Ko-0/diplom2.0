@@ -1,6 +1,6 @@
 import styles from "./Group_info.module.css";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   addGrouptous,
   createPostGroup,
@@ -331,6 +331,7 @@ console.log(state)
 
 
 const PostC=({post})=>{
+      const navigate = useNavigate();
      const [isLiked, setIsLiked] = useState(post.isLiked || false); // Track if the post is liked
       const [likesCount, setLikesCount] = useState(0); // Track the like
       console.log(post)
@@ -385,7 +386,8 @@ const PostC=({post})=>{
 
               <div className={styles.postMeta}>
                 {/* <span> {post.views_post} просмотров</span> */}
-                       <div className={styles.elem_post_btn_el} onClick={()=>{
+        {/* <div className={styles.elem_post_btn}>
+        <div className={styles.elem_post_btn_el} onClick={()=>{
             handleSubmit(post)
         }}>
    <svg
@@ -399,6 +401,25 @@ const PostC=({post})=>{
         </svg>
 <p>{likesCount}</p>
         </div>
+             <div className={styles.elem_post_btn_el} onClick={()=>{
+              
+       navigate(`/us/home/post/${post.id_post_gr}`,{state:{post}});
+             }}>
+           <svg style={{marginTop:'5px'}}
+          width="44"
+          height="40"
+          viewBox="0 0 44 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M40.9 1H38.8H15.7H5.2H3.1C1.42 1 1 2.45833 1 3.1875V25.0625C1 26.8125 2.4 27.25 3.1 27.25H9.4V36L15.7 27.25H40.9C42.58 27.25 43 25.7917 43 25.0625V3.1875C43 1.4375 41.6 1 40.9 1Z" />
+          <path d="M5.2 1H15.7M15.7 1H38.8H40.9C41.6 1 43 1.4375 43 3.1875C43 4.9375 43 18.5 43 25.0625C43 25.7917 42.58 27.25 40.9 27.25C39.22 27.25 23.4 27.25 15.7 27.25L9.4 36V27.25H3.1C2.4 27.25 1 26.8125 1 25.0625C1 23.3125 1 9.75 1 3.1875C1 2.45833 1.42 1 3.1 1C4.78 1 12.2 1 15.7 1Z" />
+        </svg>
+            <p>{post.comments_count}</p>
+        </div>
+ 
+     
+      </div> */}
                 {/* <span>
                   {post.comments_permission
                     ? "Комментарии разрешены"

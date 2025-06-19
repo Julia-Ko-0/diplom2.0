@@ -3,64 +3,92 @@ import { formatDate } from "../../hooks/homeH";
 import styles from "./Post.module.css";
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import { getComments } from "../../hooks/api";
-function Comm_Elem(){
-  return(
+import { addCommentToGroupPost, addCommentToUserPost, getComments } from "../../hooks/api";
+function Comm_Elem({ com }) {
+  const defaultAvatar = "/imgs/log/Group 25 (2).svg";
+  const avatarSrc =
+    com?.author?.profile_picture && com.author.profile_picture.trim() !== ""
+      ? com.author.profile_picture
+      : defaultAvatar;
+
+  return (
     <div className={styles.div_comm}>
-      <img></img>
-  <div className={styles.elem_post_header}>
-        <img className={styles.elem_post_header_ava} src={ "/imgs/log/Group 25 (2).svg"}></img>
-      
-        <div className={styles.elem_post_h_name}>
-  
-         <div className={styles.elem_post_header_text}> 
-            
-            <span className={styles.h_name}>autor</span>
-            {/* <span className={styles.h_name}>{post.text}</span> */}
-            </div>
-              
-          <div className={styles.elem_post_h_name_datetime}>
-            <p>data</p>
-            {/* <p>21/08/2024</p> */}
-          </div>
+      <img className={styles.comm_avatar} src={avatarSrc} alt="avatar" />
+      <div className={styles.comm_content}>
+        <div className={styles.comm_header}>
+          <span className={styles.comm_username}>{com.author.username}</span>
+          <span className={styles.comm_date}>{formatDate(com.date_time)}</span>
         </div>
-        <img
-          className={styles.elem_post_header_btn}
-          src="../imgs/Home/Group 8.svg"
-        ></img>
+        <div className={styles.comm_text}>{com.text}</div>
       </div>
     </div>
-  )
+  );
 }
 function Post() {
   const {id_post} = useParams()
     const { state } = useLocation();
   // const id = route.params.id_post
   console.log(id_post)
-    console.log(state.post)
+    
         const post = state.post
+        console.log()
+        const type_post = post?.post_type || 'group' 
     const [com, setCom] = useState([]);
+       const [loading, setLoading] = useState(false);
     useEffect(()=>{
-      getComments(id_post)
+      getComments(id_post,type_post)
                 .then((data) => {
-                  console.log("Посты пользователя:", data);
-                  setCom(data);
+                  console.log("Коментарии:", data.comments);
+                  setCom(data.comments);
                 })
                 .catch((error) => {
-                  console.error("Ошибка при получении постов:", error.message);
+                  console.error("Ошибка при получении :", error.message);
                       setCom([])
                 })
-    },[])
-//   console.log(post.fale_post);
+    },[loading])
+  console.log(com);
+
+
+  const [commentText, setCommentText] = useState("");
+const handleSendComment = async () => {
+  // if (!commentText.trim()) return;
+console.log(post)
+console.log(commentText)
+  try {
+    if (post?.post_type === "group") {
+      await addCommentToGroupPost(post.post_id, commentText);
+      
+    // setCommentText("");
+    setLoading(p=>!p)
+    } else if (post?.post_type === "user") {
+      console.log(post.post_id,commentText)
+      await addCommentToUserPost(post.post_id,commentText);
+      
+    // setCommentText("");
+    setLoading(p=>!p)
+    } else {
+      
+        // await addCommentToGroupPost(Number(id_post),commentText);
+      
+    setLoading(p=>!p)
+    }
+
+  } catch (err) {
+    console.error("Ошибка при добавлении комментария:", err);
+  }
+};
+
+
+
   return (
 
       <div className={styles.elem_post}>
-     <button>dsfsd</button>
+     {/* <button>dsfsd</button> */}
    <div className={styles.post_comm_div_post}>
         
        <div className={styles.elem_post_header}>
        
-        <img className={styles.elem_post_header_ava} src={post.author.profile_picture == '' || post.author.profile_picture == ''? "/imgs/log/Group 25 (2).svg" :post.author.profile_picture}></img>
+        <img style={{width:"60px",height:"60px"}} className={styles.elem_post_header_ava} src={post.author.profile_picture == '' || post.author.profile_picture == ''? "/imgs/log/Group 25 (2).svg" :post.author.profile_picture}></img>
       
         <div className={styles.elem_post_h_name}>
           
@@ -120,7 +148,7 @@ function Post() {
             <p>{post.comments_count}</p>
         </div>
              <div className={styles.elem_post_btn_el}>
-             <svg
+             {/* <svg
           width="38"
           height="40"
           viewBox="0 0 38 40"
@@ -131,7 +159,7 @@ function Post() {
           <path d="M15.8321 2.48197L17.6875 13.922C15.2929 11.619 13.2289 10.5884 10.9435 10.1049C8.9451 9.68214 6.77741 9.67774 4.07142 9.60673L15.8321 2.48197Z" />
           <path d="M26.9135 30.4226C28.8713 30.9645 31.0351 31.0999 33.7305 31.3341L21.3565 37.7214L20.5189 26.2125C22.7054 28.6515 24.6747 29.8029 26.9135 30.4226ZM26.9135 30.4226C28.6659 28.7705 32.7715 24.3834 35.1751 20.052C37.5787 15.7207 36.9791 11.9795 36.3789 10.6503C34.498 7.28961 29.2707 1.18421 23.4082 3.64839M10.9435 10.1049C8.9451 9.68213 6.77742 9.67774 4.07142 9.60673L15.8321 2.48197L17.6875 13.922C15.2929 11.619 13.2289 10.5884 10.9435 10.1049ZM10.9435 10.1049C9.34434 11.8603 5.64338 16.4884 3.63309 20.9581C1.62281 25.4279 2.55196 29.1269 3.26782 30.4177C5.43971 33.6594 11.1889 39.4393 16.8107 36.6248" />
         </svg>
-           <p>{post.repost}</p>
+           <p>{post.repost}</p> */}
         </div>
      
        
@@ -139,12 +167,26 @@ function Post() {
       </div>
    </div>
   <div>
-     <input></input><button></button>
+    <div className={styles.comment_input_wrapper}>
+  <input
+    className={styles.comment_input}
+    type="text"
+    placeholder="Напишите комментарий..."
+    value={commentText}
+    onChange={(e) => setCommentText(e.target.value)}
+  />
+  <button className={styles.comment_button} onClick={handleSendComment}>
+    Отправить
+  </button>
+</div>
   </div>
       <div className={styles.div_com_post}>
-        <Comm_Elem/>
-          <Comm_Elem/>
-            <Comm_Elem/>
+        {
+          com.map((e)=>{
+            return(<Comm_Elem com={e}/>)
+          })
+        }
+    
       </div>
     </div>
  

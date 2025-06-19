@@ -1,109 +1,99 @@
-.posts{
-    /* background-color: rgb(0, 78, 78); */
+.posts {
+    /* background-color: var(--bg-color); */
     width: 100%;
-  margin: 0px;
+    margin: 0px;
 }
-/* .elem_menu{
-    background-color: #000000;
-} */
-.elem_post{
+
+.elem_post {
     display: block;
     margin: 0px auto 30px auto;
-    background-color:  var(--bg-color2);
+    background-color: var(--bg-color2);
     padding: 20px 30px 10px 30px;
     height: auto;
-    border: 1px solid  var(--border-color); /* Параметры рамки */
-    /* max-width: 800px; */
+    border: 1px solid var(--border-color); /* Параметры рамки */
     border-radius: 8px;
-    /* width: 100%; */
-  
 }
-.elem_post_header_ava{
-    margin:  auto 10px auto 10px;
+
+.elem_post_header_ava {
+    margin: auto 10px auto 10px;
     height: 70px;    
     border-radius: 50%;
 }
-.elem_post_header_btn{
+
+.elem_post_header_btn {
     margin: 1px 0px 0px 0px;
-    height: 20px;    
-  
+    height: 20px;
 }
-.elem_post_header{
-    /* margin: auto auto auto 100px; */
-      
+
+.elem_post_header {
     display: flex;
     height: 100px;
     width: 100%;
 }
-.elem_post_header_text{
+
+.elem_post_header_text {
     display: grid;
     padding: 0px 0px 10px 0px;
-  height: 100%;
+    height: 100%;
+
+    /* grid-template-columns: 20% 80%; */
 }
-.h_name{
-    /* margin-top: 30px; */
-}
-.elem_post_h_name{
+
+.elem_post_h_name {
     display: grid;
     width: 100%;
     grid-template-columns: auto 40%;
-    /* height: 50px; */
-    margin:  auto auto auto 10px;
-   
+    margin: auto auto auto 10px;
 }
-/* .elem_post_h_name p {
-    margin-top: px;
-} */
-.elem_post_h_name_datetime{
+
+.elem_post_h_name_datetime {
     display: flex;
-    /* margin-top: -30px; */
-    
 }
-.elem_post_body{
+
+.elem_post_body {
     height: auto;
-        /* max-width: 20vw; */
 }
-.elem_post_body_img{
+
+.elem_post_body_img {
     width: 100%;
     object-fit: cover;
-    /* width: 100px; */
-      /* max-width: 100%; */
     border-radius: 5px;
-    /* border: solid 1px black; */
     max-height: 50vh;
-
-
 }
-.fale_post{
+
+.fale_post {
     width: auto;
 }
-.elem_post_btn{
+
+.elem_post_btn {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     margin-top: 5px;
     justify-content: center;
     justify-items: center;
-
-}
-.elem_post_btn svg{
- fill: var(--svg-color-full);
- stroke: var(--svg-color);
- stroke-width: 2px;
 }
 
-.elem_post_btn svg{
+.elem_post_btn svg {
+    fill: var(--svg-color-full);
+    stroke: var(--svg-color);
+    stroke-width: 2px;
+}
+
+.elem_post_btn svg {
     margin: 0px auto 0px auto;
     width: 25px;
 }
-.elem_post_btn_el{
+
+.elem_post_btn_el {
     display: flex;
     align-content: center;
     align-items: center;
-     cursor: pointer;
+    cursor: pointer;
     width: 60px;
 }
-.forder_div{
+
+.forder_div {
     display: flex;
     border: solid 1px;
     border-color: var(--border-color);
@@ -116,16 +106,16 @@
     width: calc(100% - 10px);
     overflow-x: auto;
     margin-bottom: 10px;
-
 }
-  .forder_div button{
-     
-  display: flex;            /* превращаем кнопку в flex-контейнер */
-  justify-content: center;  /* горизонтальное выравнивание */
-  align-items: center;      /* вертикальное выравнивание */
-  text-align: center;    
-  }
-  .active {
+
+.forder_div button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.active {
     background-color: transparent;
     border: 1px solid var(--border-color-forder);
     border-radius: 8px;
@@ -134,15 +124,14 @@
     cursor: pointer;
     transition: background-color 0.3s;
     height: 30px;
-width: 50%;
+    width: 50%;
     background-color: var(--bg-color-forder); /* Цвет активной вкладки */
-    color:var(--text-color-forder) ;
-    /* font-weight: bold; */
-  }
+    color: var(--text-color-forder);
+}
+
 .tab {
     width: 50%;
     background-color: transparent;
-    /* border: 1px solid #ccc; */
     border-radius: 8px;
     border: none;
     padding: 8px 16px;
@@ -150,67 +139,140 @@ width: 50%;
     cursor: pointer;
     transition: background-color 0.3s;
     height: 30px;
- 
-  }
-  
-  .tab:hover {
-    background-color: #f0f0f0;
-  }
-      .add_posts {
-  display: grid;
-gap: 10px;
-/* grid-template-columns: 70% 30%; */
+}
 
-    /* border-color: var(--border-color); */
-    /* border-radius: 10px; */
-    /* background-color: var(--bg-color2); */
+.tab:hover {
+    background-color: var(--bg-color-hover-element);
+}
+
+.add_posts {
+    display: grid;
+    gap: 10px;
     height: 40px;
     align-items: center; 
     gap: 5px;
     padding: 0px 5px 0px 5px;
-    /* width: calc(100% - 10px); */
-
     margin-bottom: 10px;
-  }
-  .add_posts svg{
-    /* width: 42px; */
-width: 20px;
 }
 
-    .add_posts button:hover{
+.add_posts svg {
+    width: 20px;
+}
 
-  }
-    .add_posts input{
+.add_posts input {
     margin-left: -5px;
     width: calc(100% - 35px);
     padding-left: 40px;
     font-size: 17px;
-
     border: 1px solid var(--border-color);
     border-radius: 7px;
     background: url('../Chats/search-svgrepo-com.svg') no-repeat 10px center;
     background-size: 15px;
     height: 35px;
-       background-color: var(--bg-color2);
-  }
- .add_posts  input:focus{
+    background-color: var(--bg-color2);
+}
+
+.add_posts input:focus {
     outline: none;
     border: 2px solid var(--border-color-input);
-    padding-left: 40px; /* Сохраняем одинаковый отступ */
-    box-sizing: border-box; 
-    width:calc(100% + 10px);
-        /* width: calc(100% - 35px); */
+    padding-left: 40px;
+    box-sizing: border-box;
+    width: calc(100% + 10px);
     height: 100%;
 }
-.post_comm_div_post{
-    border-bottom: 2px solid var(--border-color);
 
+.post_comm_div_post {
+    border-bottom: 2px solid var(--border-color);
 }
-.div_com_post{
-    /* background-color: aqua; */
+
+.div_com_post {
     padding: 20px 0px 20px 0px;
 }
-.div_comm{
-      border-bottom: 2px solid var(--border-color);
 
+.div_comm {
+    border-bottom: 2px solid var(--border-color);
+}
+
+.div_comm {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+    gap: 10px;
+}
+
+.comm_avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comm_content {
+    display: flex;
+    flex-direction: column;
+}
+
+.comm_header {
+    display: flex;
+ 
+    justify-content: space-between;
+    font-size: 14px;
+    gap: 30px;
+    color: var(--date-color);
+}
+
+.comm_username {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.comm_date {
+    margin-left: auto;
+}
+
+.comm_text {
+    margin-top: 4px;
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+.comment_input_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    padding: 10px;
+
+    border-radius: 12px;
+  
+}
+
+.comment_input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.comment_input:focus {
+    border-color: var(--element-select);
+}
+
+.comment_button {
+    padding: 10px 18px;
+    background-color: var(--bg-color-hover-element);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.comment_button:hover {
+    background-color: var(--bg-color-hover-element2);
 }
