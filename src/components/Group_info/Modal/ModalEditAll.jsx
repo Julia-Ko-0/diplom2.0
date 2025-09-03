@@ -8,10 +8,9 @@ export const ModalEditAll = ({ role, groupInfo, feauteres_us, setLoading_ }) => 
   const [selectedTags, setSelectedTags] = useState([]);
   const [modalEdit, setModalEdit] = useState(false);
   const [isTags, setTags] = useState([]);
-  const [newPhoto, setNewPhoto] = useState(null); // Состояние для новой фотографии
   const [preview, setPreview] = useState(  groupInfo?.photo );
-  const [base64Image, setBase64Image] = useState('');
-
+  const [base64Image, setBase64Image] = useState( groupInfo?.photo);
+console.log(groupInfo)
   useEffect(() => {
     if (groupInfo?.tags) {
       setSelectedTags(groupInfo?.tags?.map(tag => tag.id_tag));
@@ -88,14 +87,19 @@ const fallbackImg = "/imgs/log/Group 25 (2).svg";
       {!modalEdit && (
         <div>
           <div className={styles.div_header_edit}>
-            <p>Редактирование группы</p>
+            {/* <p>Редактирование группы</p> */}
             <button className={styles.btn_add} style={{ padding: "10px" }} onClick={handleSubmitSave}>
               Сохранить
             </button>
           </div>
  {/* <img src={groupInfo?.group_photo_base64 }></img> */}
           {/* Если картинка есть, показываем её, если нет — заглушка */}
-          <div className={styles.imageWrapper}>
+    
+
+          <div className={styles.div_}>
+    
+          <div className={styles.div_img_name}>
+                          <div className={styles.imageWrapper}>
            
             <label htmlFor="avatar-upload" className={styles.avatar_label}>
               <img
@@ -113,9 +117,8 @@ const fallbackImg = "/imgs/log/Group 25 (2).svg";
               style={{ display: "none" }}
             />
           </div>
-
-          <div className={styles.div_}>
-            <div className={styles.inputWrapper}>
+                 <div className={styles.div_input}>
+             <div className={styles.inputWrapper}>
               <input
                 type="text"
                 placeholder="Название группы"
@@ -134,6 +137,9 @@ const fallbackImg = "/imgs/log/Group 25 (2).svg";
                 className={styles.input}
               />
             </div>
+     </div>
+
+          </div>
 
             <div className={styles.div_header_edit}>
               <p>Теги</p>
