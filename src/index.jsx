@@ -7,6 +7,7 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './Routes/Routes';
 import { ThemeProvider } from './context/ThemeContext';
 import axios from 'axios';
+import { PostsProvider } from './components/PostaContext/PostaContext';
 
 axios.defaults.withCredentials = true;
 
@@ -16,7 +17,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
   <ThemeProvider>
+    <PostsProvider>   
     <RouterProvider router={router} />
+     </PostsProvider>
   </ThemeProvider>
 </React.StrictMode>
 );
