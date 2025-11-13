@@ -19,7 +19,6 @@ async function logout() {
     }
 
     const result = await response.json();
-    console.log("Успех:", result);
   } catch (err) {
     console.error("Сетевая ошибка:", err);
   }
@@ -56,7 +55,7 @@ export const NovBar = () => {
         setUserIndo({});
       });
   }, []);
-  console.log(isUserInfo);
+
   return (
     <div className={styles.div_novbar}>
       <div className={styles.div_novbar_}>

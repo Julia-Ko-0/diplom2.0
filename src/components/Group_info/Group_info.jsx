@@ -353,7 +353,7 @@ export const PostC = ({ post, groupPhoto, groupName }) => {
       console.error("Ошибка при лайке:", err);
     }
   };
-  console.log(post);
+
   useEffect(() => {
     const scroll = sessionStorage.getItem("scrollPosition");
     if (scroll) window.scrollTo(0, parseInt(scroll, 10));
@@ -366,14 +366,26 @@ export const PostC = ({ post, groupPhoto, groupName }) => {
       state: { post },
     });
   };
-  console.log(post);
+
   return (
     <div key={post.id_post_gr} className={styles.postCard}>
       <div className={styles.postHeader}>
         <div className={styles.authorInfo}>
           <img className={styles.avatarMini} src={groupPhoto}></img>
           <div className={styles.div_group_name}>
-            <span className={styles.groupName}>{groupName}</span>
+            <span
+              className={styles.groupName}
+              onClick={() => {
+                if (post.post_type == "group") {
+                  navigate("/us/group_info", { state: post.group_info });
+                }
+                if (post.post_type == "user") {
+                  navigate("/us/user", { state: post.author });
+                }
+              }}
+            >
+              {groupName}
+            </span>
             {groupName !== post.author.username && (
               <span className={styles.authorName}>{post.author.username}</span>
             )}

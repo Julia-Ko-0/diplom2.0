@@ -21,8 +21,8 @@ export const User = () => {
   const [friendRequestStatus, setFriendRequestStatus] = useState("");
   const [subscriptionStatus, setSubscriptionStatus] = useState("");
   const [posts, setPosts] = useState([]);
-  const userId = state?.id;
-  const userLogin = state?.login;
+  const userId = state?.id ?? state.user_id;
+  const userLogin = state?.login ?? state.username;
   const userMe = state?.me;
 
   useEffect(() => {
@@ -30,11 +30,15 @@ export const User = () => {
 
     getUsersInfo(userLogin)
       .then((data) => setUserInfo(data.user_info))
-      .catch((error) => console.error("Ошибка получения информации:", error.message));
+      .catch((error) =>
+        console.error("Ошибка получения информации:", error.message)
+      );
 
     areFriends(userId)
       .then((data) => setIsFriend(data.are_friends))
-      .catch((error) => console.error("Ошибка получения статуса друзей:", error.message));
+      .catch((error) =>
+        console.error("Ошибка получения статуса друзей:", error.message)
+      );
 
     areFriends_R(userId)
       .then((data) => setFriendRequestStatus(data.status))
@@ -43,14 +47,18 @@ export const User = () => {
     areFriends_Sub(userId)
       .then((data) => setSubscriptionStatus(data.status))
       .catch((error) => console.error("Ошибка подписки:", error.message));
-      // Получаем посты пользователя
-    getUsersPosts(state?.login)
-      .then((data) => setPosts(data.posts))  // Сохраняем посты
-      .catch((error) => console.error("Ошибка получения постов:", error.message));
-    }, [userId, userLogin]);
+    // Получаем посты пользователя
+    getUsersPosts(state?.login ?? state?.username)
+      .then((data) => setPosts(data.posts)) // Сохраняем посты
+      .catch((error) =>
+        console.error("Ошибка получения постов:", error.message)
+      );
+  }, [userId, userLogin]);
 
   const handleSendRequest = () => {
-    sendFriendRequest(userInfo.id_user).catch((err) => alert("Ошибка отправки заявки"));
+    sendFriendRequest(userInfo.id_user).catch((err) =>
+      alert("Ошибка отправки заявки")
+    );
   };
 
   const handleCancelRequest = () => {
@@ -60,80 +68,91 @@ export const User = () => {
   };
 
   const handleAccept = () => {
-    acceptFriendRequest(userInfo.id_user).catch((err) => alert("Ошибка добавления"));
+    acceptFriendRequest(userInfo.id_user).catch((err) =>
+      alert("Ошибка добавления")
+    );
   };
 
   const handleReject = () => {
-    rejectFriendRequest(userInfo.id_user).catch((err) => alert("Ошибка отклонения"));
+    rejectFriendRequest(userInfo.id_user).catch((err) =>
+      alert("Ошибка отклонения")
+    );
   };
 
-return (
-<div>
-    <div className={styles.container}>
-    <img
-      className={styles.img_avatar}
-      src={userInfo?.profile_picture || "/imgs/log/Group 25 (2).svg"}
-      alt="avatar"
-    />
-    <p className={styles.username}>{userInfo.username}</p>
-    <p className={styles.birthdate}>{userInfo.date_birth}</p>
+  return (
+    <div>
+      <div className={styles.container}>
+        <img
+          className={styles.img_avatar}
+          src={userInfo?.profile_picture || "/imgs/log/Group 25 (2).svg"}
+          alt="avatar"
+        />
+        <p className={styles.username}>{userInfo.username}</p>
+        <p className={styles.birthdate}>{userInfo.date_birth}</p>
 
-    {isFriend ? (
-      <div className={styles.status}>
-        <p>Уже в друзьях</p>
-      </div>
-    ) : (
-      <div className={styles.status}>
-        {friendRequestStatus === "false" && subscriptionStatus === "false" && !userMe &&(
-          <div className={styles.actions}>
-            <button onClick={handleSendRequest}>Добавить в друзья</button>
+        {isFriend ? (
+          <div className={styles.status}>
+            <p>Уже в друзьях</p>
+          </div>
+        ) : (
+          <div className={styles.status}>
+            {friendRequestStatus === "false" &&
+              subscriptionStatus === "false" &&
+              !userMe && (
+                <div className={styles.actions}>
+                  <button onClick={handleSendRequest}>Добавить в друзья</button>
+                </div>
+              )}
+            {friendRequestStatus === "me" && (
+              <>
+                <p>Заявка отправлена</p>
+                <div className={styles.actions}>
+                  <button className="secondary" onClick={handleCancelRequest}>
+                    Отменить заявку
+                  </button>
+                </div>
+              </>
+            )}
+            {friendRequestStatus === "he" && (
+              <>
+                <p>Вам пришла заявка</p>
+                <div className={styles.actions}>
+                  <button onClick={handleAccept}>Принять</button>
+                  <button className="secondary" onClick={handleReject}>
+                    Отклонить
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         )}
-        {friendRequestStatus === "me" && (
-          <>
-            <p>Заявка отправлена</p>
-            <div className={styles.actions}>
-              <button className="secondary" onClick={handleCancelRequest}>Отменить заявку</button>
-            </div>
-          </>
-        )}
-        {friendRequestStatus === "he" && (
-          <>
-            <p>Вам пришла заявка</p>
-            <div className={styles.actions}>
-              <button onClick={handleAccept}>Принять</button>
-              <button className="secondary" onClick={handleReject}>Отклонить</button>
-            </div>
-          </>
-        )}
-      </div>
-    )}
 
-    {subscriptionStatus === "me" && (
-      <div className={styles.status}>
-        <p>Вы подписаны</p>
-      </div>
-    )}
-    {subscriptionStatus === "he" && (
-      <div className={styles.status}>
-        <p>У вас в подписчиках</p>
-      </div>
-    )}
+        {subscriptionStatus === "me" && (
+          <div className={styles.status}>
+            <p>Вы подписаны</p>
+          </div>
+        )}
+        {subscriptionStatus === "he" && (
+          <div className={styles.status}>
+            <p>У вас в подписчиках</p>
+          </div>
+        )}
 
-    <div className={styles.stats}>
-      <span>Друзья: {userInfo.friends_count}</span>
-      <span>Подписчики: {userInfo.subscribers_count}</span>
-    </div>
-    
-  </div>
-    <div className={styles.posts}>
+        <div className={styles.stats}>
+          <span>Друзья: {userInfo.friends_count}</span>
+          <span>Подписчики: {userInfo.subscribers_count}</span>
+        </div>
+      </div>
+      <div className={styles.posts}>
         {posts.length > 0 ? (
           posts.map((post) => (
             <div key={post.id} className={styles.elem_post}>
               <div className={styles.elem_post_header}>
                 <img
                   className={styles.elem_post_header_ava}
-                  src={post.author?.profile_picture || "/imgs/log/Group 25 (2).svg"}
+                  src={
+                    post.author?.profile_picture || "/imgs/log/Group 25 (2).svg"
+                  }
                   alt="avatar"
                 />
                 <div className={styles.elem_post_h_name}>
@@ -145,9 +164,14 @@ return (
                 </div>
               </div>
               <div className={styles.elem_post_body}>
-                {post.fale_post && post.fale_post !== 'data:image/png;base64,' && (
-                  <img className={styles.elem_post_body_img} alt="post" src={post.fale_post} />
-                )}
+                {post.fale_post &&
+                  post.fale_post !== "data:image/png;base64," && (
+                    <img
+                      className={styles.elem_post_body_img}
+                      alt="post"
+                      src={post.fale_post}
+                    />
+                  )}
               </div>
               <div className={styles.elem_post_btn}>
                 <div className={styles.elem_post_btn_el}>
@@ -175,7 +199,6 @@ return (
           <p>Посты пока отсутствуют.</p>
         )}
       </div>
-</div>
-);
-
+    </div>
+  );
 };

@@ -53,7 +53,7 @@ function ModalPost({ setModal }) {
 
     try {
       await createPost(formData);
-      setModal(false)
+      setModal(false);
       // Очистить форму при необходимости:
       setFormData({ header: "", text_post: "", fale_post: "" });
       setImagePreview(null);
@@ -175,24 +175,23 @@ function ModalGroup({ setModal }) {
   };
 
   const handleSubmit = async () => {
-    if (!formData.header ) {
+    if (!formData.header) {
       alert("Заполните название");
       return;
     }
 
     try {
       await addGroup({
-         name: formData.header,            // string
-  type_gr_id: 1,                      // number (int)
-  description: formData.text_post, // string | null
-  photo_base64: null
-        
+        name: formData.header, // string
+        type_gr_id: 1, // number (int)
+        description: formData.text_post, // string | null
+        photo_base64: null,
       });
-     
+
       // Очистить форму при необходимости:
       setFormData({ header: "", text_post: "", fale_post: "" });
       setImagePreview(null);
-      setModal(false)
+      setModal(false);
     } catch (err) {
       console.error("Ошибка при создании поста:", err);
       alert("Ошибка при создании поста");
@@ -283,7 +282,7 @@ const Menu = () => {
   const isChatsActive =
     location.pathname === "/us/chats" || location.pathname === "/us/chatsms";
   const [modal, setModal] = useState(false);
-    const [modalG, setModalG] = useState(false);
+  const [modalG, setModalG] = useState(false);
   return (
     <div className={styles.div_}>
       <div className={styles.div_home}>
@@ -296,6 +295,13 @@ const Menu = () => {
                   ? `${styles.elem_menu} ${styles.active}`
                   : styles.elem_menu
               }
+              onClick={() => {
+                {
+                  if (window.scrollY > 0) {
+                    window.scrollTo(0, 0);
+                  }
+                }
+              }}
             >
               Главная
             </NavLink>
@@ -313,7 +319,7 @@ const Menu = () => {
             <NavLink
               to="friends"
               className={({ isActive }) =>
-                isActive ||  location.pathname === '/us/user'
+                isActive || location.pathname === "/us/user"
                   ? `${styles.elem_menu} ${styles.active}`
                   : styles.elem_menu
               }
@@ -324,7 +330,7 @@ const Menu = () => {
             <NavLink
               to="group"
               className={({ isActive }) =>
-                isActive ||  location.pathname === '/us/group_info'
+                isActive || location.pathname === "/us/group_info"
                   ? `${styles.elem_menu} ${styles.active}`
                   : styles.elem_menu
               }
@@ -367,7 +373,7 @@ const Menu = () => {
               Создать пост
             </button>
           </div>
-             <div className={styles.btn_modal}>
+          <div className={styles.btn_modal}>
             <button
               onClick={() => {
                 setModalG(true);

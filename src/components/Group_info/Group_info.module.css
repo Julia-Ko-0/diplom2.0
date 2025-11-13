@@ -140,6 +140,7 @@
 }
 .div_group_name {
   display: grid;
+  cursor: pointer;
 }
 .postDate {
   font-size: 12px;
