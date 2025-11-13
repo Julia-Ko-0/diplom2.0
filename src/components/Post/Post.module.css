@@ -1,278 +1,308 @@
 .posts {
-    /* background-color: var(--bg-color); */
-    width: 100%;
-    margin: 0px;
+  /* background-color: var(--bg-color); */
+  width: 100%;
+  margin: 0px;
 }
 
 .elem_post {
-    display: block;
-    margin: 0px auto 30px auto;
-    background-color: var(--bg-color2);
-    padding: 20px 30px 10px 30px;
-    height: auto;
-    border: 1px solid var(--border-color); /* Параметры рамки */
-    border-radius: 8px;
+  display: block;
+  margin: 0px auto 30px auto;
+  background-color: var(--bg-color2);
+  padding: 20px 30px 10px 30px;
+  height: auto;
+  border: 1px solid var(--border-color); /* Параметры рамки */
+  border-radius: 8px;
 }
 
 .elem_post_header_ava {
-    margin: auto 10px auto 10px;
-    height: 70px;    
-    border-radius: 50%;
+  margin: auto 10px auto 10px;
+  height: 70px;
+  border-radius: 50%;
 }
 
 .elem_post_header_btn {
-    margin: 1px 0px 0px 0px;
-    height: 20px;
+  margin: 1px 0px 0px 0px;
+  height: 20px;
 }
 
 .elem_post_header {
-    display: flex;
-    height: 100px;
-    width: 100%;
+  display: flex;
+  height: 100px;
+  width: 100%;
 }
 
 .elem_post_header_text {
-    display: grid;
-    padding: 0px 0px 10px 0px;
-    height: 100%;
+  display: grid;
+  padding: 0px 0px 10px 0px;
+  height: 100%;
 
-    /* grid-template-columns: 20% 80%; */
+  /* grid-template-columns: 20% 80%; */
 }
 
 .elem_post_h_name {
-    display: grid;
-    width: 100%;
-    grid-template-columns: auto 40%;
-    margin: auto auto auto 10px;
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto 40%;
+  margin: auto auto auto 10px;
 }
 
 .elem_post_h_name_datetime {
-    display: flex;
+  display: flex;
 }
 
 .elem_post_body {
-    height: auto;
+  height: auto;
 }
 
 .elem_post_body_img {
-    width: 100%;
-    object-fit: cover;
-    border-radius: 5px;
-    max-height: 50vh;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  max-height: 50vh;
 }
 
 .fale_post {
-    width: auto;
+  width: auto;
 }
 
 .elem_post_btn {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 5px;
-    justify-content: center;
-    justify-items: center;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 5px;
+  justify-content: center;
+  justify-items: center;
 }
 
 .elem_post_btn svg {
-    fill: var(--svg-color-full);
-    stroke: var(--svg-color);
-    stroke-width: 2px;
+  fill: var(--svg-color-full);
+  stroke: var(--svg-color);
+  stroke-width: 2px;
 }
 
 .elem_post_btn svg {
-    margin: 0px auto 0px auto;
-    width: 25px;
+  margin: 0px auto 0px auto;
+  width: 25px;
 }
 
 .elem_post_btn_el {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: 60px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 60px;
 }
 
 .forder_div {
-    display: flex;
-    border: solid 1px;
-    border-color: var(--border-color);
-    border-radius: 8px;
-    background-color: var(--bg-color2);
-    height: 40px;
-    align-items: center; 
-    gap: 5px;
-    padding: 0px 5px 0px 5px;
-    width: calc(100% - 10px);
-    overflow-x: auto;
-    margin-bottom: 10px;
+  display: flex;
+  border: solid 1px;
+  border-color: var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-color2);
+  height: 40px;
+  align-items: center;
+  gap: 5px;
+  padding: 0px 5px 0px 5px;
+  width: calc(100% - 10px);
+  overflow-x: auto;
+  margin-bottom: 10px;
 }
 
 .forder_div button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .active {
-    background-color: transparent;
-    border: 1px solid var(--border-color-forder);
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    height: 30px;
-    width: 50%;
-    background-color: var(--bg-color-forder); /* Цвет активной вкладки */
-    color: var(--text-color-forder);
+  background-color: transparent;
+  border: 1px solid var(--border-color-forder);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  height: 30px;
+  width: 50%;
+  background-color: var(--bg-color-forder); /* Цвет активной вкладки */
+  color: var(--text-color-forder);
 }
 
 .tab {
-    width: 50%;
-    background-color: transparent;
-    border-radius: 8px;
-    border: none;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    height: 30px;
+  width: 50%;
+  background-color: transparent;
+  border-radius: 8px;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  height: 30px;
 }
 
 .tab:hover {
-    background-color: var(--bg-color-hover-element);
+  background-color: var(--bg-color-hover-element);
 }
 
 .add_posts {
-    display: grid;
-    gap: 10px;
-    height: 40px;
-    align-items: center; 
-    gap: 5px;
-    padding: 0px 5px 0px 5px;
-    margin-bottom: 10px;
+  display: grid;
+  gap: 10px;
+  height: 40px;
+  align-items: center;
+  gap: 5px;
+  padding: 0px 5px 0px 5px;
+  margin-bottom: 10px;
 }
 
 .add_posts svg {
-    width: 20px;
+  width: 20px;
 }
 
 .add_posts input {
-    margin-left: -5px;
-    width: calc(100% - 35px);
-    padding-left: 40px;
-    font-size: 17px;
-    border: 1px solid var(--border-color);
-    border-radius: 7px;
-    background: url('../Chats/search-svgrepo-com.svg') no-repeat 10px center;
-    background-size: 15px;
-    height: 35px;
-    background-color: var(--bg-color2);
+  margin-left: -5px;
+  width: calc(100% - 35px);
+  padding-left: 40px;
+  font-size: 17px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  background: url("../Chats/search-svgrepo-com.svg") no-repeat 10px center;
+  background-size: 15px;
+  height: 35px;
+  background-color: var(--bg-color2);
 }
 
 .add_posts input:focus {
-    outline: none;
-    border: 2px solid var(--border-color-input);
-    padding-left: 40px;
-    box-sizing: border-box;
-    width: calc(100% + 10px);
-    height: 100%;
+  outline: none;
+  border: 2px solid var(--border-color-input);
+  padding-left: 40px;
+  box-sizing: border-box;
+  width: calc(100% + 10px);
+  height: 100%;
 }
 
 .post_comm_div_post {
-    border-bottom: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
 }
 
 .div_com_post {
-    padding: 20px 0px 20px 0px;
+  padding: 20px 0px 20px 0px;
 }
 
 .div_comm {
-    border-bottom: 2px solid var(--border-color);
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+  /* border-bottom: 1px solid var(--border-color); */
+  gap: 10px;
 }
-
-.div_comm {
-    display: flex;
-    align-items: flex-start;
-    padding: 10px;
-    border-bottom: 1px solid var(--border-color);
-    gap: 10px;
+.div_comm_ {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
 }
-
 .comm_avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .comm_content {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .comm_header {
-    display: flex;
- 
-    justify-content: space-between;
-    font-size: 14px;
-    gap: 30px;
-    color: var(--date-color);
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  gap: 30px;
+  color: var(--date-color);
+  width: 100%;
 }
 
 .comm_username {
-    font-weight: bold;
-    color: var(--text-color);
+  font-weight: bold;
+  color: var(--text-color);
 }
 
 .comm_date {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .comm_text {
-    margin-top: 4px;
-    font-size: 16px;
-    color: var(--text-color);
+  margin-top: 4px;
+  font-size: 16px;
+  color: var(--text-color);
+}
+.com {
+  /* margin: 0px 0px 0px auto; */
+}
+.comLike {
+  width: 100%;
+  display: flex;
+  justify-content: end;
 }
 
 .comment_input_wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 20px 0;
-    padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 10px;
 
-    border-radius: 12px;
-  
+  border-radius: 12px;
 }
 
 .comment_input {
-    flex: 1;
-    padding: 10px 14px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 15px;
-    outline: none;
-    transition: border-color 0.2s ease;
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease;
 }
 
 .comment_input:focus {
-    border-color: var(--element-select);
+  border-color: var(--element-select);
 }
 
 .comment_button {
-    padding: 10px 18px;
-    background-color: var(--bg-color-hover-element);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+  padding: 10px 18px;
+  background-color: var(--bg-color-hover-element);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .comment_button:hover {
-    background-color: var(--bg-color-hover-element2);
+  background-color: var(--bg-color-hover-element2);
+}
+.likeText {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  margin: auto 10px 0px auto;
+  justify-content: end;
+  justify-items: end;
+}
+.comLike {
+  display: flex;
+  height: 30px;
+  height: 20px;
+  gap: 5px;
+}
+
+.comLike svg {
+  fill: var(--svg-color-full);
+  stroke: var(--svg-color);
+  stroke-width: 2px;
+  width: 20px;
+  height: 20px;
 }

@@ -1,7 +1,7 @@
-.img_avatar{
-    width: 200px;
-    height: 100px;
-    padding: 20px;
+.img_avatar {
+  width: 200px;
+  height: 100px;
+  padding: 20px;
 }
 .groupContainer {
   padding: 24px;
@@ -106,7 +106,7 @@
   border-radius: 12px;
   background-color: var(--bg-color2);
   padding: 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .postHeader {
@@ -123,31 +123,58 @@
 }
 
 .avatarMini {
-  width: 36px;
-  height: 36px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid var(--border-color);
 }
 
 .authorName {
+  font-size: 15px;
+  color: var(--text-color);
+}
+.groupName {
   font-weight: 600;
   color: var(--text-color);
 }
-
+.div_group_name {
+  display: grid;
+}
 .postDate {
   font-size: 12px;
   color: var(--text-color-description);
 }
-
+.div_post_all {
+  padding: 0px 15px 0px 15px;
+}
+/* .div_post_all img {
+  margin: 0px auto 0px auto;
+} */
+.div_img {
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
+  justify-self: center;
+  object-fit: cover;
+  width: 100%;
+}
+.div_img img {
+  max-height: 50vh;
+  object-fit: cover;
+  width: 100%;
+}
 .postTitle {
   font-size: 18px;
   font-weight: bold;
+  line-height: 5px;
   margin: 10px 0 6px;
   color: var(--text-color);
 }
 
 .postText {
+  line-height: 5px;
   white-space: pre-wrap;
   color: var(--text-color);
   margin-bottom: 10px;
@@ -156,7 +183,7 @@
 .postImage {
   max-width: 100%;
   border-radius: 8px;
-  margin: 10px 0;
+  margin: 10px auto 10px auto;
   border: 1px solid var(--border-color);
 }
 
@@ -173,11 +200,11 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 .div_add_post {
@@ -201,199 +228,190 @@
   z-index: 1001;
 }
 
-.div_header_modal{
-    display: flex;
-  
+.div_header_modal {
+  display: flex;
 }
-.div_header_modal button{
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    border-radius: 50%;
-    border: 1px solid var(--border-color);
-    margin: 0px 0px 0px auto;
-  
+.div_header_modal button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  margin: 0px 0px 0px auto;
 }
-.div_header_modal svg{
-    width: 20px;
-    color: var(--svg-color);
-    fill: var(--svg-color);
-    stroke: var(--svg-color); 
+.div_header_modal svg {
+  width: 20px;
+  color: var(--svg-color);
+  fill: var(--svg-color);
+  stroke: var(--svg-color);
 }
-.image_preview{
+.image_preview {
   width: auto;
   max-height: auto;
   max-width: 50vw;
   max-height: 40vh;
-  object-fit:contain;
+  object-fit: contain;
 }
 .input_header {
-    margin-left: -5px;
-    width: calc(100% - 35px);
-    padding-left: 20px;
-    font-size: 17px;
-    border: 1px solid var(--border-color);
-    border-radius: 7px;
-    background-size: 15px;
-    height: 35px;
-    background-color: var(--bg-color2);
+  margin-left: -5px;
+  width: calc(100% - 35px);
+  padding-left: 20px;
+  font-size: 17px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  background-size: 15px;
+  height: 35px;
+  background-color: var(--bg-color2);
 }
-.btn_modal button{
-  display: flex;            /* превращаем кнопку в flex-контейнер */
-  justify-content: center;  /* горизонтальное выравнивание */
-  align-items: center;      /* вертикальное выравнивание */
+.btn_modal button {
+  display: flex; /* превращаем кнопку в flex-контейнер */
+  justify-content: center; /* горизонтальное выравнивание */
+  align-items: center; /* вертикальное выравнивание */
   text-align: center;
   width: 100%;
   height: 42px;
   gap: 10px;
-  font-size:15px;
+  font-size: 15px;
   border-radius: 7px;
   background-color: var(--button-color);
   border: 1px solid var(--button-border-color);
 }
-.btd_div{
+.btd_div {
   display: flex;
   justify-content: end;
   gap: 24px;
   padding: 20px 0px 20px 0px;
   border-bottom: 1px solid var(--border-color);
 }
-.forder_div{
-    display: flex;
-    /* border: solid 1px; */
-    /* border-color: var(--border-color); */
-    border-radius: 10px;
-    height: 40px;
-    align-items: center; 
-    gap: 5px;
-    padding: 0px 5px 0px 5px;
-    width: calc(100% - 10px);
-    overflow-x: auto;
-    
-
+.forder_div {
+  display: flex;
+  /* border: solid 1px; */
+  /* border-color: var(--border-color); */
+  border-radius: 10px;
+  height: 40px;
+  align-items: center;
+  gap: 5px;
+  padding: 0px 5px 0px 5px;
+  width: calc(100% - 10px);
+  overflow-x: auto;
 }
 
 .tab {
-    background-color: transparent;
-    /* border: 1px solid #ccc; */
-    border-radius: 8px;
-    border: none;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    height: 30px;
-     display: flex;            
-  justify-content: center; 
-  align-items: center;   
+  background-color: transparent;
+  /* border: 1px solid #ccc; */
+  border-radius: 8px;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
- 
-  }
-  
-  .tab:hover {
-   background-color: var(--bg-color2);
-  }
-  .tab_ {
-    background-color: transparent;
-    /* border: 1px solid #ccc; */
-    border-radius: 8px;
-    border: none;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.1s;
-    height: 30px;
-     display: flex;            /* превращаем кнопку в flex-контейнер */
-  justify-content: center;  /* горизонтальное выравнивание */
-  align-items: center;      /* вертикальное выравнивание */
-  text-align: center;
- 
-  }
-  
-  .tab_:hover {
-background-color: var(--bg-color2);
-  }
-  
-  .active {
-     display: flex;            /* превращаем кнопку в flex-контейнер */
-  justify-content: center;  /* горизонтальное выравнивание */
-  align-items: center;      /* вертикальное выравнивание */
-  text-align: center;
-    background-color: transparent;
-    border: 1px solid var(--border-color-forder);
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.1s;
-    height: 30px;
-
-    background-color: var(--bg-color-hover-element); 
-    color:var(--text-color-forder) ;
-    /* font-weight: bold; */
-  }
-
-.div_header_modalEdit{
-    display: flex;
-    height: 40px;
-  
 }
-.div_header_modalEdit button{
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    border-radius: 50%;
-    border: 1px solid var(--border-color);
-    margin: 0px 0px 0px auto;
-  
+
+.tab:hover {
+  background-color: var(--bg-color2);
 }
-.div_header_modalEdit svg{
-    width: 20px;
-    color: var(--svg-color);
-    fill: var(--svg-color);
-    stroke: var(--svg-color); 
+.tab_ {
+  background-color: transparent;
+  /* border: 1px solid #ccc; */
+  border-radius: 8px;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.1s;
+  height: 30px;
+  display: flex; /* превращаем кнопку в flex-контейнер */
+  justify-content: center; /* горизонтальное выравнивание */
+  align-items: center; /* вертикальное выравнивание */
+  text-align: center;
+}
+
+.tab_:hover {
+  background-color: var(--bg-color2);
+}
+
+.active {
+  display: flex; /* превращаем кнопку в flex-контейнер */
+  justify-content: center; /* горизонтальное выравнивание */
+  align-items: center; /* вертикальное выравнивание */
+  text-align: center;
+  background-color: transparent;
+  border: 1px solid var(--border-color-forder);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.1s;
+  height: 30px;
+
+  background-color: var(--bg-color-hover-element);
+  color: var(--text-color-forder);
+  /* font-weight: bold; */
+}
+
+.div_header_modalEdit {
+  display: flex;
+  height: 40px;
+}
+.div_header_modalEdit button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  margin: 0px 0px 0px auto;
+}
+.div_header_modalEdit svg {
+  width: 20px;
+  color: var(--svg-color);
+  fill: var(--svg-color);
+  stroke: var(--svg-color);
 }
 .elem_post_btn_el {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: 60px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 60px;
 }
-.elem_post_btn svg{
- fill: var(--svg-color-full);
- stroke: var(--svg-color);
- stroke-width: 2px;
+.elem_post_btn svg {
+  fill: var(--svg-color-full);
+  stroke: var(--svg-color);
+  stroke-width: 2px;
 }
-.elem_post_btn{
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 5px;
-    justify-content: center;
-    justify-items: center;
+.elem_post_btn {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 5px;
+  justify-content: center;
+  justify-items: center;
+}
+.elem_post_btn svg {
+  fill: var(--svg-color-full);
+  stroke: var(--svg-color);
+  stroke-width: 2px;
+}
 
+.elem_post_btn svg {
+  margin: 0px auto 0px auto;
+  width: 25px;
 }
-.elem_post_btn svg{
- fill: var(--svg-color-full);
- stroke: var(--svg-color);
- stroke-width: 2px;
-}
-
-.elem_post_btn svg{
-    margin: 0px auto 0px auto;
-    width: 25px;
-}
-.elem_post_btn_el{
-    display: flex;
-    align-content: center;
-    align-items: center;
-     cursor: pointer;
-    width: 60px;
+.elem_post_btn_el {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 60px;
 }

@@ -7,7 +7,7 @@ let img_p = "/imgs/log/Group 25 (2).svg";
 
 
 export function CrElPosts({ post }) {
-  console.log(post)
+  console.log(post.post_type)
   // const name = post.author.username
     const navigate = useNavigate();
     return (
@@ -30,13 +30,13 @@ export function CrElPosts({ post }) {
 
         ></img>
         <div className={styles.elem_post_h_name}>
-       {post.type =='post_user' &&   
+       {post.post_type =='user' &&   
          <div className={styles.elem_post_header_text}> 
             
             <span className={styles.h_name}>{post.author.username??''}</span>
             {/* <span className={styles.h_name}>{post.text}</span> */}
             </div>}
-                {post.type =='post_group' &&     <div className={styles.elem_post_header_text}> 
+                {post.post_type =='group' &&     <div className={styles.elem_post_header_text}> 
                 <span className={styles.h_name}>{post.group.group_name}</span>
             <span className={styles.h_name}>{post.author.username??''}</span>
         
@@ -146,7 +146,6 @@ export function CrElPosts_({ post }) {
         <div className={styles.elem_post_h_name}>
        {post.post_type =='user' &&   
          <div className={styles.elem_post_header_text}> 
-            
             <span className={styles.h_name}>{ post.author.username}</span>
             {/* <span className={styles.h_name}>{post.text}</span> */}
             </div>}
