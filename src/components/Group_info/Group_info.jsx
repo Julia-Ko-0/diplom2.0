@@ -162,7 +162,7 @@ export const Group_info = () => {
   const [isLoading, setLoading] = useState(true);
   const [feauteres_us, setfeauteres_us] = useState([]);
 
-  console.log(state);
+  console.log(posts);
   useEffect(() => {
     // console.log(state.id_group ?? state.id);
     const id = state?.id_group ?? state?.id ?? state?.group_id;
@@ -179,7 +179,7 @@ export const Group_info = () => {
         setGroupInfo(null);
       });
     getGroupPosts(id)
-      .then((data) => setPosts(data.posts))
+      .then((data) => setPosts(data))
       .catch((error) => {
         console.error("Ошибка при получении :", error.message);
         setPosts([]);
@@ -340,12 +340,13 @@ export const Group_info = () => {
 
 export const PostC = ({ post, groupPhoto, groupName }) => {
   const navigate = useNavigate();
-  const [isLiked, setIsLiked] = useState(post.isLiked || false); // Track if the post is liked
+
+  const [isLiked, setIsLiked] = useState(post?.isLiked || false); // Track if the post is liked
   const [likesCount, setLikesCount] = useState(post?.likes_count); // Track the like
   const handleLike = async () => {
     try {
-      const typP = post.post_type === "user" ? "us" : "gr";
-      const res = await ToggleLikePost(post.post_id, typP);
+      const typP = post?.post_type === "user" ? "us" : "gr";
+      const res = await ToggleLikePost(post?.post_id, typP);
       if (res.like_added) setLikesCount(likesCount + 1);
       else setLikesCount(likesCount - 1);
       setIsLiked(!isLiked);
@@ -358,17 +359,35 @@ export const PostC = ({ post, groupPhoto, groupName }) => {
     const scroll = sessionStorage.getItem("scrollPosition");
     if (scroll) window.scrollTo(0, parseInt(scroll, 10));
   }, []);
+  useEffect(() => {
+    const like = sessionStorage.getItem("like");
+    const id_post = sessionStorage.getItem("id_post");
+    console.log(like, id_post);
+    if (like > likesCount && id_post == post.post_id) {
+      setLikesCount(likesCount + 1);
+    }
+    if (like < likesCount && id_post == post.post_id) {
+      setLikesCount(likesCount - 1);
+    }
+  }, []);
   const [search_params, setSearch] = useState();
+  // const onLikeUpdate = (newValue) => {
+  //   if (newValue) {
+  //     setLikesCount(likesCount + 1);
+  //   } else {
+  //     setLikesCount(likesCount - 1);
+  //   }
+  // };
 
   const handleOpenPost = (post) => {
     sessionStorage.setItem("scrollPosition", window.scrollY);
-    navigate(`/us/home/post/${post.id_post_gr ?? post.post_id}`, {
+    navigate(`/us/home/post/${post?.id_post_gr ?? post?.post_id}`, {
       state: { post },
     });
   };
-
+  console.log(post);
   return (
-    <div key={post.id_post_gr} className={styles.postCard}>
+    <div key={post?.id_post_gr} className={styles.postCard}>
       <div className={styles.postHeader}>
         <div className={styles.authorInfo}>
           <img className={styles.avatarMini} src={groupPhoto}></img>
@@ -380,40 +399,48 @@ export const PostC = ({ post, groupPhoto, groupName }) => {
                   navigate("/us/group_info", { state: post.group_info });
                 }
                 if (post.post_type == "user") {
-                  navigate("/us/user", { state: post.author });
+                  navigate("/us/user", { state: post?.author });
                 }
               }}
             >
               {groupName}
             </span>
-            {groupName !== post.author.username && (
-              <span className={styles.authorName}>{post.author.username}</span>
+            {groupName !== post?.author?.username && (
+              <span className={styles.authorName}>
+                {post?.author?.username}
+              </span>
             )}
           </div>
         </div>
         <span className={styles.postDate}>
           {new Date(
-            post.dateTime_post_gr || post.dateTime_post
+            post?.dateTime_post_gr ||
+              post?.dateTime_post ||
+              post?.dateTime_post_us
           ).toLocaleString()}
         </span>
       </div>
+
       <div className={styles.div_post_all}>
-        <h4 className={styles.postTitle}>{post.header}</h4>
-        <p className={styles.postText}>{post.text}</p>
+        <h4 className={styles.postTitle}>{post?.header}</h4>
+        <p className={styles.postText}>{post?.text}</p>
         <div className={styles.div_img}>
           {post?.fale_post_gr && (
             <img
               // src={post.fale_post}
-              src={post.fale_post_gr == "" ? post.fale_post : post.fale_post_gr}
+              src={
+                post?.fale_post_gr == "" ? post?.fale_post : post?.fale_post_gr
+              }
               alt="Вложение"
               className={styles.postImage}
             />
           )}
-          {post.fale_post && post.fale_post !== "data:image/png;base64," && (
-            <img className={styles.postImage} src={post.fale_post} alt="" />
+          {post?.fale_post && post?.fale_post !== "data:image/png;base64," && (
+            <img className={styles.postImage} src={post?.fale_post} alt="" />
           )}
         </div>
       </div>
+
       <div className={styles.postMeta}>
         {/* <span> {post.views_post} просмотров</span> */}
         <div className={styles.elem_post_btn}>
@@ -447,7 +474,7 @@ export const PostC = ({ post, groupPhoto, groupName }) => {
               <path d="M40.9 1H38.8H15.7H5.2H3.1C1.42 1 1 2.45833 1 3.1875V25.0625C1 26.8125 2.4 27.25 3.1 27.25H9.4V36L15.7 27.25H40.9C42.58 27.25 43 25.7917 43 25.0625V3.1875C43 1.4375 41.6 1 40.9 1Z" />
               <path d="M5.2 1H15.7M15.7 1H38.8H40.9C41.6 1 43 1.4375 43 3.1875C43 4.9375 43 18.5 43 25.0625C43 25.7917 42.58 27.25 40.9 27.25C39.22 27.25 23.4 27.25 15.7 27.25L9.4 36V27.25H3.1C2.4 27.25 1 26.8125 1 25.0625C1 23.3125 1 9.75 1 3.1875C1 2.45833 1.42 1 3.1 1C4.78 1 12.2 1 15.7 1Z" />
             </svg>
-            <p>{post.comments_count}</p>
+            <p>{post?.comments_count}</p>
           </div>
         </div>
         {/* <div className={styles.elem_post_btn}>

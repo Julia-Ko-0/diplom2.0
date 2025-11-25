@@ -1,4 +1,3 @@
-
 // type SMSProps = {
 //     smsType?: number,
 //     sms?:string,
@@ -9,7 +8,6 @@ import { deleteMessage } from "../../../hooks/api";
 import { formatDate } from "../../../hooks/homeH";
 
 // let user_id_ = 7
-
 
 export const SMSApp = ({ sms, id_, setSMS, smsList }) => {
   const [modal, setModal] = useState(false);
@@ -48,7 +46,7 @@ export const SMSApp = ({ sms, id_, setSMS, smsList }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-console.log(sms)
+
   // Стили для модального окна
   const menuStyles = {
     top: isLastMessage ? "auto" : "100%", // Если это последнее сообщение, расположить меню выше
@@ -65,15 +63,30 @@ console.log(sms)
       onContextMenu={handleRightClick}
     >
       <div>
-         <p style={{fontSize:"13px",marginBottom:"auto",color:"var(--date-color)"}} >{sms.user.username}</p>
- 
-      <div className={`${style.sms} ${modal ? style.sms_ : ""}`}>
-        
-        <p style={{}}>{sms.text_sms}</p>
-        <p style={{fontSize:"10px",marginTop:"auto",color:"var(--date-color)"}} className={style.date_sms}>{formatDate(sms.dateTime_sms)}</p>
+        <p
+          style={{
+            fontSize: "13px",
+            marginBottom: "auto",
+            color: "var(--date-color)",
+          }}
+        >
+          {sms.user.username}
+        </p>
+
+        <div className={`${style.sms} ${modal ? style.sms_ : ""}`}>
+          <p style={{}}>{sms.text_sms}</p>
+          <p
+            style={{
+              fontSize: "10px",
+              marginTop: "auto",
+              color: "var(--date-color)",
+            }}
+            className={style.date_sms}
+          >
+            {formatDate(sms.dateTime_sms)}
+          </p>
+        </div>
       </div>
-      </div>
-     
 
       {modal && (
         <div
@@ -88,4 +101,3 @@ console.log(sms)
     </div>
   );
 };
-

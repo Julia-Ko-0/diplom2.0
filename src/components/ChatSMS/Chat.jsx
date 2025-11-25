@@ -2,7 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./chat.module.css";
 import { SMSApp } from "./SMS/SMS";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getChatInfo, getChatMessages, getFriendsList, getUserInfo, sendMessageOne, sendMessageToChat } from "../../hooks/api";
+import {
+  getChatInfo,
+  getChatMessages,
+  getFriendsList,
+  getUserInfo,
+  sendMessageOne,
+  sendMessageToChat,
+} from "../../hooks/api";
 import { InfoChat } from "./InfoChat/InfoChat";
 import { AddUserChat } from "./Add_UserChat/Add_userChat";
 
@@ -16,35 +23,38 @@ export const Chat = () => {
   const [isUserInfo, setUser] = useState({});
   const [isOffset, setOffset] = useState(0);
   const id = state.sms.id_chat;
-  
+
   const navigate = useNavigate();
 
-// const nameCh = state.sms.name
+  // const nameCh = state.sms.name
 
   const countChatPepl = state.sms.countChatPepl;
-const [isUnfoChat,setInfoChat] = useState(state.sms)
-// console.log(isUnfoChat)
+  const [isUnfoChat, setInfoChat] = useState(state.sms);
+  // console.log(isUnfoChat)
   const smsRef = useRef(null);
   const [modal, setModal] = useState(false);
-       const menuRef_add_user = useRef(null);
-         const [modal_add_user, setModal_add_user] = useState(false);
+  const menuRef_add_user = useRef(null);
+  const [modal_add_user, setModal_add_user] = useState(false);
   const handleScroll = () => {
+    console.log(smsRef.current);
     if (smsRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = smsRef.current;
       if (clientHeight - scrollTop === scrollHeight) {
-        console.log("Достигли верхней границы");
         setOffset((prevOffset) => prevOffset + 20);
       }
     }
   };
-// console.log(state.sms)
+  // console.log(state.sms)
   useEffect(() => {
-    getChatMessages(id, 20, isOffset)
-      .then((data) => setSMS((prevMessages) => [...prevMessages, ...data]))
-      .catch((error) => {
-        console.error("Ошибка при получении:", error.message);
-        setSMS([]);
-      });
+    // setSMS([]);
+    if (isOffset !== 0) {
+      getChatMessages(id, 20, isOffset)
+        .then((data) => setSMS((prevMessages) => [...prevMessages, ...data]))
+        .catch((error) => {
+          console.error("Ошибка при получении:", error.message);
+          setSMS([]);
+        });
+    }
   }, [isOffset]);
 
   useEffect(() => {
@@ -61,22 +71,38 @@ const [isUnfoChat,setInfoChat] = useState(state.sms)
         console.error("Ошибка при получении:", error.message);
         setUser({});
       });
-      getChatInfo(id)
-                .then((data) => {
-                        console.log("info:", data);
-                        setInfo(data);
-    
-                      })
-                      .catch((error) => {
-                        console.error("Ошибка при получении :", error.message);
-                            setInfo([])
-                      })
+    getChatInfo(id)
+      .then((data) => {
+        console.log("info:", data);
+        setInfo(data);
+      })
+      .catch((error) => {
+        console.error("Ошибка при получении :", error.message);
+        setInfo([]);
+      });
+  }, []);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        menuRef_add_user.current &&
+        !menuRef_add_user.current.contains(event.target)
+      ) {
+        setModal_add_user(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const handleSubmit = async () => {
     if (isSms_ === "") return;
 
-    const otherUsers = isInfo.filter((user) => user.user_id !== isUserInfo.id_user);
+    const otherUsers = isInfo.filter(
+      (user) => user.user_id !== isUserInfo.id_user
+    );
     try {
       await sendMessageOne({
         receiver_id: otherUsers[0].user_id,
@@ -149,44 +175,34 @@ const [isUnfoChat,setInfoChat] = useState(state.sms)
       }
     }
   };
-useEffect(()=>{
-
-  const handleClickOutside = (event) => {
-    
-    if (
-      menuRef_add_user.current &&  
-      !menuRef_add_user.current.contains(event.target) 
-
-    ) {
-     
-      setModal_add_user(false);
-    }
-  };
-
-  document.addEventListener("mousedown", handleClickOutside);
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-},[])
 
   return (
     <div className={styles.div_}>
-      <div className={styles.heder_chat_div} onClick={() => {
-        if(state.sms.countChatPepl == 'many'){
-       
-               setModal(true)
-        }
-   
-        }}>
-        <button className={styles.btn_n}
-            onClick={() => {
-              navigate("/us/chats");
-            }}
-            ><svg width="30" height="39" viewBox="0 0 46 39" xmlns="http://www.w3.org/2000/svg">
-<path d="M23.0475 35.9076C23.6508 36.4752 23.6797 37.4243 23.1122 38.0277C22.5447 38.631 21.5956 38.6599 20.9921 38.0924L0.795813 19.099L20.9954 0.886311L21.1145 0.788587C21.7276 0.339311 22.5936 0.418896 23.1137 0.99546C23.6337 1.57226 23.6231 2.44168 23.1128 3.00523L23.0045 3.11369L5.22455 19.1443L23.0475 35.9076Z" />
-<path d="M44.5 17.5C45.3284 17.5 46 18.1716 46 19C46 19.8284 45.3284 20.5 44.5 20.5H3V17.5H44.5Z" />
-</svg>
-</button>
+      <div
+        className={styles.heder_chat_div}
+        onClick={() => {
+          if (state.sms.countChatPepl == "many") {
+            setModal(true);
+          }
+        }}
+      >
+        <button
+          className={styles.btn_n}
+          onClick={() => {
+            setSMS([]);
+            navigate("/us/chats");
+          }}
+        >
+          <svg
+            width="30"
+            height="39"
+            viewBox="0 0 46 39"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M23.0475 35.9076C23.6508 36.4752 23.6797 37.4243 23.1122 38.0277C22.5447 38.631 21.5956 38.6599 20.9921 38.0924L0.795813 19.099L20.9954 0.886311L21.1145 0.788587C21.7276 0.339311 22.5936 0.418896 23.1137 0.99546C23.6337 1.57226 23.6231 2.44168 23.1128 3.00523L23.0045 3.11369L5.22455 19.1443L23.0475 35.9076Z" />
+            <path d="M44.5 17.5C45.3284 17.5 46 18.1716 46 19C46 19.8284 45.3284 20.5 44.5 20.5H3V17.5H44.5Z" />
+          </svg>
+        </button>
         <img src={isUnfoChat.pfoto || img_p} alt="Chat" />
         <div className={styles.heder_name_date}>
           <p style={{ fontSize: "15px" }}>{isUnfoChat.name_chat}</p>
@@ -196,7 +212,12 @@ useEffect(()=>{
 
       <div className={styles.sms_div} ref={smsRef} onScroll={handleScroll}>
         {isSms.map((s) => (
-          <SMSApp sms={s} id_={isUserInfo.id_user} setSMS={setSMS} smsList={isSms} />
+          <SMSApp
+            sms={s}
+            id_={isUserInfo.id_user}
+            setSMS={setSMS}
+            smsList={isSms}
+          />
         ))}
       </div>
 
@@ -222,11 +243,21 @@ useEffect(()=>{
         </button>
       </div>
 
-
-      {modal && <InfoChat setModal={setModal} infoChat={state.sms} setModal_add_user={setModal_add_user} setInfoChat={setInfoChat}/>}
-         {
-        modal_add_user && <AddUserChat menuRef_add_user={menuRef_add_user} isInfo={isInfo} id_c={id}/>
-      }
+      {modal && (
+        <InfoChat
+          setModal={setModal}
+          infoChat={state.sms}
+          setModal_add_user={setModal_add_user}
+          setInfoChat={setInfoChat}
+        />
+      )}
+      {modal_add_user && (
+        <AddUserChat
+          menuRef_add_user={menuRef_add_user}
+          isInfo={isInfo}
+          id_c={id}
+        />
+      )}
     </div>
   );
 };

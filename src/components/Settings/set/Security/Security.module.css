@@ -3,7 +3,7 @@
 /* Для контейнера */
 .container {
   max-width: 700px;
-  width: 90%;
+  width: 85%;
   /* margin: 60px auto; */
   padding: 32px;
   background-color: var(--bg-color2);

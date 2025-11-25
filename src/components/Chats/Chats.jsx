@@ -25,7 +25,6 @@ function ModalPost({ setModal }) {
 
   const handleSubmit = async () => {
     if (!formData) {
-
       return;
     }
 
@@ -33,13 +32,11 @@ function ModalPost({ setModal }) {
       await addChatFolder(formData);
 
       // Очистить форму при необходимости:
-      setFormData( "");
-
+      setFormData("");
     } catch (err) {
       console.error("Ошибка при создании поста:", err);
- 
     }
-     setModal(false);
+    setModal(false);
   };
 
   return (
@@ -54,7 +51,6 @@ function ModalPost({ setModal }) {
           <button
             onClick={() => {
               setModal(false);
-              console.log(formData);
             }}
           >
             <svg
@@ -79,15 +75,9 @@ function ModalPost({ setModal }) {
           className={styles.input_header}
           placeholder="Заголовок поста"
           value={formData}
-          onChange={(e) =>
-            setFormData(e.target.value )
-          }
+          onChange={(e) => setFormData(e.target.value)}
         />
-  
 
-    
-
-       
         <div className={styles.div_button}>
           <button onClick={() => handleSubmit()}>Опубликовать</button>
         </div>
@@ -96,7 +86,6 @@ function ModalPost({ setModal }) {
   );
 }
 function CrElChatsAdd({ sms, setSMS, isSms }) {
-
   const id = sms.id_chat;
   console.log(isSms);
   // Функция для изменения состояния чекбокса
@@ -144,7 +133,7 @@ function CrElChatsAdd({ sms, setSMS, isSms }) {
         <input
           type="checkbox"
           checked={sms.is_in_folder}
-          onChange={handleCheckboxChange} // Исправлено: вызываем функцию handleCheckboxChange
+          onChange={handleCheckboxChange}
         />
         <span className={styles.checkbox_label}> </span>
       </label>
@@ -154,7 +143,7 @@ function CrElChatsAdd({ sms, setSMS, isSms }) {
 
 function ModalAddF({ setModal, id_folder, setSMS_, setLoading }) {
   const [isSms, setSMS] = useState([]);
-    const [isSmss_, setSMSs_] = useState([]);
+  const [isSmss_, setSMSs_] = useState([]);
   useEffect(() => {
     getChatsInFolderBoolen(id_folder)
       .then((data) => {
@@ -166,15 +155,12 @@ function ModalAddF({ setModal, id_folder, setSMS_, setLoading }) {
   }, []);
 
   const handleSubmit_Add = async (e) => {
-    console.log(isSmss_)
     if (e.is_in_folder) {
-        
       try {
         await addChatToFolder({
           folder_id: id_folder,
           chat_id: e.id_chat,
         });
-   
       } catch (err) {
         console.error("Ошибка:", err);
       }
@@ -189,21 +175,18 @@ function ModalAddF({ setModal, id_folder, setSMS_, setLoading }) {
       }
     }
   };
-const handleSave = () => {
-  isSms.map((e) => {
+  const handleSave = () => {
+    isSms.map((e) => {
+      setSMSs_((elem) => [...elem, e]);
+      handleSubmit_Add(e);
+    });
 
-    setSMSs_((elem)=>[...elem,e])
-    handleSubmit_Add(e);
-  });
+    setModal(false);
 
-  setModal(false);
-
-
-setTimeout(() => {
-    setLoading(prevState => !prevState);
-  }, 100);
-};
-
+    setTimeout(() => {
+      setLoading((prevState) => !prevState);
+    }, 100);
+  };
 
   return (
     <div className={styles.modal_overlay}>
@@ -238,10 +221,7 @@ setTimeout(() => {
         </div>
 
         <div className={styles.div_button}>
-          <button
-            onClick={() => handleSave() }>
-            Сохранить
-          </button>
+          <button onClick={() => handleSave()}>Сохранить</button>
         </div>
         <div className={styles.chatForder_add}>
           {isSms.map((smss) => (
@@ -270,7 +250,6 @@ function CrElChats({ sms }) {
     <li
       className={styles.div_chats}
       onClick={() => {
-        console.log(sms)
         navigate("/us/chatsms", { state: { sms } });
       }}
     >
@@ -282,22 +261,31 @@ function CrElChats({ sms }) {
       <div className={styles.div_chats_name_and_sms}>
         <div className={styles.div_chats_sms}>
           <span>{sms.name_chat}</span>
-          <span className={styles.chats_sms_date} style={{color:"var(--bg-color-sms_last_chat)"}}>{sms.dateTime_chat}</span>
+          <span
+            className={styles.chats_sms_date}
+            style={{ color: "var(--bg-color-sms_last_chat)" }}
+          >
+            {sms.dateTime_chat}
+          </span>
         </div>
         {sms.last_message !== null && sms.last_message.text_sms.length > 70 && (
-          <span style={{color:"var(--bg-color-sms_last_chat)"}}>{sms.last_message.text_sms.substring(0, 70)}...</span>
+          <span style={{ color: "var(--bg-color-sms_last_chat)" }}>
+            {sms.last_message.text_sms.substring(0, 70)}...
+          </span>
         )}
         {sms.last_message !== null &&
           sms.last_message.text_sms !== null &&
           sms.last_message.text_sms.length <= 70 && (
-            <span style={{color:"var(--bg-color-sms_last_chat)"}}>{sms.last_message.text_sms}</span>
+            <span style={{ color: "var(--bg-color-sms_last_chat)" }}>
+              {sms.last_message.text_sms}
+            </span>
           )}
         {/* <span>{sms.last_message.text_sms}</span> */}
       </div>
     </li>
   );
 }
-function CrElForder({ name, id, activeTab, setActiveTab, setSMS, setLoading}) {
+function CrElForder({ name, id, activeTab, setActiveTab, setSMS, setLoading }) {
   // <<<<<<< HEAD
 
   const [modal, setModal] = useState(false);
@@ -310,26 +298,21 @@ function CrElForder({ name, id, activeTab, setActiveTab, setSMS, setLoading}) {
     // setSMS() // если нужно, добавьте здесь логику
   };
 
-    const handleSubmit_remuve = async () => {
-
-      try {
-        await removeChatFolder(id);
-   
-      } catch (err) {
-        console.error("Ошибка:", err);
-      }
- setMenuOpen(false)
-     setTimeout(() => {
-      console.log("odsjhgiurhuirw4iujhrgeuhijrge")
-    setLoading(prevState => !prevState);
-  }, 100);
+  const handleSubmit_remuve = async () => {
+    try {
+      await removeChatFolder(id);
+    } catch (err) {
+      console.error("Ошибка:", err);
+    }
+    setMenuOpen(false);
+    setTimeout(() => {
+      setLoading((prevState) => !prevState);
+    }, 100);
   };
   const handleRightClick = (e) => {
     e.preventDefault(); // Предотвращаем стандартное меню браузера
 
-
     setMenuOpen(true);
-
   };
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -370,12 +353,22 @@ function CrElForder({ name, id, activeTab, setActiveTab, setSMS, setLoading}) {
           >
             <p>Добавить в группу чат</p>
           </div>
-          <div className={styles.div_novbar_menu_elem} onClick={ handleSubmit_remuve}>
+          <div
+            className={styles.div_novbar_menu_elem}
+            onClick={handleSubmit_remuve}
+          >
             <p>Удалить группу чатов</p>
           </div>
         </div>
       )}
-      {modal && <ModalAddF setModal={setModal} id_folder={id} setSMS_={setSMS} setLoading={setLoading}/>}
+      {modal && (
+        <ModalAddF
+          setModal={setModal}
+          id_folder={id}
+          setSMS_={setSMS}
+          setLoading={setLoading}
+        />
+      )}
     </div>
   );
 }
@@ -385,12 +378,12 @@ function Chats() {
   const [activeTab, setActiveTab] = useState("all");
   const [isSms, setSMS] = useState([]);
   const [isFolder, setFolder] = useState([]);
-    const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-    const [friends, setFriends] = useState([]);
+  const [friends, setFriends] = useState([]);
   const [filteredFriends, setFilteredFriends] = useState([]);
-   const [isSearching, setIsSearching] = useState(false); 
-     const navigate = useNavigate();
+  const [isSearching, setIsSearching] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     // Прокрутка колесиком
     const scrollable = document.getElementById("scrollable");
@@ -411,21 +404,16 @@ function Chats() {
   useEffect(() => {
     getUserChatFolders()
       .then((data) => {
-
         setFolder(data);
       })
       .catch((error) => {
-
         setFolder([]);
       });
-
-  }, [modal,isLoading]);
+  }, [modal, isLoading]);
   useEffect(() => {
-    console.log('lkhgsiukdgyiu7sdghsduyjtgfhu')
     if (activeTab !== "all") {
       getChatsInFolder(activeTab)
         .then((data) => {
-          console.log("п:", data);
           setSMS(data);
         })
         .catch((error) => {
@@ -435,7 +423,6 @@ function Chats() {
     } else {
       getUserChats()
         .then((data) => {
-          console.log("xfns:", data);
           setSMS(data);
         })
         .catch((error) => {
@@ -443,9 +430,9 @@ function Chats() {
           setSMS([]);
         });
     }
-  }, [activeTab,isLoading]);
-useEffect(()=>{
-      getFriendsList()
+  }, [activeTab, isLoading]);
+  useEffect(() => {
+    getFriendsList()
       .then((data) => {
         setFriends(data.friends);
         setFilteredFriends(data.friends); // Изначально показываем всех друзей
@@ -453,16 +440,15 @@ useEffect(()=>{
       .catch((error) => {
         console.error("Ошибка при получении списка друзей:", error.message);
       });
-},[])
+  }, []);
 
-    const handleSearchChange = (e) => {
+  const handleSearchChange = (e) => {
     const query = e.target.value;
     setSearchTerm(query);
-console.log(friends)
+
     // Фильтрация списка друзей по введенному значению
     const filtered = friends?.filter((friend) =>
       friend.login.toLowerCase().includes(query.toLowerCase())
-
     );
     setFilteredFriends(filtered);
     setIsSearching(query.length > 0); // Включаем поиск, если что-то введено
@@ -470,7 +456,6 @@ console.log(friends)
 
   return (
     <div className={styles.all_chast_div}>
-      
       <div className={styles.forder_div} id="scrollable">
         <button
           className={styles.tab_}
@@ -484,7 +469,6 @@ console.log(friends)
           className={activeTab === "all" ? styles.active : styles.tab}
           onClick={() => {
             setActiveTab("all");
-
           }}
         >
           Все
@@ -498,40 +482,37 @@ console.log(friends)
             setActiveTab={setActiveTab}
             setSMS={setSMS}
             setLoading={setLoading}
-
           />
         ))}
       </div>
 
       <ul className={styles.chast_div}>
         <div className={styles.input_div}>
-          <input value={ searchTerm}    onChange={handleSearchChange} type="text" />
+          <input value={searchTerm} onChange={handleSearchChange} type="text" />
         </div>
 
-        {!isSearching && isSms?.map((smss) => (
-          <CrElChats key={smss.id_chat} sms={smss} />
-        ))}
-
+        {!isSearching &&
+          isSms?.map((smss) => <CrElChats key={smss.id_chat} sms={smss} />)}
       </ul>
-      {isSearching && filteredFriends?.map((friend)=>(  <li
-                key={friend.id}
-                className={styles.div_chats}
-                 onClick={() => {
-        navigate("/us/chatsms_new", { state: { friend } });
- 
-        
-      }}
-              >
-                <img
-                  src={friend.photo || "/imgs/log/Group 25 (2).svg"}
-                  alt="user-photo"
-                />
-                <div className={styles.div_chats_name_and_sms}>
-                  <span>{friend.login}</span>
-                </div>
-              </li>))}
-    {modal && <ModalPost setModal={setModal} />}
-    
+      {isSearching &&
+        filteredFriends?.map((friend) => (
+          <li
+            key={friend.id}
+            className={styles.div_chats}
+            onClick={() => {
+              navigate("/us/chatsms_new", { state: { friend } });
+            }}
+          >
+            <img
+              src={friend.photo || "/imgs/log/Group 25 (2).svg"}
+              alt="user-photo"
+            />
+            <div className={styles.div_chats_name_and_sms}>
+              <span>{friend.login}</span>
+            </div>
+          </li>
+        ))}
+      {modal && <ModalPost setModal={setModal} />}
     </div>
   );
 }

@@ -1,4 +1,9 @@
-import { createBrowserRouter } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import App from "../App";
 // import { Homes } from "../components/Home/Home";
 import { NovBar } from "../components/NovBar/novbar";
@@ -25,192 +30,139 @@ import { User } from "../components/User/User";
 import { Group_info } from "../components/Group_info/Group_info";
 import { FriendRe } from "../components/FriendRe/FriendRe";
 import { Chat_new } from "../components/ChatSMS_new/Chat_new";
+import { Security } from "../components/Settings/set/Security/Security";
 
-//  export  const router = createBrowserRouter([
-//     {
-// element: <ProtectedRoute/>,
-// children:[
-//   {
-//         path:'/us',
-//         element:<App/>,
-//         children:[
-//             {
-//                 path:'/us',
-//                 element: <Menu/>,
-//                 children:[
-//                     {
-//                         path:'home',
-//                         element: <Homes/>
-//                     },
-//                     {
-//                         path:'chats',
-//                         element: <Chats/>,
+export default function ProtectedStateRoute({
+  children,
+  redirect = "/us/home/posts",
+}) {
+  const location = useLocation();
 
-//                     },
-//                     {
-//                         path:'group',
-//                         element: <Group/>
-//                     },
-//                     {
-//                         path:'myakk',
-//                         // element:</>
-//                     },
-//                     {
-//                         path:'chatsms',
-//                         element:<Chat/>
-//                     },
+  // Если state отсутствует — редиректим
+  if (!location.state) {
+    return <Navigate to={redirect} replace />;
+  }
 
-//                 ]
-//             },
-//             {
-//                 path:'settings',
-//                 element: <Settings/>,
-//                 children:[
-//                     {
-//                         path:'fav',
-//                         element: <Fav/>
-//                     },
-//                     {
-//                         path:'blacklist',
-//                         element: <Blacklist/>
-//                     },
-//                     {
-//                         path:'appearance',
-//                         element: <Appearance/>
-//                     },
-//                     {
-//                         path:'akk',
-//                         element: <Akk/>
-//                     },
-
-//                 ]
-//             },
-
-//         ]
-//     },
-// ]
-//     } ,
-
-//     {
-
-//         path:'/login',
-//         element:<Login/>
-//     },
-//     {
-
-//         path:'/',
-//         element:<Registr/>
-//     },
-
-//  ])
-
+  return children;
+}
 export const router = createBrowserRouter([
   {
-  element: <ProtectedRoute />,
-  children: [
-  {
-    path: "/us",
-    element: <App />,
+    element: <ProtectedRoute />,
     children: [
       {
         path: "/us",
-        element: <Menu />,
+        element: <App />,
         children: [
           {
-            path: "home",
-            element: <Homes />,
+            path: "/us",
+            element: <Menu />,
             children: [
               {
-                path: "posts",
-                element: <Post_home/>,
+                path: "home",
+                element: <Homes />,
+                children: [
+                  {
+                    path: "posts",
+                    element: <Post_home />,
+                  },
+                  {
+                    path: "post/:id_post",
+                    element: <Post />,
+                  },
+                  {
+                    path: "search",
+                    element: <Search />,
+                  },
+                ],
               },
               {
-                path: "post/:id_post",
-                element: <Post/>,
+                path: "chats",
+                element: <Chats />,
               },
               {
-                path: "search",
-                element: <Search />,
+                path: "group",
+                element: <Group />,
               },
-          
+              {
+                path: "myakk",
+                // element:</>
+              },
+              {
+                path: "chatsms",
+                element: (
+                  <ProtectedStateRoute>
+                    {" "}
+                    <Chat />
+                  </ProtectedStateRoute>
+                ),
+              },
+              {
+                path: "chatsms_new",
+                element: <Chat_new />,
+              },
+              {
+                path: "user",
+                element: (
+                  <ProtectedStateRoute>
+                    <User />
+                  </ProtectedStateRoute>
+                ),
+              },
+              {
+                path: "friends",
+                element: <Friends />,
+              },
+              {
+                path: "friends_request",
+                element: <FriendRe />,
+              },
+              {
+                path: "group_info",
+                element: <Group_info />,
+              },
             ],
           },
           {
-            path: "chats",
-            element: <Chats />,
-          },
-          {
-            path: "group",
-            element: <Group />,
-          },
-          {
-            path: "myakk",
-            // element:</>
-          },
-          {
-            path: "chatsms",
-            element: <Chat />,
-          },
-            {
-            path: "chatsms_new",
-            element: <Chat_new/>,
-          },
-          {
-            path:'user',
-            element:<User/>
-          },
-             {
-            path:'friends',
-            element:<Friends/>
-          },
-                     {
-            path:'friends_request',
-            element:<FriendRe/>
-          },
-                  {
-            path: "group_info",
-            element: < Group_info/>,
-          },
-        ],
-      },
-      {
-        path: "settings",
-        element: <Settings />,
-        children: [
-          {
-            path: "fav",
-            element: <Fav />,
-          },
-          {
-            path: "blacklist",
-            element: <Blacklist />,
-          },
-          {
-            path: "appearance",
-            element: <Appearance />,
-          },
-          {
-            path: "akk",
-            element: <Akk />,
+            path: "settings",
+            element: <Settings />,
+            children: [
+              {
+                path: "fav",
+                element: <Fav />,
+              },
+              {
+                path: "blacklist",
+                element: <Blacklist />,
+              },
+              {
+                path: "appearance",
+                element: <Appearance />,
+              },
+              {
+                path: "akk",
+                element: <Akk />,
+              },
+              {
+                path: "security",
+                element: <Security />,
+              },
+            ],
           },
         ],
       },
     ],
   },
-  ],
-  },
-{
-  element:<ProtectedRouteLogin/>,
-  children:[
- {
-    path: "/login",
-    element: <Login />,
-  },
   {
-    path: "/",
-    element: <Registr />,
+    element: <ProtectedRouteLogin />,
+    children: [
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/",
+        element: <Registr />,
+      },
+    ],
   },
-  ]
-},
- 
 ]);

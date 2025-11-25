@@ -306,3 +306,74 @@
   width: 20px;
   height: 20px;
 }
+.div_likes_count {
+  display: flex;
+  min-width: 15px;
+  justify-content: end;
+}
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatarMini {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+.div_group_name {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  cursor: pointer;
+}
+.groupName {
+  font-weight: 600;
+  color: var(--text-color);
+}
+.authorName {
+  font-size: 15px;
+  color: var(--text-color);
+}
+.postDate {
+  font-size: 12px;
+  color: var(--text-color-description);
+}
+.div_post_all {
+  padding: 0px 15px 0px 15px;
+}
+.postTitle {
+  font-size: 18px;
+  /* font-weight: bold; */
+  line-height: 5px;
+  margin: 10px 0 6px;
+  color: var(--text-color);
+}
+
+.postText {
+  line-height: 5px;
+  white-space: pre-wrap;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+.div_img img {
+  max-height: 50vh;
+  object-fit: cover;
+  width: 100%;
+}
+.postImage {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 10px auto 10px auto;
+  border: 1px solid var(--border-color);
+}

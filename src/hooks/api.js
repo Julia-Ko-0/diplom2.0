@@ -199,9 +199,21 @@ export const getRolesInfoForGroup = (groupId) =>
 export const getComments = (postId, t_p = "user") => {
   return fetchWithAuth(`/comments?post_id=${postId}&type=${t_p}`);
 };
-export const toggleLikeComment = (commentId) =>
+// export const toggleLikeComment = (commentId) =>
+//   fetchWithAuth("/toggle_like_comment", {
+//     body: JSON.stringify({ comment_id: commentId }),
+//   });
+// export const toggleLikeComment = (commentId, isGroup = false) =>
+//   fetchWithAuth(
+//     `/toggle_like_comment?comment_id=${commentId}&is_group=${isGroup}`
+//   );
+export const toggleLikeComment = (commentId, isGroup) =>
   fetchWithAuth("/toggle_like_comment", {
-    body: JSON.stringify({ comment_id: commentId }),
+    method: "POST",
+    body: JSON.stringify({
+      comment_id: commentId,
+      is_group: isGroup,
+    }),
   });
 
 /* ✨ Уведомления и избранное */

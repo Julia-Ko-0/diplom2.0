@@ -1,198 +1,177 @@
-
-.all_chast_div{
-display: grid;
-gap: 10px;
+.all_chast_div {
+  display: grid;
+  gap: 10px;
 }
 
-.chast_div{
-    display: block;
-    height: auto;
-    padding: 0px ;
-    border: solid 1px;
-    width: 100%;
-    /* border-width: 1px; */
-    border-color: var(--border-color);
-    border-radius: 10px;
-    background-color: var(--bg-color2);
-    margin-top: 0px;
+.chast_div {
+  display: block;
+  height: auto;
+  padding: 0px;
+  border: solid 1px;
+  width: 100%;
+  /* border-width: 1px; */
+  border-color: var(--border-color);
+  border-radius: 10px;
+  background-color: var(--bg-color2);
+  margin-top: 0px;
 }
 
-
-.forder_div{
-    display: flex;
-    border: solid 1px;
-    border-color: var(--border-color);
-    border-radius: 10px;
-    background-color: var(--bg-color2);
-    height: 40px;
-    align-items: center; 
-    gap: 5px;
-    padding: 0px 5px 0px 5px;
-    width: calc(100% - 10px);
-    overflow-x: auto;
-    
-
+.forder_div {
+  display: flex;
+  border: solid 1px;
+  border-color: var(--border-color);
+  border-radius: 10px;
+  background-color: var(--bg-color2);
+  height: 40px;
+  align-items: center;
+  gap: 5px;
+  padding: 0px 5px 0px 5px;
+  width: calc(100% - 10px);
+  overflow-x: auto;
 }
 
-
-
-  .forder_div::-webkit-scrollbar {
-    display: none;
-  }
-  
+.forder_div::-webkit-scrollbar {
+  display: none;
+}
 
 .tab {
-    background-color: transparent;
-    /* border: 1px solid #ccc; */
-    border-radius: 8px;
-    border: none;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    height: 30px;
-     display: flex;            
-  justify-content: center; 
-  align-items: center;   
+  background-color: transparent;
+  /* border: 1px solid #ccc; */
+  border-radius: 8px;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
- 
-  }
-  
-  .tab:hover {
-    background-color: var(--button-hover);
-  }
-  .tab_ {
-    background-color: transparent;
-    /* border: 1px solid #ccc; */
-    border-radius: 8px;
-    border: none;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    height: 30px;
-     display: flex;            /* превращаем кнопку в flex-контейнер */
-  justify-content: center;  /* горизонтальное выравнивание */
-  align-items: center;      /* вертикальное выравнивание */
-  text-align: center;
- 
-  }
-  
-  .tab_:hover {
-    background-color: var(--button-hover);
-  }
-  
-  .active {
-     display: flex;            /* превращаем кнопку в flex-контейнер */
-  justify-content: center;  /* горизонтальное выравнивание */
-  align-items: center;      /* вертикальное выравнивание */
-  text-align: center;
-    background-color: transparent;
-    border: 1px solid var(--border-color-forder);
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    height: 30px;
-
-    background-color: var(--bg-color-forder); /* Цвет активной вкладки */
-    color:var(--text-color-forder) ;
-    /* font-weight: bold; */
-  }
-
-
-.div_chats{
-    display: flex;
-/* margin-left: -5%; */
-    /* margin: 5px 0px 5px 0px; */
-    height: 100px;
- border-top: 1px solid var(--border-color);
-    /* background-color: antiquewhite; */
- 
-  
-
-
 }
 
-.input_div{
-    height: 35px;
-width: 100%;
-margin-left: -1px;
-
-
-
+.tab:hover {
+  background-color: var(--button-hover);
 }
-.input_div input{
-    width: calc(100% + 2px);
-    padding-left: 40px;
-    font-size: 17px;
-    border: none;
-    border-radius: 10px 10px 0px 0px;
-    background: url('search-svgrepo-com.svg') no-repeat 10px center;
-    background-size: 15px;
-    height: 35px;
+.tab_ {
+  background-color: transparent;
+  /* border: 1px solid #ccc; */
+  border-radius: 8px;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  height: 30px;
+  display: flex; /* превращаем кнопку в flex-контейнер */
+  justify-content: center; /* горизонтальное выравнивание */
+  align-items: center; /* вертикальное выравнивание */
+  text-align: center;
+}
 
+.tab_:hover {
+  background-color: var(--button-hover);
+}
+
+.active {
+  display: flex; /* превращаем кнопку в flex-контейнер */
+  justify-content: center; /* горизонтальное выравнивание */
+  align-items: center; /* вертикальное выравнивание */
+  text-align: center;
+  background-color: transparent;
+  border: 1px solid var(--border-color-forder);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  height: 30px;
+
+  background-color: var(--bg-color-forder); /* Цвет активной вкладки */
+  color: var(--text-color-forder);
+  /* font-weight: bold; */
+}
+
+.div_chats {
+  display: flex;
+  /* margin-left: -5%; */
+  /* margin: 5px 0px 5px 0px; */
+  height: 100px;
+  border-top: 1px solid var(--border-color);
+  /* background-color: antiquewhite; */
+}
+
+.input_div {
+  height: 35px;
+  width: 100%;
+  margin-left: -1px;
+}
+.input_div input {
+  width: calc(100% + 2px);
+  padding-left: 40px;
+  font-size: 17px;
+  border: none;
+  border-radius: 10px 10px 0px 0px;
+  background: url("search-svgrepo-com.svg") no-repeat 10px center;
+  background-size: 15px;
+  height: 35px;
 }
 /* .input_div input.icon{
     background: url('search-svgrepo-com.svg')  no-repeat center left;
 
 } */
-.input_div input:focus{
-    outline: none;
-    border: 2px solid var(--border-color-input);
-    padding-left: 40px; /* Сохраняем одинаковый отступ */
-    box-sizing: border-box; 
-    height: 100%;
+.input_div input:focus {
+  outline: none;
+  border: 2px solid var(--border-color-input);
+  padding-left: 40px; /* Сохраняем одинаковый отступ */
+  box-sizing: border-box;
+  height: 100%;
 }
-.div_chats img{
+.div_chats img {
   height: 80px;
   width: 80px;
-  margin:  auto 10px auto 10px;
+  margin: auto 10px auto 10px;
   border-radius: 50%;
 }
-.div_chats_name_and_sms{
-    
-    /* height: 20px; */
-    width: 100%;
-    margin:  20px auto auto 20px;
+.div_chats_name_and_sms {
+  /* height: 20px; */
+  width: 100%;
+  margin: 20px auto auto 20px;
 }
-.div_chats_sms{
-    /* width: 100%; */
-    display: flex;
-    margin-bottom: 10px;
-    /* margin:  auto 10px auto 10px; */
+.div_chats_sms {
+  /* width: 100%; */
+  display: flex;
+  margin-bottom: 10px;
+  /* margin:  auto 10px auto 10px; */
 }
-.chats_sms_date{
-    margin: 0px 20px 0px auto;
-    font-size: 12px;
+.chats_sms_date {
+  margin: 0px 20px 0px auto;
+  font-size: 12px;
+}
+.div_novbar_menu {
+  position: absolute;
 
+  background-color: var(--bg-color2);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  margin-top: 10px;
 }
-.div_novbar_menu{
-    position: absolute;
- 
-    background-color: var(--bg-color2);
-    border: 1px solid var(--border-color);
-        border-radius: 10px;
-    margin-top: 10px;
+.div_novbar_menu svg {
+  width: 25px;
+  color: var(--svg-color);
+  stroke: var(--svg-color);
 }
-.div_novbar_menu svg{ 
-   width: 25px;
-   color:  var(--svg-color);
-      stroke:    var(--svg-color);
-}
-.div_novbar_menu_elem{
-    display: flex;
-    gap: 10px;
-        margin:  5px  10px  5px 10px ;
-        padding: 5px;
+.div_novbar_menu_elem {
+  display: flex;
+  gap: 10px;
+  margin: 5px 10px 5px 10px;
+  padding: 5px;
 
-    border-radius: 8px;
-    font-size: 12px;
+  border-radius: 8px;
+  font-size: 12px;
 }
-.div_novbar_menu_elem:hover{
-
-  background-color:  var( --bg-color-hover-element);
+.div_novbar_menu_elem:hover {
+  background-color: var(--bg-color-hover-element);
 }
 
 .modal_overlay {
@@ -201,11 +180,11 @@ margin-left: -1px;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 .div_add_post {
@@ -227,62 +206,59 @@ margin-left: -1px;
   z-index: 1001;
 }
 
-.div_header_modal{
-    display: flex;
-  
+.div_header_modal {
+  display: flex;
 }
-.div_header_modal button{
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    border-radius: 50%;
-    border: 1px solid var(--border-color);
-    margin: 0px 0px 0px auto;
-  
+.div_header_modal button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  margin: 0px 0px 0px auto;
 }
-.div_header_modal svg{
-    width: 20px;
-    color: var(--svg-color);
-    fill: var(--svg-color);
-    stroke: var(--svg-color); 
+.div_header_modal svg {
+  width: 20px;
+  color: var(--svg-color);
+  fill: var(--svg-color);
+  stroke: var(--svg-color);
 }
-.image_preview{
+.image_preview {
   width: auto;
   max-height: auto;
   max-width: 50vw;
   max-height: 40vh;
-  object-fit:contain;
+  object-fit: contain;
 }
 .input_header {
-    margin-left: -5px;
-    width: calc(100% - 35px);
-    padding-left: 20px;
-    font-size: 17px;
-    border: 1px solid var(--border-color);
-    border-radius: 7px;
-    background-size: 15px;
-    height: 35px;
-    background-color: var(--bg-color2);
+  margin-left: -5px;
+  width: calc(100% - 35px);
+  padding-left: 20px;
+  font-size: 17px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  background-size: 15px;
+  height: 35px;
+  background-color: var(--bg-color2);
 }
-.btn_modal button{
-  display: flex;            /* превращаем кнопку в flex-контейнер */
-  justify-content: center;  /* горизонтальное выравнивание */
-  align-items: center;      /* вертикальное выравнивание */
+.btn_modal button {
+  display: flex; /* превращаем кнопку в flex-контейнер */
+  justify-content: center; /* горизонтальное выравнивание */
+  align-items: center; /* вертикальное выравнивание */
   text-align: center;
   width: 100%;
   height: 42px;
   gap: 10px;
-  font-size:15px;
+  font-size: 15px;
   border-radius: 7px;
   background-color: var(--button-color);
   border: 1px solid var(--button-border-color);
 }
-.btn_modal{
-
+.btn_modal {
 }
-.chatForder_add{
-    overflow-y: auto;
+.chatForder_add {
+  overflow-y: auto;
 }

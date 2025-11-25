@@ -26,7 +26,7 @@ export const Settings = () => {
         </div>
 
         <div className={styles.menu}>
-          {/* <NavLink
+          <NavLink
             to="akk"
             className={({ isActive }) =>
               isActive
@@ -35,7 +35,7 @@ export const Settings = () => {
             }
           >
             Аккаунт
-          </NavLink> */}
+          </NavLink>
 
           <NavLink
             to="appearance"
@@ -47,7 +47,7 @@ export const Settings = () => {
           >
             Внешний вид
           </NavLink>
-          {/* <NavLink
+          <NavLink
             to="blacklist"
             className={({ isActive }) =>
               isActive
@@ -67,7 +67,17 @@ export const Settings = () => {
             }
           >
             Избранное
-          </NavLink> */}
+          </NavLink>
+          <NavLink
+            to="security"
+            className={({ isActive }) =>
+              isActive
+                ? `${styles.elem_menu} ${styles.active}`
+                : styles.elem_menu
+            }
+          >
+            Безопасность
+          </NavLink>
         </div>
       </div>
     </div>

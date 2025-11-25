@@ -13,6 +13,7 @@ import {
   rejectFriendRequest,
   sendFriendRequest,
 } from "../../hooks/api";
+import { PostC } from "../Group_info/Group_info";
 
 export const User = () => {
   const { state } = useLocation();
@@ -78,7 +79,8 @@ export const User = () => {
       alert("Ошибка отклонения")
     );
   };
-
+  console.log(userInfo);
+  console.log(posts);
   return (
     <div>
       <div className={styles.container}>
@@ -146,54 +148,62 @@ export const User = () => {
       <div className={styles.posts}>
         {posts.length > 0 ? (
           posts.map((post) => (
-            <div key={post.id} className={styles.elem_post}>
-              <div className={styles.elem_post_header}>
-                <img
-                  className={styles.elem_post_header_ava}
-                  src={
-                    post.author?.profile_picture || "/imgs/log/Group 25 (2).svg"
-                  }
-                  alt="avatar"
-                />
-                <div className={styles.elem_post_h_name}>
-                  <span className={styles.h_name}>{post.header}</span>
-                  <span className={styles.h_name}>{post.text}</span>
-                  <div className={styles.elem_post_h_name_datetime}>
-                    <p>{post.dateTime_post}</p>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.elem_post_body}>
-                {post.fale_post &&
-                  post.fale_post !== "data:image/png;base64," && (
-                    <img
-                      className={styles.elem_post_body_img}
-                      alt="post"
-                      src={post.fale_post}
-                    />
-                  )}
-              </div>
-              <div className={styles.elem_post_btn}>
-                <div className={styles.elem_post_btn_el}>
-                  <svg width="46" height="38" viewBox="0 0 46 38" fill="none">
-                    {/* Иконка лайка */}
-                  </svg>
-                  <p>{post.likes_count}</p>
-                </div>
-                <div className={styles.elem_post_btn_el}>
-                  <svg width="44" height="40" viewBox="0 0 44 40" fill="none">
-                    {/* Иконка комментариев */}
-                  </svg>
-                  <p>{post.comments_count}</p>
-                </div>
-                <div className={styles.elem_post_btn_el}>
-                  <svg width="38" height="40" viewBox="0 0 38 40" fill="none">
-                    {/* Иконка репоста */}
-                  </svg>
-                  <p>{post.repost}</p>
-                </div>
-              </div>
-            </div>
+            <PostC
+              post={post}
+              groupPhoto={
+                userInfo?.profile_picture ?? "/imgs/log/Group 25 (2).svg"
+              }
+              groupName={userInfo?.username ?? ""}
+            />
+
+            // <div key={post.id} className={styles.elem_post}>
+            //   <div className={styles.elem_post_header}>
+            //     <img
+            //       className={styles.elem_post_header_ava}
+            //       src={
+            //         post.author?.profile_picture || "/imgs/log/Group 25 (2).svg"
+            //       }
+            //       alt="avatar"
+            //     />
+            //     <div className={styles.elem_post_h_name}>
+            //       <span className={styles.h_name}>{post.header}</span>
+            //       <span className={styles.h_name}>{post.text}</span>
+            //       <div className={styles.elem_post_h_name_datetime}>
+            //         <p>{post.dateTime_post}</p>
+            //       </div>
+            //     </div>
+            //   </div>
+            //   <div className={styles.elem_post_body}>
+            //     {post.fale_post &&
+            //       post.fale_post !== "data:image/png;base64," && (
+            //         <img
+            //           className={styles.elem_post_body_img}
+            //           alt="post"
+            //           src={post.fale_post}
+            //         />
+            //       )}
+            //   </div>
+            //   <div className={styles.elem_post_btn}>
+            //     <div className={styles.elem_post_btn_el}>
+            //       <svg width="46" height="38" viewBox="0 0 46 38" fill="none">
+            //         {/* Иконка лайка */}
+            //       </svg>
+            //       <p>{post.likes_count}</p>
+            //     </div>
+            //     <div className={styles.elem_post_btn_el}>
+            //       <svg width="44" height="40" viewBox="0 0 44 40" fill="none">
+            //         {/* Иконка комментариев */}
+            //       </svg>
+            //       <p>{post.comments_count}</p>
+            //     </div>
+            //     <div className={styles.elem_post_btn_el}>
+            //       <svg width="38" height="40" viewBox="0 0 38 40" fill="none">
+            //         {/* Иконка репоста */}
+            //       </svg>
+            //       <p>{post.repost}</p>
+            //     </div>
+            //   </div>
+            // </div>
           ))
         ) : (
           <p>Посты пока отсутствуют.</p>

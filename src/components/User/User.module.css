@@ -1,7 +1,7 @@
-.img_avatar{
-    width: 200px;
-    height: 100px;
-    padding: 20px;
+.img_avatar {
+  width: 200px;
+  height: 100px;
+  padding: 20px;
 }
 /* Общий контейнер */
 .container {
@@ -121,4 +121,8 @@
   object-fit: cover;
   margin-top: 10px;
   border-radius: 5px;
+}
+.posts {
+  display: grid;
+  gap: 10px;
 }

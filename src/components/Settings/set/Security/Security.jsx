@@ -1,15 +1,10 @@
 import { useState } from "react";
-import styles from "./akk.module.css";
-import SHA256 from "crypto-js/sha256";
-import {
-  updateUserPassword,
-  updateUserInfo,
-  updateUserEmail,
-  updateBirthdate,
-  updateUserLogin,
-} from "../../../../hooks/api";
+import styles from "./Security.module.css";
 
-export const Akk = () => {
+export const Security = () => {
+  // const location = useLocation();
+  // const isChatsActive = location.pathname === '/us/settings' || location.pathname === '/us/settings';
+
   const [lastname, setLastname] = useState(null);
   const [firstname, setFirstname] = useState(null);
   const [patronymic, setPatronymic] = useState(null);
@@ -42,55 +37,19 @@ export const Akk = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Настройки аккаунта</h2>
-
+      <h2 className={styles.title}>Настройки безопасности</h2>
+      <h2
+        style={{ textAlign: "center", fontSize: "23px" }}
+        className={styles.title}
+      >
+        Смена пароля
+      </h2>
       <div className={styles.form}>
         <input
-          type="text"
-          placeholder="Никнейм"
-          value={login}
-          onChange={(e) => setLogin(e.target.value)}
-          className={styles.input}
-        />
-        <input
-          type="text"
-          placeholder="Имя"
-          value={firstname}
-          onChange={(e) => setFirstname(e.target.value)}
-          className={styles.input}
-        />
-        <input
-          type="text"
-          placeholder="Фамилия"
-          value={lastname}
-          onChange={(e) => setLastname(e.target.value)}
-          className={styles.input}
-        />
-        <input
-          type="text"
-          placeholder="Отчество"
-          value={patronymic}
-          onChange={(e) => setPatronymic(e.target.value)}
-          className={styles.input}
-        />
-        <input
-          type="date"
-          value={birthdate}
-          onChange={(e) => setBirthdate(e.target.value)}
-          className={styles.input}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className={styles.input}
-        />
-        {/* <input
-          type="text"
-          placeholder="Новый логин"
-          value={login}
-          onChange={(e) => setLogin(e.target.value)}
+          type="password"
+          placeholder="Старый пароль"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           className={styles.input}
         />
         <input
@@ -99,7 +58,14 @@ export const Akk = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className={styles.input}
-        /> */}
+        />
+        <input
+          type="password"
+          placeholder="Повторите новый пароль"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className={styles.input}
+        />
         <button onClick={handleSave} className={styles.saveButton}>
           Сохранить
         </button>
