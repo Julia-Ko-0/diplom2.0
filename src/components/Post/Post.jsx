@@ -11,6 +11,7 @@ import {
   ToggleLikePost,
 } from "../../hooks/api";
 import { PostC } from "../Group_info/Group_info";
+import { usePosts } from "../PostaContext/PostaContext";
 
 const defaultAvatar = "/imgs/log/Group 25 (2).svg";
 
@@ -82,6 +83,7 @@ function Comm_Elem({ com, isGroup }) {
   );
 }
 export default function Post() {
+  const { setPosts, postFail } = usePosts();
   const { id_post } = useParams();
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -101,8 +103,26 @@ export default function Post() {
       const res = await ToggleLikePost(Number(post?.post_id), typP);
       if (res.like_added) {
         setLikesCount(likesCount + 1);
+        if (postFail) {
+          setPosts((prevPosts) =>
+            prevPosts.map((post__) =>
+              post__.post_id === post?.post_id
+                ? { ...post__, likes_count: post__.likes_count + 1 } // Увеличиваем количество лайков
+                : post__
+            )
+          );
+        }
       } else {
         setLikesCount(likesCount - 1);
+        if (postFail) {
+          setPosts((prevPosts) =>
+            prevPosts.map((post__) =>
+              post__.post_id === post?.post_id
+                ? { ...post__, likes_count: post__.likes_count - 1 } // Увеличиваем количество лайков
+                : post__
+            )
+          );
+        }
         setIsLiked(!isLiked);
       }
     } catch (err) {

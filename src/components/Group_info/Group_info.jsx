@@ -13,6 +13,7 @@ import {
   UnsubscribeFromGroupHandler,
 } from "../../hooks/api";
 import { ModalEdit } from "./ModalEdit";
+import { usePosts } from "../PostaContext/PostaContext";
 
 function ModalPost({ setModal, id_gr }) {
   const [formData, setFormData] = useState({
@@ -348,16 +349,39 @@ export const Group_info = () => {
 
 export const PostC = ({ post, groupPhoto, groupName, likePost }) => {
   const navigate = useNavigate();
-
+  const { setPosts, postFail } = usePosts();
   const [isLiked, setIsLiked] = useState(post?.isLiked || false); // Track if the post is liked
   const [likesCount, setLikesCount] = useState(post?.likes_count); // Track the like
   const handleLike = async () => {
     try {
       const typP = post?.post_type === "user" ? "us" : "gr";
       const res = await ToggleLikePost(post?.post_id, typP);
-      if (res.like_added) setLikesCount(likesCount + 1);
-      else setLikesCount(likesCount - 1);
-      setIsLiked(!isLiked);
+      if (res.like_added) {
+        setLikesCount(likesCount + 1);
+        if (postFail) {
+          setPosts((prevPosts) =>
+            prevPosts.map((post__) =>
+              post__.post_id === post?.post_id
+                ? { ...post__, likes_count: post__.likes_count + 1 } // Увеличиваем количество лайков
+                : post__
+            )
+          );
+        }
+      } else {
+        setLikesCount(likesCount - 1);
+
+        setIsLiked(!isLiked);
+        if (postFail) {
+          setPosts((prevPosts) =>
+            prevPosts.map((post__) =>
+              post__.post_id === post?.post_id
+                ? { ...post__, likes_count: post__.likes_count - 1 } // Увеличиваем количество лайков
+                : post__
+            )
+          );
+        }
+      }
+
       likePost();
     } catch (err) {
       console.error("Ошибка при лайке:", err);
@@ -368,17 +392,35 @@ export const PostC = ({ post, groupPhoto, groupName, likePost }) => {
     const scroll = sessionStorage.getItem("scrollPosition");
     if (scroll) window.scrollTo(0, parseInt(scroll, 10));
   }, []);
-  useEffect(() => {
-    const like = sessionStorage.getItem("like");
-    const id_post = sessionStorage.getItem("id_post");
-    console.log(like, id_post);
-    if (like > likesCount && id_post == post.post_id) {
-      setLikesCount(likesCount + 1);
-    }
-    if (like < likesCount && id_post == post.post_id) {
-      setLikesCount(likesCount - 1);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const like = sessionStorage.getItem("like");
+  //   const id_post = sessionStorage.getItem("id_post");
+  //   console.log(like, id_post);
+  //   if (like > likesCount && id_post == post.post_id) {
+  //     setLikesCount(likesCount + 1);
+  //     if (postFail) {
+  //       setPosts((prevPosts) =>
+  //         prevPosts.map((post) =>
+  //           post.post_id === id_post
+  //             ? { ...post, likes_count: post.likes_count + 1 } // Увеличиваем количество лайков
+  //             : post
+  //         )
+  //       );
+  //     }
+  //   }
+  //   if (like < likesCount && id_post == post.post_id) {
+  //     setLikesCount(likesCount - 1);
+  //     if (postFail) {
+  //       setPosts((prevPosts) =>
+  //         prevPosts.map((post) =>
+  //           post.post_id === id_post
+  //             ? { ...post, likes_count: post.likes_count - 1 } // Увеличиваем количество лайков
+  //             : post
+  //         )
+  //       );
+  //     }
+  //   }
+  // }, []);
   const [search_params, setSearch] = useState();
   // const onLikeUpdate = (newValue) => {
   //   if (newValue) {

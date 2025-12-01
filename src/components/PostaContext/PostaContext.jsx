@@ -8,7 +8,7 @@ export const PostsProvider = ({ children }) => {
   const [hasMore, setHasMore] = useState(true);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [postFail, setPostFail] = useState(false);
   return (
     <PostsContext.Provider
       value={{
@@ -21,7 +21,9 @@ export const PostsProvider = ({ children }) => {
         hasLoaded,
         setHasLoaded,
         loading,
-        setLoading
+        setLoading,
+        setPostFail,
+        postFail,
       }}
     >
       {children}

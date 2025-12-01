@@ -21,11 +21,13 @@ export default function Post_home() {
     setHasLoaded,
     loading,
     setLoading,
+    setPostFail,
+    postFail,
   } = usePosts();
 
   const [searchParams, setSearchParams] = useState("");
   const [likes, setLikes] = useState(true);
-  const [postFail, setPostFail] = useState(false);
+
   const [message, setMessage] = useState(null);
   const likePost = () => {
     setLikes((p) => !p);
