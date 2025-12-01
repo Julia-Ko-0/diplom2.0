@@ -54,7 +54,7 @@ export default function Post_home() {
       setHasLoaded(true);
     } catch (err) {
       console.error("Ошибка при получении постов:", err);
-      setHasMore(false);
+      // setHasMore(false);
 
       if (reset) setPosts([]);
       setPostFail(true);
@@ -67,7 +67,7 @@ export default function Post_home() {
   };
   const fetchPostsRandom = async (reset = false) => {
     try {
-      const data = await getRandomPosts(LIMIT, offset);
+      const data = await getRandomPosts();
       const validData = Array.isArray(data) ? data : [];
 
       if (reset) {
@@ -97,7 +97,6 @@ export default function Post_home() {
   useEffect(() => {
     if (postFail) {
       fetchPostsRandom();
-      console.log("lgfklg");
     }
   }, [postFail]);
   // Подгрузка при скролле
@@ -183,7 +182,7 @@ export default function Post_home() {
       </div>
 
       {loading && <p>Загрузка...</p>}
-      {!hasMore && !postFail && <p>Все посты загружены</p>}
+      {!hasMore && <p>Все посты загружены</p>}
 
       <Outlet />
     </div>
