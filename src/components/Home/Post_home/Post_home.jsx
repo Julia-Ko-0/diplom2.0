@@ -1,4 +1,3 @@
-// src/components/Home/Post_home/Post_home.jsx
 import styles from "./Post_home.module.css";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
@@ -27,16 +26,27 @@ export default function Post_home() {
   const [likes, setLikes] = useState(true);
   const [postFail, setPostFail] = useState(false);
   const [message, setMessage] = useState(null);
+
   const likePost = () => {
     setLikes((p) => !p);
   };
-  const fetchPosts = async (reset = false) => {
+
+  // Функция для загрузки постов (фильтрованные или случайные)
+  const fetchPosts = async (reset = false, random = false) => {
     if (loading || (!hasMore && !reset)) return;
-    if (postFail) return;
+    if (postFail && !random) return; // если ошибка, а не случайные посты, не подгружаем
     setLoading(true);
 
     try {
-      const data = await getFilteredPosts(LIMIT, reset ? 0 : offset);
+      let data;
+      if (random) {
+        // Загружаем случайные посты
+        data = await getRandomPosts(LIMIT, reset ? 0 : offset);
+      } else {
+        // Загружаем фильтрованные посты
+        data = await getFilteredPosts(LIMIT, reset ? 0 : offset);
+      }
+
       const validData = Array.isArray(data) ? data : [];
 
       if (reset) {
@@ -55,9 +65,9 @@ export default function Post_home() {
       setHasMore(false);
 
       if (reset) setPosts([]);
-      setPostFail(true);
+      setPostFail(true); // Активируем флаг ошибки
       setMessage(
-        "У вас пока нет друзей и групп, возможно что-то ниже вам понравиться"
+        "У вас пока нет друзей и групп, возможно что-то ниже вам понравится"
       );
     } finally {
       setLoading(false);
@@ -68,9 +78,11 @@ export default function Post_home() {
   useEffect(() => {
     if (!hasLoaded) fetchPosts(true);
   }, []);
+
   useEffect(() => {
     fetchPosts(true);
   }, [likes]);
+
   // Подгрузка при скролле
   useEffect(() => {
     const handleScroll = () => {
@@ -84,7 +96,7 @@ export default function Post_home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [offset, loading, hasMore]);
 
-  // Надёжное восстановление scroll при возврате
+  // Надежное восстановление scroll при возврате
   useEffect(() => {
     const scroll = sessionStorage.getItem("scrollPosition");
     if (!scroll) return;
@@ -105,18 +117,13 @@ export default function Post_home() {
     navigate(`/us/home/post/${post.post_id}`, { state: { post } });
   };
 
+  // Загрузка случайных постов при ошибке
   useEffect(() => {
     if (postFail) {
-      getRandomPosts()
-        .then((data) => {
-          setPosts(data);
-        })
-        .catch((error) => {
-          console.error("Ошибка при получении постов:", error.message);
-          setPosts([]);
-        });
+      fetchPosts(true, true); // Загружаем случайные посты
     }
   }, [postFail]);
+
   return (
     <div className={styles.posts}>
       <div className={styles.add_posts}>
@@ -127,7 +134,9 @@ export default function Post_home() {
           placeholder="Поиск..."
         />
       </div>
+
       {message && <div className={styles.message}>{message}</div>}
+
       <div style={{ display: "grid", gap: "20px" }}>
         {posts.map((post, index) => (
           <PostC
