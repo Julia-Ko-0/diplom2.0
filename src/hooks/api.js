@@ -45,17 +45,17 @@ export const getUsersPosts = (login, limit = 10, offset = 0) =>
 export const getNameHistory = () => fetchWithAuth("/user/name-history");
 export const updateUserInfo = (data) =>
   fetchWithAuth("/update-info-user", { body: JSON.stringify(data) });
-export const updateUserEmail = (email) =>
-  fetchWithAuth("/update-user-email", { body: JSON.stringify({ email }) });
-export const updateBirthdate = (birthdate) =>
+export const updateUserEmail = (new_email) =>
+  fetchWithAuth("/update-user-email", { body: JSON.stringify({ new_email }) });
+export const updateBirthdate = (birth_date) =>
   fetchWithAuth("/update-user-birthdate", {
-    body: JSON.stringify({ birthdate }),
+    body: JSON.stringify({ birth_date }),
   });
-export const updateUserLogin = (login) =>
-  fetchWithAuth("/update-user-login", { body: JSON.stringify({ login }) });
-export const updateUserPassword = (password) =>
+export const updateUserLogin = (new_login) =>
+  fetchWithAuth("/update-user-login", { body: JSON.stringify({ new_login }) });
+export const updateUserPassword = (new_password) =>
   fetchWithAuth("/update-user-password", {
-    body: JSON.stringify({ password }),
+    body: JSON.stringify({ new_password }),
   });
 
 /* 💬 Чаты и сообщения */
@@ -340,6 +340,8 @@ export const getRecommendedPosts = (limit = 50, offset = 0) =>
   fetchWithAuth(`/recommended-posts?limit=${limit}&offset=${offset}`);
 export const getFilteredPosts = (limit = 50, offset = 0) =>
   fetchWithAuth(`/filtered-posts?limit=${limit}&offset=${offset}`);
+export const getRandomPosts = (limit = 50, offset = 0) =>
+  fetchWithAuth(`/random-posts?limit=${limit}&offset=${offset}`);
 // 📂 Получение папок чатов пользователя
 export const getUserChatFolders = () => fetchWithAuth("/get-user-chat-folders");
 

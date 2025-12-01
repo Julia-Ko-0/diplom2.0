@@ -1,9 +1,9 @@
 // src/components/Home/Post_home/Post_home.jsx
 import styles from "./Post_home.module.css";
-import { Outlet, useNavigate } from "react-router";
+import { Outlet, useLocation, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { usePosts } from "../../PostaContext/PostaContext";
-import { getFilteredPosts } from "../../../hooks/api";
+import { getFilteredPosts, getRandomPosts } from "../../../hooks/api";
 import { PostC } from "../../Group_info/Group_info";
 
 const LIMIT = 10;
@@ -24,9 +24,15 @@ export default function Post_home() {
   } = usePosts();
 
   const [searchParams, setSearchParams] = useState("");
-
+  const [likes, setLikes] = useState(true);
+  const [postFail, setPostFail] = useState(false);
+  const [message, setMessage] = useState(null);
+  const likePost = () => {
+    setLikes((p) => !p);
+  };
   const fetchPosts = async (reset = false) => {
     if (loading || (!hasMore && !reset)) return;
+    if (postFail) return;
     setLoading(true);
 
     try {
@@ -47,7 +53,12 @@ export default function Post_home() {
     } catch (err) {
       console.error("Ошибка при получении постов:", err);
       setHasMore(false);
+
       if (reset) setPosts([]);
+      setPostFail(true);
+      setMessage(
+        "У вас пока нет друзей и групп, возможно что-то ниже вам понравиться"
+      );
     } finally {
       setLoading(false);
     }
@@ -57,7 +68,9 @@ export default function Post_home() {
   useEffect(() => {
     if (!hasLoaded) fetchPosts(true);
   }, []);
-
+  useEffect(() => {
+    fetchPosts(true);
+  }, [likes]);
   // Подгрузка при скролле
   useEffect(() => {
     const handleScroll = () => {
@@ -92,6 +105,18 @@ export default function Post_home() {
     navigate(`/us/home/post/${post.post_id}`, { state: { post } });
   };
 
+  useEffect(() => {
+    if (postFail) {
+      getRandomPosts()
+        .then((data) => {
+          setPosts(data);
+        })
+        .catch((error) => {
+          console.error("Ошибка при получении постов:", error.message);
+          setPosts([]);
+        });
+    }
+  }, [postFail]);
   return (
     <div className={styles.posts}>
       <div className={styles.add_posts}>
@@ -102,10 +127,11 @@ export default function Post_home() {
           placeholder="Поиск..."
         />
       </div>
-
+      {message && <div className={styles.message}>{message}</div>}
       <div style={{ display: "grid", gap: "20px" }}>
         {posts.map((post, index) => (
           <PostC
+            likePost={likePost}
             key={`${post.post_id}-${index}`}
             groupName={
               post.post_type === "user"
@@ -127,7 +153,7 @@ export default function Post_home() {
       </div>
 
       {loading && <p>Загрузка...</p>}
-      {!hasMore && <p>Все посты загружены</p>}
+      {!hasMore && !postFail && <p>Все посты загружены</p>}
 
       <Outlet />
     </div>

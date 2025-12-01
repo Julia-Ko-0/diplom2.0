@@ -162,7 +162,6 @@ export const Group_info = () => {
   const [isLoading, setLoading] = useState(true);
   const [feauteres_us, setfeauteres_us] = useState([]);
 
-  console.log(posts);
   useEffect(() => {
     // console.log(state.id_group ?? state.id);
     const id = state?.id_group ?? state?.id ?? state?.group_id;
@@ -216,7 +215,15 @@ export const Group_info = () => {
 
     setfeauteres_us(allFeatures);
   }, [role]);
-
+  // useEffect(() => {
+  //   const id = state?.id_group ?? state?.id ?? state?.group_id;
+  //   getGroupPosts(id)
+  //     .then((data) => setPosts(data))
+  //     .catch((error) => {
+  //       console.error("Ошибка при получении :", error.message);
+  //       setPosts([]);
+  //     });
+  // }, [state]);
   // console.log(groupInfo);
   // console.log(role);
   // console.log(role_);
@@ -309,6 +316,7 @@ export const Group_info = () => {
         {posts?.length > 0 ? (
           posts?.map((post) => (
             <PostC
+              // liikepost={liikepost}
               post={post}
               groupPhoto={groupInfo?.photo ?? "/imgs/log/Group 25 (2).svg"}
               groupName={groupInfo?.name ?? ""}
@@ -338,7 +346,7 @@ export const Group_info = () => {
   );
 };
 
-export const PostC = ({ post, groupPhoto, groupName }) => {
+export const PostC = ({ post, groupPhoto, groupName, likePost }) => {
   const navigate = useNavigate();
 
   const [isLiked, setIsLiked] = useState(post?.isLiked || false); // Track if the post is liked
@@ -350,6 +358,7 @@ export const PostC = ({ post, groupPhoto, groupName }) => {
       if (res.like_added) setLikesCount(likesCount + 1);
       else setLikesCount(likesCount - 1);
       setIsLiked(!isLiked);
+      likePost();
     } catch (err) {
       console.error("Ошибка при лайке:", err);
     }
@@ -461,7 +470,10 @@ export const PostC = ({ post, groupPhoto, groupName }) => {
           {/* Комментарии */}
           <div
             className={styles.elem_post_btn_el}
-            onClick={() => handleOpenPost(post)}
+            onClick={() => {
+              likePost();
+              handleOpenPost(post);
+            }}
           >
             <svg
               style={{ marginTop: "5px" }}

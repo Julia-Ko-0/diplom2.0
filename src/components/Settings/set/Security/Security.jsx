@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styles from "./Security.module.css";
+import { SHA256 } from "crypto-js";
+import { updateUserPassword } from "../../../../hooks/api";
 
 export const Security = () => {
   // const location = useLocation();
@@ -12,27 +14,39 @@ export const Security = () => {
   const [email, setEmail] = useState(null);
   const [login, setLogin] = useState(null);
   const [password, setPassword] = useState(null);
+  const [passwordNew, setPasswordNew] = useState(null);
+  const [passwordNew_, setPasswordNew_] = useState(null);
   // const [дщпшт, setLogin] = useState("");
   const [message, setMessage] = useState(null);
+  const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(passwordNew);
 
   const handleSave = async () => {
-    // try {
-    //   // Хешируем пароль, если он был изменен
-    //   const hashedPassword = password ? SHA256(password).toString() : null;
-    //   await updateUserInfo({
-    //     Lastname: lastname,
-    //     Firstname: firstname,
-    //     Patronymic: patronymic,
-    //   });
-    //   if (email) await updateUserEmail(email);
-    //   if (birthdate) await updateBirthdate(birthdate);
-    //   if (login) await updateUserLogin(login);
-    //   if (hashedPassword) await updateUserPassword(hashedPassword); // Отправляем хешированный пароль
-    //   setMessage("Данные успешно обновлены");
-    // } catch (error) {
-    //   setMessage("Ошибка при обновлении данных");
-    //   console.error(error);
-    // }
+    if (passwordNew !== passwordNew_) {
+      setMessage("Пароли не сопадают");
+      return;
+    }
+    console.log(passwordNew);
+    if (passwordNew.length < 8) {
+      setMessage("Пароль должен иметь 8 или более символов");
+      return;
+    }
+    if (!/[!@#$%^&*(/),.?":{}|<>\\]/.test(passwordNew)) {
+      setMessage("Пароль должен содержать хотя бы один специальный символ");
+      return;
+    }
+
+    try {
+      // Хешируем пароль, если он был изменен
+      const hashedPassword = passwordNew
+        ? SHA256(passwordNew).toString()
+        : null;
+
+      if (hashedPassword) await updateUserPassword(hashedPassword); // Отправляем хешированный пароль
+      setMessage("Данные успешно обновлены");
+    } catch (error) {
+      setMessage("Ошибка при обновлении данных");
+      console.error(error);
+    }
   };
 
   return (
@@ -55,15 +69,15 @@ export const Security = () => {
         <input
           type="password"
           placeholder="Новый пароль"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={passwordNew}
+          onChange={(e) => setPasswordNew(e.target.value)}
           className={styles.input}
         />
         <input
           type="password"
           placeholder="Повторите новый пароль"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={passwordNew_}
+          onChange={(e) => setPasswordNew_(e.target.value)}
           className={styles.input}
         />
         <button onClick={handleSave} className={styles.saveButton}>
